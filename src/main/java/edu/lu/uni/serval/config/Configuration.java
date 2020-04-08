@@ -10,7 +10,7 @@ public class Configuration {
 	public static final String TEMP_FILES_PATH = ".temp/";
 	public static final long SHELL_RUN_TIMEOUT = 10800L;
 	
-	public static String knownBugPositions = "BugPosotion/GzoltarBugPosition.txt";
+	public static String knownBugPositions = "BugPosition/GZoltarBugPosition.txt";
 	public static String suspPositionsFilePath = "SuspiciousCodePositions/";
 	public static String failedTestCasesFilePath = "FailedTestCases/";
 	public static String faultLocalizationMetric = "Ochiai";
