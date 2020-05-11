@@ -12,30 +12,91 @@ public class PathUtils {
 		String[] words = bugProject.split("_");
 		String projectName = words[0];
 		int bugId = Integer.parseInt(words[1]);
-		if (projectName.equals("Math")) {
-			if (bugId < 85) {
-				path.add("/target/classes/");
-				path.add("/target/test-classes/");
-				path.add("/src/main/java/");
-				path.add("/src/test/java/");
-			} else {
+
+		if (projectName.equals("Chart")) {
+			path.add("/build/");
+			path.add("/build-tests/");
+			path.add("/source/");
+			path.add("/tests/");
+		} else if (projectName.equals("Cli")) {
+			if (bugId <= 29) {
 				path.add("/target/classes/");
 				path.add("/target/test-classes/");
 				path.add("/src/java/");
 				path.add("/src/test/");
-			}
-		} else if (projectName.equals("Time")) {
-			if (bugId < 12) {
+			} else {
 				path.add("/target/classes/");
 				path.add("/target/test-classes/");
 				path.add("/src/main/java/");
 				path.add("/src/test/java/");
+			}
+		} else if (projectName.equals("Closure")) {
+			path.add("/build/classes/");
+			path.add("/build/test/");
+			path.add("/src/");
+			path.add("/test/");
+		} else if (projectName.equals("Codec")) {
+			if (bugId <= 10) {
+				path.add("/target/classes/");
+				path.add("/target/tests/");
+				path.add("/src/java/");
+				path.add("/src/test/");
+			} else if (bugId <= 16) {
+				path.add("/target/classes/");
+				path.add("/target/tests/");
+				path.add("/src/main/java/");
+				path.add("/src/test/java/");
 			} else {
-				path.add("/build/classes/");
-				path.add("/build/tests/");
+				path.add("/target/classes/");
+				path.add("/target/test-classes/");
 				path.add("/src/main/java/");
 				path.add("/src/test/java/");
 			}
+		} else if (projectName.equals("Collections")) {
+			path.add("/target/classes/");
+			path.add("/target/tests/");
+			path.add("/src/main/java/");
+			path.add("/src/test/java/");
+		} else if (projectName.equals("Compress")) {
+			path.add("/target/classes/");
+			path.add("/target/test-classes/");
+			path.add("/src/main/java/");
+			path.add("/src/test/java/");
+		} else if (projectName.equals("Csv")) {
+			path.add("/target/classes/");
+			path.add("/target/test-classes/");
+			path.add("/src/main/java/");
+			path.add("/src/test/java/");
+		} else if (projectName.equals("Gson")) {
+			path.add("/target/classes/");
+			path.add("/target/test-classes/");
+			path.add("/gson/src/main/java/");
+			path.add("/gson/src/test/java/");
+		} else if (projectName.equals("JacksonCore")) {
+			path.add("/target/classes/");
+			path.add("/target/test-classes/");
+			path.add("/src/main/java/");
+			path.add("/src/test/java/");
+		} else if (projectName.equals("JacksonDatabind")) {
+			path.add("/target/classes/");
+			path.add("/target/test-classes/");
+			path.add("/src/main/java/");
+			path.add("/src/test/java/");
+		} else if (projectName.equals("JacksonXml")) {
+			path.add("/target/classes/");
+			path.add("/target/test-classes/");
+			path.add("/src/main/java/");
+			path.add("/src/test/java/");
+		} else if (projectName.equals("Jsoup")) {
+			path.add("/target/classes/");
+			path.add("/target/test-classes/");
+			path.add("/src/main/java/");
+			path.add("/src/test/java/");
+		} else if (projectName.equals("JxPath")) {
+			path.add("/target/classes/");
+			path.add("/target/test-classes/");
+			path.add("/src/java/");
+			path.add("/src/test/");
 		} else if (projectName.equals("Lang")) {
 			if (bugId <= 20) {
 				path.add("/target/classes/");
@@ -58,19 +119,30 @@ public class PathUtils {
 				path.add("/src/java/");
 				path.add("/src/test/");
 			}
-		} else if (projectName.equals("Chart")) {
-			path.add("/build/");
-			path.add("/build-tests/");
-			path.add("/source/");
-			path.add("/tests/");
-
-		} else if (projectName.equals("Closure")) {
-			path.add("/build/classes/");
-			path.add("/build/test/");
-			path.add("/src/");
-			path.add("/test/");
+		} else if (projectName.equals("Math")) {
+			if (bugId <= 84) {
+				path.add("/target/classes/");
+				path.add("/target/test-classes/");
+				path.add("/src/main/java/");
+				path.add("/src/test/java/");
+			} else {
+				path.add("/target/classes/");
+				path.add("/target/test-classes/");
+				path.add("/src/java/");
+				path.add("/src/test/");
+			}
 		} else if (projectName.equals("Mockito")) {
-			if (bugId <= 11 || (bugId >= 18 && bugId <= 21)) {
+			if (bugId <= 11) {
+				path.add("/build/classes/main/");
+				path.add("/build/classes/test/");
+				path.add("/src/");
+				path.add("/test/");
+			} else if (bugId <= 17) {
+				path.add("/target/classes/");
+				path.add("/target/test-classes/");
+				path.add("/src/");
+				path.add("/test/");
+			} else if (bugId <= 21) {
 				path.add("/build/classes/main/");
 				path.add("/build/classes/test/");
 				path.add("/src/");
@@ -81,7 +153,20 @@ public class PathUtils {
 				path.add("/src/");
 				path.add("/test/");
 			}
+		} else if (projectName.equals("Time")) {
+			if (bugId <= 11) {
+				path.add("/target/classes/");
+				path.add("/target/test-classes/");
+				path.add("/src/main/java/");
+				path.add("/src/test/java/");
+			} else {
+				path.add("/build/classes/");
+				path.add("/build/tests/");
+				path.add("/src/main/java/");
+				path.add("/src/test/java/");
+			}
 		}
+
 		return path;
 	}
 
