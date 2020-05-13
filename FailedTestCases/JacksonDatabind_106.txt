@@ -1,0 +1,4 @@
+Failing tests: 3
+  - com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testJDKTypes1855
+  - com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowLong
+  - com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowInt

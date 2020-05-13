@@ -1,0 +1,3 @@
+Failing tests: 2
+  - com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testJDKTypes1855
+  - com.fasterxml.jackson.databind.ser.jdk.SqlDateSerializationTest::testSqlDateConfigOverride
