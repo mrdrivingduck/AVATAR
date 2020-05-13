@@ -1,0 +1,13 @@
+diff --git a/src/java/org/apache/commons/cli/HelpFormatter.java b/src/java/org/apache/commons/cli/HelpFormatter.java
+index 639b9d5..9eb5b21 100644
+--- a/src/java/org/apache/commons/cli/HelpFormatter.java
++++ b/src/java/org/apache/commons/cli/HelpFormatter.java
+@@ -809,7 +809,7 @@ public class HelpFormatter {
+         while (true)
+         {
+             text = padding + text.substring(pos).trim();
+-            pos = findWrapPos(text, width, nextLineTabStop);
++            pos = findWrapPos(text, width, this.defaultLeftPad);
+ 
+             if (pos == -1)
+             {

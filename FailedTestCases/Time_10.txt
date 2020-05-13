@@ -1,3 +1,0 @@
-Failing tests: 2
-  - org.joda.time.TestDays::testFactory_daysBetween_RPartial_MonthDay
-  - org.joda.time.TestMonths::testFactory_monthsBetween_RPartial_MonthDay
