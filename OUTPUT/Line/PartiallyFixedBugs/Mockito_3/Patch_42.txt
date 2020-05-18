@@ -1,0 +1,45 @@
+diff --git a/buildSrc/src/test/groovy/org/mockito/release/notes/improvements/GitHubTicketFetcherTest.groovy b/buildSrc/src/test/groovy/org/mockito/release/notes/improvements/GitHubTicketFetcherTest.groovy
+deleted file mode 100644
+index 902137999..000000000
+--- a/buildSrc/src/test/groovy/org/mockito/release/notes/improvements/GitHubTicketFetcherTest.groovy
++++ /dev/null
+@@ -1,23 +0,0 @@
+-package org.mockito.release.notes.improvements
+-
+-import spock.lang.IgnoreIf
+-import spock.lang.Specification
+-import spock.lang.Subject
+-import testutil.OfflineChecker
+-
+-@IgnoreIf({ OfflineChecker.isOffline()})
+-class GitHubTicketFetcherTest extends Specification {
+-
+-    @Subject fetcher = new GitHubTicketFetcher()
+-
+-    //TODO SF tidy up this and the test subject
+-    def "fetches improvements from GitHub"() {
+-        def impr = new DefaultImprovements()
+-        def readOnlyToken = "a0a4c0f41c200f7c653323014d6a72a127764e17"
+-        when: fetcher.fetchTickets(readOnlyToken, ['109', '108', '99999', '112'], impr)
+-        then:
+-        impr.toText() == """* Improvements: 2
+-  * Allow instances of other classes in AdditionalAnswers.delegatesTo [(#112)](https://github.com/mockito/mockito/issues/112)
+-  * Clarify Spy vs Mock CALLS_REAL_METHODS [(#108)](https://github.com/mockito/mockito/issues/108)"""
+-    }
+-}
+diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java
+index a3a7c08df..db8afdcbe 100644
+--- a/src/org/mockito/internal/invocation/InvocationMatcher.java
++++ b/src/org/mockito/internal/invocation/InvocationMatcher.java
+@@ -125,10 +125,7 @@ public class InvocationMatcher implements DescribedInvocation, CapturesArgumensF
+                 }
+             }
+             for (int position = indexOfVararg; position < matchers.size(); position++) {
+-                Matcher m = matchers.get(position);
+-                if (m instanceof CapturesArguments) {
+-                    ((CapturesArguments) m).captureFrom(invocation.getRawArguments()[position - indexOfVararg]);
+-                }
++                
+             }
+         } else {
+             for (int position = 0; position < matchers.size(); position++) {

@@ -1,0 +1,13 @@
+diff --git a/gson/src/main/java/com/google/gson/stream/JsonWriter.java b/gson/src/main/java/com/google/gson/stream/JsonWriter.java
+index d76f7c10..f0ebe3d9 100644
+--- a/gson/src/main/java/com/google/gson/stream/JsonWriter.java
++++ b/gson/src/main/java/com/google/gson/stream/JsonWriter.java
+@@ -619,7 +619,7 @@ public class JsonWriter implements Closeable, Flushable {
+       }
+       // fall-through
+     case EMPTY_DOCUMENT: // first in document
+-      if (!lenient && !root) {
++      if (!lenient && !this.serializeNulls) {
+         throw new IllegalStateException(
+             "JSON must start with an array or an object.");
+       }

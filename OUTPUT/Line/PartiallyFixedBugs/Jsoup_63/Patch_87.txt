@@ -1,0 +1,15 @@
+diff --git a/src/main/java/org/jsoup/parser/Tokeniser.java b/src/main/java/org/jsoup/parser/Tokeniser.java
+index 29fe4cc..378d83b 100644
+--- a/src/main/java/org/jsoup/parser/Tokeniser.java
++++ b/src/main/java/org/jsoup/parser/Tokeniser.java
+@@ -41,10 +41,7 @@ final class Tokeniser {
+     }
+ 
+     Token read() {
+-        if (!selfClosingFlagAcknowledged) {
+-            error("Self closing flag not acknowledged");
+-            selfClosingFlagAcknowledged = true;
+-        }
++        
+         while (!isEmitPending)
+             state.read(this, reader);

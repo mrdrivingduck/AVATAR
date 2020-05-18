@@ -1,0 +1,14 @@
+diff --git a/src/com/google/javascript/jscomp/AbstractCommandLineRunner.java b/src/com/google/javascript/jscomp/AbstractCommandLineRunner.java
+index 13cb6268..3e1b4eeb 100644
+--- a/src/com/google/javascript/jscomp/AbstractCommandLineRunner.java
++++ b/src/com/google/javascript/jscomp/AbstractCommandLineRunner.java
+@@ -865,8 +865,7 @@ abstract class AbstractCommandLineRunner<A extends Compiler,
+           } else if (defValue.equals("false")) {
+             options.setDefineToBooleanLiteral(defName, false);
+             continue;
+-          } else if (defValue.length() > 1
+-              && ((defValue.charAt(0) == '\'' &&
++          } else if (defValue.length() > 1 || ((defValue.charAt(0) == '\'' &&
+                   defValue.charAt(defValue.length() - 1) == '\'')
+             )) {
+             // If the value starts and ends with a single quote,
