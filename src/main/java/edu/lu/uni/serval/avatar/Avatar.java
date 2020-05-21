@@ -10,9 +10,11 @@ import edu.lu.uni.serval.config.Configuration;
 import edu.lu.uni.serval.fixpattern.FixTemplate;
 import edu.lu.uni.serval.fixpattern.findbugs.BCUnconfirmedCast;
 import edu.lu.uni.serval.fixpattern.findbugs.DLSDeadLocalStore;
+import edu.lu.uni.serval.fixpattern.findbugs.ECBadArrayCompare;
 import edu.lu.uni.serval.fixpattern.findbugs.EQDoesNotOverrideEquals;
 import edu.lu.uni.serval.fixpattern.findbugs.NPAlwaysNull;
 import edu.lu.uni.serval.fixpattern.findbugs.NPNullOnSomePath;
+import edu.lu.uni.serval.fixpattern.findbugs.NPNullOnSomePathException;
 import edu.lu.uni.serval.fixpattern.findbugs.UCFUselessControlFlow;
 import edu.lu.uni.serval.fixpattern.findbugs.UCUselessCondition;
 import edu.lu.uni.serval.fixpattern.findbugs.UCUselessCondition_;
@@ -103,6 +105,8 @@ public class Avatar extends AbstractFixer {
 				generatePatches(ft, scn);
 				if (this.minErrorTest == 0) break;
 				ft = new NPNullOnSomePath();
+				generatePatches(ft, scn);
+				ft = new NPNullOnSomePathException();
 			} else if (Checker.isIfStatement(contextInfo)
 					|| Checker.isWhileStatement(contextInfo) 
 					|| Checker.isDoStatement(contextInfo)) {
@@ -132,6 +136,8 @@ public class Avatar extends AbstractFixer {
 				generatePatches(ft, scn);
 				if (this.minErrorTest == 0) break;
 				ft = new EP2();
+				generatePatches(ft, scn);
+				ft = new ECBadArrayCompare();
 			} else if (Checker.isClassInstanceCreation(contextInfo)) {
 				ft = new EP3();
 			} else if (Checker.isInfixExpression(contextInfo)) {
