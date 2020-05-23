@@ -12,6 +12,9 @@ import edu.lu.uni.serval.fixpattern.findbugs.BCUnconfirmedCast;
 import edu.lu.uni.serval.fixpattern.findbugs.DLSDeadLocalStore;
 import edu.lu.uni.serval.fixpattern.findbugs.ECBadArrayCompare;
 import edu.lu.uni.serval.fixpattern.findbugs.EQDoesNotOverrideEquals;
+import edu.lu.uni.serval.fixpattern.findbugs.FEFloatingPointEquality;
+import edu.lu.uni.serval.fixpattern.findbugs.FETestIfEqualToNan;
+import edu.lu.uni.serval.fixpattern.findbugs.IDIVCastToDouble;
 import edu.lu.uni.serval.fixpattern.findbugs.NPAlwaysNull;
 import edu.lu.uni.serval.fixpattern.findbugs.NPNullOnSomePath;
 import edu.lu.uni.serval.fixpattern.findbugs.NPNullOnSomePathException;
@@ -142,6 +145,12 @@ public class Avatar extends AbstractFixer {
 				ft = new EP3();
 			} else if (Checker.isInfixExpression(contextInfo)) {
 				ft = new EP4();
+				generatePatches(ft, scn);
+				ft = new FETestIfEqualToNan();
+				generatePatches(ft, scn);
+				ft = new FEFloatingPointEquality();
+				generatePatches(ft, scn);
+				ft = new IDIVCastToDouble();
 			}
 			
 			if (ft != null) {
