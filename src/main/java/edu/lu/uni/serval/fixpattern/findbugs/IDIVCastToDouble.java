@@ -8,7 +8,7 @@ import edu.lu.uni.serval.jdt.tree.ITree;
 import edu.lu.uni.serval.utils.Checker;
 
 /**
- * 
+ * Useful for Math_11.
  * 
  * @author Mr Dk.
  */
@@ -24,90 +24,85 @@ public class IDIVCastToDouble extends FixTemplate {
 	private List<ITree> buggyExps = new ArrayList<>();
 	private List<String> operators = new ArrayList<>();
 	private List<String> buggyExpStr = new ArrayList<>();
-	
+
 	@Override
 	public void generatePatches() {
 		ITree tree = this.getSuspiciousCodeTree();
 		findBuggyExpressions(tree);
 		if (buggyExps.isEmpty()) return;
-		
-		ITree firstBuggyExp = buggyExps.get(0);
-		int startPos = firstBuggyExp.getPos();
-		StringBuilder fixedCodeStr1 = new StringBuilder(this.getSubSuspiciouCodeStr(this.suspCodeStartPos, startPos));
-		fixedCodeStr1.append(generatedFix(operators.get(0), buggyExpStr.get(0)));
-		startPos = startPos + firstBuggyExp.getLength();
-		
-		for (int index = 1; index < buggyExps.size(); index++) {
-			ITree buggyExp = buggyExps.get(index);
-			fixedCodeStr1.append(this.getSubSuspiciouCodeStr(startPos, buggyExp.getPos()));
-			fixedCodeStr1.append(generatedFix(operators.get(index), buggyExpStr.get(index)));
+
+		StringBuilder fixCode = new StringBuilder();
+		int startPos = this.suspCodeStartPos;
+		for (int i = 0; i < buggyExps.size(); i++) {
+			ITree buggyExp = buggyExps.get(i);
+			if (startPos > buggyExp.getPos()) {
+				return;
+			}
+			fixCode.append(this.getSubSuspiciouCodeStr(startPos, buggyExp.getPos()));
+			fixCode.append(generatedFix(operators.get(i), buggyExpStr.get(i)));
 			startPos = buggyExp.getPos() + buggyExp.getLength();
 		}
 		
-		fixedCodeStr1.append(this.getSubSuspiciouCodeStr(startPos, this.suspCodeEndPos));
+		fixCode.append(this.getSubSuspiciouCodeStr(startPos, this.suspCodeEndPos));
 		
-		this.generatePatch(fixedCodeStr1.toString());
+		this.generatePatch(fixCode.toString());
 	}
 
 	private void findBuggyExpressions(ITree tree) {
 		List<ITree> children = tree.getChildren();
 		
 		for (ITree child : children) {
-			int type = child.getType();
-			if (Checker.isComplexExpression(type)) {
-				if (Checker.isInfixExpression(type)) {
-					List<ITree> subChildren = child.getChildren();
-					String op = subChildren.get(1).getLabel();
+			if (Checker.isInfixExpression(child.getType())) {
+				List<ITree> subChildren = child.getChildren();
+				String op = subChildren.get(1).getLabel();
 
-					if ("/".equals(op)) {
-						ITree dividendExp = subChildren.get(0);
-						ITree divisorExp = subChildren.get(2);
+				if ("/".equals(op)) {
+					ITree dividendExp = subChildren.get(0);
+					ITree divisorExp = subChildren.get(2);
 
-						if (dividendExp != null && Checker.isNumberLiteral(dividendExp.getType())) {
-							int startPos = dividendExp.getPos();
-							int endPos = startPos + dividendExp.getLength();
-							String collectionExp = this.getSubSuspiciouCodeStr(startPos, endPos);
-							if (!collectionExp.contains("d") &&
-								!collectionExp.contains("f") &&
-								!collectionExp.contains(".")) {
-								buggyExps.add(dividendExp);
-								operators.add("CastConst");
-								buggyExpStr.add(collectionExp);
-							}
-						} else if (dividendExp != null) {
-							int startPos = dividendExp.getPos();
-							int endPos = startPos + dividendExp.getLength();
-							String collectionExp = this.getSubSuspiciouCodeStr(startPos, endPos);
+					if (dividendExp != null && Checker.isNumberLiteral(dividendExp.getType())) {
+						int startPos = dividendExp.getPos();
+						int endPos = startPos + dividendExp.getLength();
+						String collectionExp = this.getSubSuspiciouCodeStr(startPos, endPos);
+						if (!collectionExp.contains("d") &&
+							!collectionExp.contains("f") &&
+							!collectionExp.contains(".")) {
 							buggyExps.add(dividendExp);
-							operators.add("CastExpression");
+							operators.add("CastConst");
 							buggyExpStr.add(collectionExp);
 						}
+					} else if (dividendExp != null) {
+						int startPos = dividendExp.getPos();
+						int endPos = startPos + dividendExp.getLength();
+						String collectionExp = this.getSubSuspiciouCodeStr(startPos, endPos);
+						buggyExps.add(dividendExp);
+						operators.add("CastExpression");
+						buggyExpStr.add(collectionExp);
+					}
 
-						if (divisorExp != null && Checker.isNumberLiteral(divisorExp.getType())) {
-							int startPos = divisorExp.getPos();
-							int endPos = startPos + divisorExp.getLength();
-							String collectionExp = this.getSubSuspiciouCodeStr(startPos, endPos);
-							if (!collectionExp.contains("d") &&
-								!collectionExp.contains("f") &&
-								!collectionExp.contains(".")) {
-								buggyExps.add(divisorExp);
-								operators.add("CastConst");
-								buggyExpStr.add(collectionExp);
-							}
-						} else if (divisorExp != null) {
-							int startPos = divisorExp.getPos();
-							int endPos = startPos + divisorExp.getLength();
-							String collectionExp = this.getSubSuspiciouCodeStr(startPos, endPos);
+					if (divisorExp != null && Checker.isNumberLiteral(divisorExp.getType())) {
+						int startPos = divisorExp.getPos();
+						int endPos = startPos + divisorExp.getLength();
+						String collectionExp = this.getSubSuspiciouCodeStr(startPos, endPos);
+						if (!collectionExp.contains("d") &&
+							!collectionExp.contains("f") &&
+							!collectionExp.contains(".")) {
 							buggyExps.add(divisorExp);
-							operators.add("CastExpression");
+							operators.add("CastConst");
 							buggyExpStr.add(collectionExp);
 						}
+					} else if (divisorExp != null) {
+						int startPos = divisorExp.getPos();
+						int endPos = startPos + divisorExp.getLength();
+						String collectionExp = this.getSubSuspiciouCodeStr(startPos, endPos);
+						buggyExps.add(divisorExp);
+						operators.add("CastExpression");
+						buggyExpStr.add(collectionExp);
 					}
 				}
-				findBuggyExpressions(child);
-			} else if (Checker.isStatement(type)) {
-				break;
 			}
+
+			findBuggyExpressions(child);
 		}
 	}
 
