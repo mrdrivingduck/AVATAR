@@ -14,9 +14,9 @@ import edu.lu.uni.serval.jdt.tree.ITree;
 public class NPNullOnSomePathException extends FixTemplate {
 
 	/*
-	 * if (input/outputStream != null) {
+	 * + if (input/outputStream != null) {
 	 *     input/outputStream.close();
-	 * }
+	 * + }
 	 */
 	@Override
 	public void generatePatches() {
