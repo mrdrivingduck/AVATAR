@@ -23,7 +23,7 @@ public class IDIVCastToDouble extends FixTemplate {
 	
 	private List<ITree> buggyExps = new ArrayList<>();
 	private List<String> operators = new ArrayList<>();
-	private List<String> buggyExpStr = new ArrayList<>();
+	private List<String> buggyStrList = new ArrayList<>();
 
 	@Override
 	public void generatePatches() {
@@ -39,7 +39,7 @@ public class IDIVCastToDouble extends FixTemplate {
 				return;
 			}
 			fixCode.append(this.getSubSuspiciouCodeStr(startPos, buggyExp.getPos()));
-			fixCode.append(generatedFix(operators.get(i), buggyExpStr.get(i)));
+			fixCode.append(generatedFix(operators.get(i), buggyStrList.get(i)));
 			startPos = buggyExp.getPos() + buggyExp.getLength();
 		}
 		
@@ -63,41 +63,41 @@ public class IDIVCastToDouble extends FixTemplate {
 					if (dividendExp != null && Checker.isNumberLiteral(dividendExp.getType())) {
 						int startPos = dividendExp.getPos();
 						int endPos = startPos + dividendExp.getLength();
-						String collectionExp = this.getSubSuspiciouCodeStr(startPos, endPos);
-						if (!collectionExp.contains("d") &&
-							!collectionExp.contains("f") &&
-							!collectionExp.contains(".")) {
+						String buggyStr = this.getSubSuspiciouCodeStr(startPos, endPos);
+						if (!buggyStr.contains("d") &&
+							!buggyStr.contains("f") &&
+							!buggyStr.contains(".")) {
 							buggyExps.add(dividendExp);
 							operators.add("CastConst");
-							buggyExpStr.add(collectionExp);
+							buggyStrList.add(buggyStr);
 						}
 					} else if (dividendExp != null) {
 						int startPos = dividendExp.getPos();
 						int endPos = startPos + dividendExp.getLength();
-						String collectionExp = this.getSubSuspiciouCodeStr(startPos, endPos);
+						String buggyStr = this.getSubSuspiciouCodeStr(startPos, endPos);
 						buggyExps.add(dividendExp);
 						operators.add("CastExpression");
-						buggyExpStr.add(collectionExp);
+						buggyStrList.add(buggyStr);
 					}
 
 					if (divisorExp != null && Checker.isNumberLiteral(divisorExp.getType())) {
 						int startPos = divisorExp.getPos();
 						int endPos = startPos + divisorExp.getLength();
-						String collectionExp = this.getSubSuspiciouCodeStr(startPos, endPos);
-						if (!collectionExp.contains("d") &&
-							!collectionExp.contains("f") &&
-							!collectionExp.contains(".")) {
+						String buggyStr = this.getSubSuspiciouCodeStr(startPos, endPos);
+						if (!buggyStr.contains("d") &&
+							!buggyStr.contains("f") &&
+							!buggyStr.contains(".")) {
 							buggyExps.add(divisorExp);
 							operators.add("CastConst");
-							buggyExpStr.add(collectionExp);
+							buggyStrList.add(buggyStr);
 						}
 					} else if (divisorExp != null) {
 						int startPos = divisorExp.getPos();
 						int endPos = startPos + divisorExp.getLength();
-						String collectionExp = this.getSubSuspiciouCodeStr(startPos, endPos);
+						String buggyStr = this.getSubSuspiciouCodeStr(startPos, endPos);
 						buggyExps.add(divisorExp);
 						operators.add("CastExpression");
-						buggyExpStr.add(collectionExp);
+						buggyStrList.add(buggyStr);
 					}
 				}
 			}

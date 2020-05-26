@@ -7,6 +7,11 @@ import edu.lu.uni.serval.fixpattern.FixTemplate;
 import edu.lu.uni.serval.jdt.tree.ITree;
 import edu.lu.uni.serval.utils.Checker;
 
+/**
+ * Tested through Math_22.
+ * 
+ * @author Mr Dk.
+ */
 public class FETestIfEqualToNan extends FixTemplate {
 
 	/*
@@ -26,22 +31,21 @@ public class FETestIfEqualToNan extends FixTemplate {
 			return;
 		}
 		
-		ITree firstBuggyExp = buggyExps.get(0);
-		int startPos = firstBuggyExp.getPos();
-		StringBuilder fixedCodeStr1 = new StringBuilder(this.getSubSuspiciouCodeStr(this.suspCodeStartPos, startPos));
-		fixedCodeStr1.append(generatedFix(operators.get(0), floatingExps.get(0)));
-		startPos = startPos + firstBuggyExp.getLength();
-		
-		for (int index = 1; index < buggyExps.size(); index++) {
-			ITree buggyExp = buggyExps.get(index);
-			fixedCodeStr1.append(this.getSubSuspiciouCodeStr(startPos, buggyExp.getPos()));
-			fixedCodeStr1.append(generatedFix(operators.get(index), floatingExps.get(index)));
+		StringBuilder fixCode = new StringBuilder();
+		int startPos = this.suspCodeStartPos;
+		for (int i = 0; i < buggyExps.size(); i++) {
+			ITree buggyExp = buggyExps.get(i);
+			if (startPos > buggyExp.getPos()) {
+				return;
+			}
+			fixCode.append(this.getSubSuspiciouCodeStr(startPos, buggyExp.getPos()));
+			fixCode.append(generatedFix(operators.get(i), floatingExps.get(i)));
 			startPos = buggyExp.getPos() + buggyExp.getLength();
 		}
 		
-		fixedCodeStr1.append(this.getSubSuspiciouCodeStr(startPos, this.suspCodeEndPos));
+		fixCode.append(this.getSubSuspiciouCodeStr(startPos, this.suspCodeEndPos));
 		
-		this.generatePatch(fixedCodeStr1.toString());
+		this.generatePatch(fixCode.toString());
 	}
 
 	private void findBuggyExpressions(ITree tree) {

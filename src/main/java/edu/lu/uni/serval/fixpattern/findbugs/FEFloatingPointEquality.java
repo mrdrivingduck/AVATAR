@@ -8,6 +8,7 @@ import edu.lu.uni.serval.jdt.tree.ITree;
 import edu.lu.uni.serval.utils.Checker;
 
 /**
+ * Tested through Math_22.
  * 
  * @author Mr Dk.
  */
@@ -24,7 +25,7 @@ public class FEFloatingPointEquality extends FixTemplate {
 
 	private List<String> floatingExps1 = new ArrayList<>();
 	private List<String> floatingExps2 = new ArrayList<>();
-	
+
 	@Override
 	public void generatePatches() {
 		ITree tree = this.getSuspiciousCodeTree();
@@ -33,23 +34,22 @@ public class FEFloatingPointEquality extends FixTemplate {
 		if (buggyExps.isEmpty()) {
 			return;
 		}
-		
-		ITree firstBuggyExp = buggyExps.get(0);
-		int startPos = firstBuggyExp.getPos();
-		StringBuilder fixedCodeStr1 = new StringBuilder(this.getSubSuspiciouCodeStr(this.suspCodeStartPos, startPos));
-		fixedCodeStr1.append(generatedFix(operators.get(0), floatingExps1.get(0), floatingExps2.get(0)));
-		startPos = startPos + firstBuggyExp.getLength();
-		
-		for (int index = 1; index < buggyExps.size(); index++) {
-			ITree buggyExp = buggyExps.get(index);
-			fixedCodeStr1.append(this.getSubSuspiciouCodeStr(startPos, buggyExp.getPos()));
-			fixedCodeStr1.append(generatedFix(operators.get(index), floatingExps1.get(index), floatingExps2.get(index)));
+
+		StringBuilder fixCode = new StringBuilder();
+		int startPos = this.suspCodeStartPos;
+		for (int i = 0; i < buggyExps.size(); i++) {
+			ITree buggyExp = buggyExps.get(i);
+			if (startPos > buggyExp.getPos()) {
+				return;
+			}
+			fixCode.append(this.getSubSuspiciouCodeStr(startPos, buggyExp.getPos()));
+			fixCode.append(generatedFix(operators.get(i), floatingExps1.get(i), floatingExps2.get(i)));
 			startPos = buggyExp.getPos() + buggyExp.getLength();
 		}
 		
-		fixedCodeStr1.append(this.getSubSuspiciouCodeStr(startPos, this.suspCodeEndPos));
+		fixCode.append(this.getSubSuspiciouCodeStr(startPos, this.suspCodeEndPos));
 		
-		this.generatePatch(fixedCodeStr1.toString());
+		this.generatePatch(fixCode.toString());
 	}
 
 	private void findBuggyExpressions(ITree tree) {
@@ -57,40 +57,30 @@ public class FEFloatingPointEquality extends FixTemplate {
 		
 		for (ITree child : children) {
 			int type = child.getType();
-			if (Checker.isComplexExpression(type)) {
-				if (Checker.isInfixExpression(type)) {
-					List<ITree> subChildren = child.getChildren();
-					String op = subChildren.get(1).getLabel();
-					if ("==".equals(op) || "!=".equals(op)) {
 
-						ITree exp1 = subChildren.get(0);
-						ITree exp2 = subChildren.get(2);
-						String var1Type = varTypesMap.get(exp1.getLabel());
-						String var2Type = varTypesMap.get(exp2.getLabel());
+			if (Checker.isInfixExpression(type)) {
+				List<ITree> subChildren = child.getChildren();
+				String op = subChildren.get(1).getLabel();
+				if ("==".equals(op) || "!=".equals(op)) {
 
-						if (var1Type.equals("double") || var1Type.equals("Double") ||
-							var1Type.equals("float") || var1Type.equals("Float") ||
-							var2Type.equals("double") || var2Type.equals("Double") ||
-							var2Type.equals("float") || var2Type.equals("Float")) {
-							
-							int startPos = exp1.getPos();
-							int endPos = startPos + exp1.getLength();
-							String var1 = this.getSubSuspiciouCodeStr(startPos, endPos);
-							startPos = exp2.getPos();
-							endPos = startPos + exp2.getLength();
-							String var2 = this.getSubSuspiciouCodeStr(startPos, endPos);
+					ITree exp1 = subChildren.get(0);
+					ITree exp2 = subChildren.get(2);
+						
+					int startPos = exp1.getPos();
+					int endPos = startPos + exp1.getLength();
+					String var1 = this.getSubSuspiciouCodeStr(startPos, endPos);
+					startPos = exp2.getPos();
+					endPos = startPos + exp2.getLength();
+					String var2 = this.getSubSuspiciouCodeStr(startPos, endPos);
 
-							buggyExps.add(child);
-							operators.add(op);
-							floatingExps1.add(var1);
-							floatingExps2.add(var2);
-						}
-					}
+					buggyExps.add(child);
+					operators.add(op);
+					floatingExps1.add(var1);
+					floatingExps2.add(var2);
 				}
-				findBuggyExpressions(child);
-			} else if (Checker.isStatement(type)) {
-				break;
 			}
+
+			findBuggyExpressions(child);
 		}
 	}
 
