@@ -13,32 +13,39 @@ import edu.lu.uni.serval.utils.Checker;
  */
 public class ECBadArrayCompare extends FixTemplate {
     
-    /*
+	/*
+	 * array1 == array2 --> Arrays.equals(array1, array2).
 	 * array1.equals(array2) --> Arrays.equals(array1, array2).
 	 */
+
+	List<String> varA = new ArrayList<>();
+	List<String> varB = new ArrayList<>();
+	List<String> operators = new ArrayList<>();
 	
 	@Override
 	public void generatePatches() {
 		ITree tree = this.getSuspiciousCodeTree();
+		allVarNamesMap = readAllVariableNames(tree, varTypesMap, allVarNamesList);
 		List<ITree> buggyExps = findBuggyExpressions(tree);
-		if (buggyExps.isEmpty()) return;
-		
-		ITree firstBuggyExp = buggyExps.get(0);
-		int startPos = firstBuggyExp.getPos();
-		StringBuilder fixedCodeStr1 = new StringBuilder(this.getSubSuspiciouCodeStr(this.suspCodeStartPos, startPos));
-		fixedCodeStr1.append(generatedFix(firstBuggyExp));
-		startPos = startPos + firstBuggyExp.getLength();
-		
-		for (int index = 1; index < buggyExps.size(); index++) {
-			ITree buggyExp = buggyExps.get(index);
-			fixedCodeStr1.append(this.getSubSuspiciouCodeStr(startPos, buggyExp.getPos()));
-			fixedCodeStr1.append(generatedFix(buggyExp));
+		if (buggyExps.isEmpty()) {
+			return;
+		}
+
+		StringBuilder fixCode = new StringBuilder();
+		int startPos = this.suspCodeStartPos;
+		for (int i = 0; i < buggyExps.size(); i++) {
+			ITree buggyExp = buggyExps.get(i);
+			fixCode.append(this.getSubSuspiciouCodeStr(startPos, buggyExp.getPos()));
+			fixCode.append(generatedFix(varA.get(i), varB.get(i), operators.get(i)));
 			startPos = buggyExp.getPos() + buggyExp.getLength();
 		}
+
+		// StringBuilder sb = new StringBuilder(suspJavaFileCode);
+		// sb.insert(sb.indexOf("import "), "import java.util.Arrays;");
+		// suspJavaFileCode = sb.toString();
 		
-		fixedCodeStr1.append(this.getSubSuspiciouCodeStr(startPos, this.suspCodeEndPos));
-		
-		this.generatePatch(fixedCodeStr1.toString());
+		fixCode.append(this.getSubSuspiciouCodeStr(startPos, this.suspCodeEndPos));
+		this.generatePatch(fixCode.toString());
 	}
 
 	private List<ITree> findBuggyExpressions(ITree tree) {
@@ -47,55 +54,60 @@ public class ECBadArrayCompare extends FixTemplate {
 		
 		for (ITree child : children) {
 			int type = child.getType();
-			if (Checker.isComplexExpression(type)) {
-				if (Checker.isMethodInvocation(type)) {
-					if (child.getLabel().startsWith("MethodName:equals:")) {
-						List<ITree> args = child.getChildren();
-						if (args.size() == 1) {
-							ITree arg = args.get(0);
-							if (Checker.isArrayType(arg.getType())) {
-								buggyExps.add(tree);
-								continue;
-							}
-						}
+
+			if (Checker.isInfixExpression(type)) {
+				if (child.getChild(1).getLabel().equals("==") ||
+					child.getChild(1).getLabel().equals("!=")) {
+					
+					String var1 = child.getChild(0).getLabel();
+					String var2 = child.getChild(2).getLabel();
+
+					if (var1 != null && var2 != null) {
+						buggyExps.add(tree);
+						varA.add(var1);
+						varB.add(var2);
+						operators.add(child.getChild(1).getLabel());
+					}
+
+				}
+			} else if (Checker.isMethodInvocation(type)) {
+				if (child.getChild(1) != null &&
+					child.getChild(1).getLabel().startsWith("MethodName:equals") &&
+					Checker.isSimpleName(child.getChild(0).getType())) {
+					String var1 = child.getChild(0).getLabel();
+					String var2 = child.getChild(1).getChild(0).getLabel();
+					
+					if (var1 != null && var1.startsWith("Name:")) {
+						var1 = var1.substring("Name:".length());
+					}
+					if (var2 != null && var2.startsWith("Name:")) {
+						var2 = var2.substring("Name:".length());
+					}
+
+					if (var1 != null && var2 != null) {
+						buggyExps.add(tree);
+						varA.add(var1);
+						varB.add(var2);
+						operators.add("==");
 					}
 				}
-				buggyExps.addAll(findBuggyExpressions(child));
-			} else if (Checker.isSimpleName(type)) {
-				String childLabel = child.getLabel();
-				if (childLabel.startsWith("MethodName:")) {
-					List<ITree> args = child.getChildren();
-					if (childLabel.startsWith("MethodName:equals:")) {
-						if (args.size() == 1) {
-							ITree arg = args.get(0);
-							if (Checker.isArrayType(arg.getType())) {
-								buggyExps.add(tree);
-								continue;
-							}
-						}
-					}
-					for (ITree arg : args) {
-						buggyExps.addAll(findBuggyExpressions(arg));
-					}
-				}
-			} else if (Checker.isStatement(type)) {
-				break;
 			}
 		}
 		
 		return buggyExps;
 	}
 
-	private String generatedFix(ITree buggyExp) {
-		List<ITree> children = buggyExp.getChildren();
-        ITree equalsMethod = children.get(children.size() - 1);
-        
-        String arr2 = equalsMethod.getChild(0).getLabel();
+	private String generatedFix(String var1, String var2, String op) {
+		StringBuilder sb = new StringBuilder("Arrays.equals(");
+		sb.append(var1);
+		sb.append(',');
+		sb.append(var2);
+		sb.append(")");
 
-        int startPos = buggyExp.getPos();
-		int endPos = equalsMethod.getPos();
-        String arr1 = this.getSubSuspiciouCodeStr(startPos, endPos).trim();
+		if (op.equals("!=")) {
+			sb.insert(0, '!');
+		}
 
-        return "Arrays.equals(" + arr1 + "," + arr2 + ")";
+		return sb.toString();
 	}
 }

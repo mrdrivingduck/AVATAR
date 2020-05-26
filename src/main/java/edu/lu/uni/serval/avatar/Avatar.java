@@ -142,8 +142,6 @@ public class Avatar extends AbstractFixer {
 				if (this.minErrorTest == 0) break;
 				ft = new EP2();
 				generatePatches(ft, scn);
-				ft = new ECBadArrayCompare();
-				generatePatches(ft, scn);
 				ft = new SALocalSelfComparison();
 				generatePatches(ft, scn);
 				ft = new RVReturnValueIgnoredInffered();
@@ -157,6 +155,8 @@ public class Avatar extends AbstractFixer {
 				ft = new FEFloatingPointEquality();
 				generatePatches(ft, scn);
 				ft = new IDIVCastToDouble();
+				generatePatches(ft, scn);
+				ft = new ECBadArrayCompare();
 			}
 			
 			if (ft != null) {
