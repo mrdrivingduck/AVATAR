@@ -50,19 +50,19 @@ public class NPNullOnSomePath extends FixTemplate {
 			if (suspCodeAst.getLabel().replace(" ", "").contains(varName + "!=null") 
 					|| suspCodeAst.getLabel().replace(" ", "").contains(varName + "==null")) continue;
 			// Patch 1.
-			String fixedCodeStr1 = "if (" + varName + " != null) {\n\t";
-			String fixedCodeStr2 = "\n}\n";
+			String fixedCodeStr1 = "if (" + varName + " != null) { ";
+			String fixedCodeStr2 = " } ";
 			int suspCodeEndPos = identifyRelatedStatements(suspCodeAst, varName);
 			this.generatePatch(suspCodeStartPos, suspCodeEndPos, fixedCodeStr1, fixedCodeStr2);
 			
 			if (!returnType.isEmpty()) {
 				// Patch 3.
-				fixedCodeStr1 = "if (" + varName + " == null) {\n    throw new IllegalArgumentException(\"Null '" + varName + "' argument.\");\n}\n";
+				fixedCodeStr1 = "if (" + varName + " == null) { throw new IllegalArgumentException(\"Null '" + varName + "' argument.\"); } ";
 				this.generatePatch(suspCodeStartPos, fixedCodeStr1);
 				
 				
 				// Patch 2.
-				fixedCodeStr1 = "if (" + varName + " == null) {\n    return";
+				fixedCodeStr1 = "if (" + varName + " == null) { return";
 				if ("void".equals(returnType)) {
 				} else if ("float".equals(returnType) || "double".equals(returnType)) {
 					fixedCodeStr1 += " 0.0";
@@ -73,7 +73,7 @@ public class NPNullOnSomePath extends FixTemplate {
 				} else {
 					fixedCodeStr1 += " null";
 				}
-				fixedCodeStr1 += ";\n}\n";
+				fixedCodeStr1 += "; } ";
 				this.generatePatch(suspCodeStartPos, fixedCodeStr1);
 			}
 		}

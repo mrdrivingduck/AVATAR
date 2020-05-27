@@ -8,6 +8,7 @@ import edu.lu.uni.serval.jdt.tree.ITree;
 import edu.lu.uni.serval.utils.Checker;
 
 /**
+ * e.g. for str.substring(), repair it to str = str.substring().
  * 
  * @author Mr Dk.
  */
@@ -17,56 +18,52 @@ public class RVReturnValueIgnoredInffered extends FixTemplate {
 	 * -  var.method(args);
 	 * +  var = var.method(args);
 	 */
-	
+
+	private List<ITree> buggyExps = new ArrayList<>();
+	private List<String> invokers = new ArrayList<>();	
+
 	@Override
 	public void generatePatches() {
 		ITree tree = this.getSuspiciousCodeTree();
-		List<ITree> buggyExps = findBuggyExpressions(tree);
-		if (buggyExps.isEmpty()) return;
-		
-		for (int index = 1, size = buggyExps.size(); index < size; index ++) {
-			ITree buggyExp = buggyExps.get(index);
-			StringBuilder sb = new StringBuilder(this.getSubSuspiciouCodeStr(0, buggyExp.getPos()));
-			sb.append(generatedFix(buggyExp));
-			sb.append(this.getSubSuspiciouCodeStr(buggyExp.getPos(), this.suspCodeEndPos));
+		findBuggyExpressions(tree);
+		if (buggyExps.isEmpty()) {
+			return;
+		}
+
+		for (int i = 0; i < buggyExps.size(); i++) {
+			ITree buggyExp = buggyExps.get(i);
+			StringBuilder sb = new StringBuilder(this.getSubSuspiciouCodeStr(this.suspCodeStartPos, buggyExp.getPos()));
+			sb.append(generatedFix(buggyExp, invokers.get(i)));
+			sb.append(this.getSubSuspiciouCodeStr(buggyExp.getPos() + buggyExp.getLength(), this.suspCodeEndPos));
 			this.generatePatch(sb.toString());
 		}
 	}
 
-	private List<ITree> findBuggyExpressions(ITree tree) {
-		List<ITree> children = tree.getChildren();
-		List<ITree> buggyExps = new ArrayList<>();
-		
-		for (ITree child : children) {
-			int type = child.getType();
-			if (Checker.isComplexExpression(type)) {
-				if (Checker.isMethodInvocation(type)) {
+	private void findBuggyExpressions(ITree tree) {
+		for (ITree child : tree.getChildren()) {
+
+			if (Checker.isMethodInvocation(child.getType())) {
+				if (child.getChild(0) != null && Checker.isSimpleName(child.getChild(0).getType())) {
+					String invoker = child.getChild(0).getLabel();
+					if (invoker.startsWith("Name:")) {
+						invoker = invoker.substring("Name:".length());
+					}
+
 					buggyExps.add(tree);
-					continue;
+					invokers.add(invoker);
 				}
-				buggyExps.addAll(findBuggyExpressions(child));
-			} else if (Checker.isSimpleName(type)) {
-				String childLabel = child.getLabel();
-				if (childLabel.startsWith("MethodName:")) {
-					buggyExps.add(tree);
-					continue;
-				}
-			} else if (Checker.isStatement(type)) {
-				break;
 			}
+
+			findBuggyExpressions(child);
 		}
-		
-		return buggyExps;
 	}
 
-	private String generatedFix(ITree buggyExp) {
-		List<ITree> children = buggyExp.getChildren();
-		ITree equalsMethod = children.get(children.size() - 1);
+	private String generatedFix(ITree buggyExp, String invoker) {
 		int startPos = buggyExp.getPos();
-		int endPos = equalsMethod.getPos();
-		String varExp = this.getSubSuspiciouCodeStr(startPos, endPos).trim();
+		int endPos = buggyExp.getPos() + buggyExp.getLength();
+		String exp = this.getSubSuspiciouCodeStr(startPos, endPos);
 		
-		return varExp.substring(0, varExp.length() - 1) + " = "; // remove "."
+		return invoker + " = " + exp;
 	}
 
 }
