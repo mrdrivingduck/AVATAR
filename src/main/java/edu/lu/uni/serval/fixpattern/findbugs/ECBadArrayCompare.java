@@ -63,7 +63,7 @@ public class ECBadArrayCompare extends FixTemplate {
 					String var2 = child.getChild(2).getLabel();
 
 					if (var1 != null && var2 != null) {
-						buggyExps.add(tree);
+						buggyExps.add(child);
 						varA.add(var1);
 						varB.add(var2);
 						operators.add(child.getChild(1).getLabel());
@@ -85,7 +85,7 @@ public class ECBadArrayCompare extends FixTemplate {
 					}
 
 					if (var1 != null && var2 != null) {
-						buggyExps.add(tree);
+						buggyExps.add(child);
 						varA.add(var1);
 						varB.add(var2);
 						operators.add("==");
