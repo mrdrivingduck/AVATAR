@@ -17,29 +17,30 @@ public class SALocalSelfComparison extends FixTemplate {
 	 * -    var.equals(var);
 	 * +    var.equals(this.var); 
 	 */
-	
+
 	@Override
 	public void generatePatches() {
 		ITree tree = this.getSuspiciousCodeTree();
 		List<ITree> buggyExps = findBuggyExpressions(tree);
-		if (buggyExps.isEmpty()) return;
-		
-		ITree firstBuggyExp = buggyExps.get(0);
-		int startPos = firstBuggyExp.getPos();
-		StringBuilder fixedCodeStr1 = new StringBuilder(this.getSubSuspiciouCodeStr(this.suspCodeStartPos, startPos));
-		fixedCodeStr1.append(generatedFix(firstBuggyExp));
-		startPos = startPos + firstBuggyExp.getLength();
-		
-		for (int index = 1, size = buggyExps.size(); index < size; index ++) {
-			ITree buggyExp = buggyExps.get(index);
-			fixedCodeStr1.append(this.getSubSuspiciouCodeStr(startPos, buggyExp.getPos()));
-			fixedCodeStr1.append(generatedFix(buggyExp));
+		if (buggyExps.isEmpty()) {
+			return;
+		}
+
+		StringBuilder fixCode = new StringBuilder();
+		int startPos = this.suspCodeStartPos;
+		for (int i = 0; i < buggyExps.size(); i++) {
+			ITree buggyExp = buggyExps.get(i);
+			if (startPos > buggyExp.getPos()) {
+				return;
+			}
+			fixCode.append(this.getSubSuspiciouCodeStr(startPos, buggyExp.getPos()));
+			fixCode.append(generatedFix(buggyExp));
 			startPos = buggyExp.getPos() + buggyExp.getLength();
 		}
 		
-		fixedCodeStr1.append(this.getSubSuspiciouCodeStr(startPos, this.suspCodeEndPos));
+		fixCode.append(this.getSubSuspiciouCodeStr(startPos, this.suspCodeEndPos));
 		
-		this.generatePatch(fixedCodeStr1.toString());
+		this.generatePatch(fixCode.toString());
 	}
 
 	private List<ITree> findBuggyExpressions(ITree tree) {
