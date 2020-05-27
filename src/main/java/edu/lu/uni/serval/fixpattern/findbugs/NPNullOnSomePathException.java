@@ -18,6 +18,7 @@ public class NPNullOnSomePathException extends FixTemplate {
 	 *     input/outputStream.close();
 	 * + }
 	 */
+	
 	@Override
 	public void generatePatches() {
 		ITree suspCodeAst = this.getSuspiciousCodeTree();
