@@ -10,6 +10,7 @@ import edu.lu.uni.serval.config.Configuration;
 import edu.lu.uni.serval.fixpattern.FixTemplate;
 import edu.lu.uni.serval.fixpattern.findbugs.BCUnconfirmedCast;
 import edu.lu.uni.serval.fixpattern.findbugs.DLSDeadLocalStore;
+import edu.lu.uni.serval.fixpattern.findbugs.DLSDeadLocalStoreShadowsField;
 import edu.lu.uni.serval.fixpattern.findbugs.ECBadArrayCompare;
 import edu.lu.uni.serval.fixpattern.findbugs.EQDoesNotOverrideEquals;
 import edu.lu.uni.serval.fixpattern.findbugs.FEFloatingPointEquality;
@@ -155,6 +156,8 @@ public class Avatar extends AbstractFixer {
 				ft = new FEFloatingPointEquality();
 				generatePatches(ft, scn);
 				ft = new IDIVCastToDouble();
+				generatePatches(ft, scn);
+				ft = new DLSDeadLocalStoreShadowsField();
 				generatePatches(ft, scn);
 				ft = new ECBadArrayCompare();
 			}

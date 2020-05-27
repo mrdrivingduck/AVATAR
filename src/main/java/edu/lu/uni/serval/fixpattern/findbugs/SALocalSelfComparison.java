@@ -63,7 +63,7 @@ public class SALocalSelfComparison extends FixTemplate {
 							varExp = varExp.substring(0, varExp.length() - 1);
 
 							if (varInEquals.equals(varExp)) {
-								buggyExps.add(tree);
+								buggyExps.add(child);
 								continue;
 							}
 						}
@@ -85,7 +85,7 @@ public class SALocalSelfComparison extends FixTemplate {
 							varExp = varExp.substring(0, varExp.length() - 1);
 
 							if (varInEquals.equals(varExp)) {
-								buggyExps.add(tree);
+								buggyExps.add(child);
 								continue;
 							}
 						}
