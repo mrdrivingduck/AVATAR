@@ -98,7 +98,7 @@ public class ECBadArrayCompare extends FixTemplate {
 	}
 
 	private String generatedFix(String var1, String var2, String op) {
-		StringBuilder sb = new StringBuilder("Arrays.equals(");
+		StringBuilder sb = new StringBuilder("java.util.Arrays.equals(");
 		sb.append(var1);
 		sb.append(',');
 		sb.append(var2);

@@ -51,10 +51,10 @@ public class BCUnconfirmedCast extends FixTemplate {
 				String fixedCodeStr1 = "";
 				if (Checker.isSimpleName(castedExpType) || Checker.isFieldAccess(castedExpType) 
 						|| Checker.isQualifiedName(castedExpType) || Checker.isSuperFieldAccess(castedExpType)) {
-					fixedCodeStr1 = "if (" + castedExpStr + " instanceof " + castTypeStr + ") {\n\t";
+					fixedCodeStr1 = "if (" + castedExpStr + " instanceof " + castTypeStr + ") { ";
 				} else if (Checker.isComplexExpression(castedExpType)) {
-					fixedCodeStr1 = "Object _tempVar = " + castedExpStr + ";\n" +
-									"if (_temVar instanceof " + castTypeStr + ") {\n\t";
+					fixedCodeStr1 = "Object _tempVar = " + castedExpStr + "; " +
+									"if (_temVar instanceof " + castTypeStr + ") { ";
 					 this.getSuspiciousCodeStr().replace(castedExpStr, "_temVar");
 				}
 				
@@ -63,7 +63,7 @@ public class BCUnconfirmedCast extends FixTemplate {
 					endPosition = identifyRelatedStatements(suspStmtTree, varName);
 				}
 				
-				String fixedCodeStr2 = "\n} else {\n\tthrow new IllegalArgumentException(\"Illegal argument: " + castedExpStr + "\");\n}\n";
+				String fixedCodeStr2 = " } else { throw new IllegalArgumentException(\"Illegal argument: " + castedExpStr + "\"); } ";
 				generatePatch(suspCodeStartPos, endPosition, fixedCodeStr1, fixedCodeStr2);
 			}
 		}

@@ -29,14 +29,14 @@ public class EQDoesNotOverrideEquals extends FixTemplate {
 		readClassNameAndFields(this.getSuspiciousCodeTree());
 		if (className == null) return;
 		
-		StringBuilder fixedCode = new StringBuilder("    public boolean equals(Object obj) {\n");
-		fixedCode.append("        if (obj == null) return false;\n");
-		fixedCode.append("        if (obj == this) return true;\n");
-		fixedCode.append("        if (!(obj instanceof ").append(className).append(")) return false;\n");
-		fixedCode.append("        ").append(className).append(" _var = (").append(className).append(") obj;\n");
+		StringBuilder fixedCode = new StringBuilder("    public boolean equals(Object obj) { ");
+		fixedCode.append("        if (obj == null) return false; ");
+		fixedCode.append("        if (obj == this) return true; ");
+		fixedCode.append("        if (!(obj instanceof ").append(className).append(")) return false; ");
+		fixedCode.append("        ").append(className).append(" _var = (").append(className).append(") obj; ");
 		
 		if (fieldNames.isEmpty()) {
-			fixedCode.append("        return super.equals(obj);\n    }");
+			fixedCode.append("        return super.equals(obj);    }");
 			this.generatePatch(fixedCode.toString());
 			return;
 		}
@@ -50,8 +50,8 @@ public class EQDoesNotOverrideEquals extends FixTemplate {
 		for (List<String> selectedFields : selectedFieldsList) {
 			StringBuilder fixedCodeStr1 = generatedComparingCode(selectedFields);
 			fixedCode.append(fixedCodeStr1);
-			this.generatePatch(0, fixedCode.toString() + "        return true;\n    }");
-			this.generatePatch(0, fixedCode.toString() + "        return super.equals(obj);\n    }");
+			this.generatePatch(0, fixedCode.toString() + "        return true;    }");
+			this.generatePatch(0, fixedCode.toString() + "        return super.equals(obj);    }");
 		}
 	}
 	
@@ -78,7 +78,7 @@ public class EQDoesNotOverrideEquals extends FixTemplate {
 			} else {
 				fixedCodeStr1.append("!").append(fieldName).append(".equals(_var.").append(fieldName).append(")");
 			}
-			fixedCodeStr1.append(") return false;\n");
+			fixedCodeStr1.append(") return false; ");
 		}
 		return fixedCodeStr1;
 	}
