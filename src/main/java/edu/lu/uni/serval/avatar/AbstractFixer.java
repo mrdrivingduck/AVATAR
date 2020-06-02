@@ -328,6 +328,7 @@ public abstract class AbstractFixer implements IFixer {
 						} else {
 							FileHelper.outputToFile(Configuration.outputPath + "PartiallyFixedBugs/" + buggyProject + "/Patch_" + patchId + ".txt", patchStr + "\n", false);
 						}
+						return;
 					}
 				}
 			} else {

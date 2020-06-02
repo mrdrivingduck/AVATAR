@@ -27,6 +27,9 @@ public class UCUselessCondition extends FixTemplate {
 		ITree suspStmtAst = this.getSuspiciousCodeTree();
 		Map<ITree, Integer> allPredicateExps = readAllSuspiciousPredicateExpressions(suspStmtAst);
 		
+		String originStr = this.getSuspiciousCodeStr();
+		int originLines = originStr.length() - originStr.replace("\n", "").length();
+
 		for (Map.Entry<ITree, Integer> entry : allPredicateExps.entrySet()) {
 			ITree predicateExp = entry.getKey();
 			
@@ -39,14 +42,24 @@ public class UCUselessCondition extends FixTemplate {
 				ITree thenExp = predicateExp.getChild(1);
 				startPos = thenExp.getPos();
 				endPos = startPos + thenExp.getLength();
-				String fixedCodeStr = fixedCodeStr1 + this.getSubSuspiciouCodeStr(startPos, endPos) + fixedCodeStr2;
-				this.generatePatch(fixedCodeStr);
+				StringBuilder sb = new StringBuilder(fixedCodeStr1)
+						.append(this.getSubSuspiciouCodeStr(startPos, endPos)).append(fixedCodeStr2);
+				int fixedLines = sb.length() - sb.toString().replace("\n", "").length();
+				for (int i = 0; i < originLines - fixedLines; i++) {
+					sb.append('\n');
+				}
+				this.generatePatch(sb.toString());
 				
 				ITree elseExp = predicateExp.getChild(2);
 				startPos = elseExp.getPos();
 				endPos = startPos + elseExp.getLength();
-				fixedCodeStr = fixedCodeStr1 + this.getSubSuspiciouCodeStr(startPos, endPos) + fixedCodeStr2;
-				this.generatePatch(fixedCodeStr);
+				sb = new StringBuilder(fixedCodeStr1)
+						.append(this.getSubSuspiciouCodeStr(startPos, endPos)).append(fixedCodeStr2);
+				fixedLines = sb.length() - sb.toString().replace("\n", "").length();
+				for (int i = 0; i < originLines - fixedLines; i++) {
+					sb.append('\n');
+				}
+				this.generatePatch(sb.toString());
 				
 				continue;
 			}
@@ -54,17 +67,21 @@ public class UCUselessCondition extends FixTemplate {
 			int pos = entry.getValue();
 			int predicateExpStartPos = predicateExp.getPos();
 			
-			String fixedCodeStr1;
+			StringBuilder fixedCodeStr1 = new StringBuilder();
 			if (pos == 0) {
 				continue;
 			} else if (pos > predicateExpStartPos) {
-				fixedCodeStr1 = this.getSubSuspiciouCodeStr(suspCodeStartPos, predicateExpStartPos);
-				fixedCodeStr1 += this.getSubSuspiciouCodeStr(pos, suspCodeEndPos);
+				fixedCodeStr1.append(this.getSubSuspiciouCodeStr(suspCodeStartPos, predicateExpStartPos));
+				fixedCodeStr1.append(this.getSubSuspiciouCodeStr(pos, suspCodeEndPos));
 			} else {
-				fixedCodeStr1 = this.getSubSuspiciouCodeStr(suspCodeStartPos, pos);
-				fixedCodeStr1 += this.getSubSuspiciouCodeStr(predicateExpStartPos + predicateExp.getLength(), suspCodeEndPos);
+				fixedCodeStr1.append(this.getSubSuspiciouCodeStr(suspCodeStartPos, pos));
+				fixedCodeStr1.append(this.getSubSuspiciouCodeStr(predicateExpStartPos + predicateExp.getLength(), suspCodeEndPos));
 			}
-			this.generatePatch(fixedCodeStr1);
+			int fixedLines = fixedCodeStr1.length() - fixedCodeStr1.toString().replace("\n", "").length();
+			for (int i = 0; i < originLines - fixedLines; i++) {
+				fixedCodeStr1.append('\n');
+			}
+			this.generatePatch(fixedCodeStr1.toString());
 		}
 	}
 	

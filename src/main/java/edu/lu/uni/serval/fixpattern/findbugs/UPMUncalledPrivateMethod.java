@@ -25,9 +25,16 @@ public class UPMUncalledPrivateMethod extends FixTemplate {
 		
 		int startPos = parentTree.getPos();
 		int endPos = startPos + parentTree.getLength();
+
+		String originStr = this.getSuspiciousCodeStr();
+		int originLines = originStr.length() - originStr.replace("\n", "").length();
+
+		StringBuilder fixedCodeStr1 = new StringBuilder("");
+		for (int i = 0; i < originLines; i++) {
+			fixedCodeStr1.append('\n');
+		}
 		
-		String fixedCodeStr1 = "";// Replace the buggy code with empty string.
-		this.generatePatch(startPos, endPos, fixedCodeStr1, null);
+		this.generatePatch(startPos, endPos, fixedCodeStr1.toString(), null);
 	}
 
 }

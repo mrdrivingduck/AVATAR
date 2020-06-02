@@ -33,11 +33,24 @@ public class UCFUselessControlFlow extends FixTemplate {
 		}
 		ITree lastStmt = children.get(size - 1);
 		int endPos2 = lastStmt.getPos() + lastStmt.getLength();
+
+		String originStr = this.getSuspiciousCodeStr();
+		int originLines = originStr.length() - originStr.replace("\n", "").length();
 		
-		String fixedCodeStr1 = this.getSubSuspiciouCodeStr(endPos1, endPos2);
+		StringBuilder fixedCodeStr1 = new StringBuilder(this.getSubSuspiciouCodeStr(endPos1, endPos2));
+		int fixedLines = fixedCodeStr1.length() - fixedCodeStr1.toString().replace("\n", "").length();
 		
-		this.generatePatch(fixedCodeStr1); // Just remove the control flow.
-		this.generatePatch(""); // Remove all code in the control flow.
+		for (int i = 0; i < originLines - fixedLines; i++) {
+			fixedCodeStr1.append('\n');
+		}
+
+		StringBuilder empty = new StringBuilder("");
+		for (int i = 0; i < originLines; i++) {
+			empty.append('\n');
+		}
+		
+		this.generatePatch(fixedCodeStr1.toString()); // Just remove the control flow.
+		this.generatePatch(empty.toString()); // Remove all code in the control flow.
 	}
 
 }

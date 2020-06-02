@@ -26,8 +26,16 @@ public class UCUselessObject extends FixTemplate {
 		if (!"".equals(varName)) { // statements related to variable.
 			endPosition = identifyRelatedStatements(suspStmtTree, varName);
 		}
-		String fixedCodeStr1 = "";// Replace the buggy code with empty string.
-		this.generatePatch(endPosition, endPosition, fixedCodeStr1, null);
+
+		String originStr = this.getSuspiciousCodeStr();
+		int originLines = originStr.length() - originStr.replace("\n", "").length();
+
+		StringBuilder fixedCodeStr1 = new StringBuilder("");
+		for (int i = 0; i < originLines; i++) {
+			fixedCodeStr1.append('\n');
+		}
+
+		this.generatePatch(endPosition, endPosition, fixedCodeStr1.toString(), null);
 	}
 
 }
