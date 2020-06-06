@@ -8,15 +8,13 @@ import edu.lu.uni.serval.jdt.tree.ITree;
 import edu.lu.uni.serval.utils.Checker;
 
 /**
+ * array1 == array2 --> Arrays.equals(array1, array2).
+ * array1.equals(array2) --> Arrays.equals(array1, array2).
+ * 
  * 
  * @author Mr Dk.
  */
 public class ECBadArrayCompare extends FixTemplate {
-    
-	/*
-	 * array1 == array2 --> Arrays.equals(array1, array2).
-	 * array1.equals(array2) --> Arrays.equals(array1, array2).
-	 */
 
 	List<String> varA = new ArrayList<>();
 	List<String> varB = new ArrayList<>();
@@ -55,7 +53,7 @@ public class ECBadArrayCompare extends FixTemplate {
 		for (ITree child : children) {
 			int type = child.getType();
 
-			if (Checker.isInfixExpression(type)) {
+			if (Checker.isInfixExpression(type) && child.getChildren().size() >= 3) {
 				if (child.getChild(1).getLabel().equals("==") ||
 					child.getChild(1).getLabel().equals("!=")) {
 					

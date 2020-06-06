@@ -8,16 +8,13 @@ import edu.lu.uni.serval.jdt.tree.ITree;
 
 /**
  * 
+ * + if (input/outputStream != null) {
+ *     input/outputStream.close();
+ * + }
  * 
  * @author Mr Dk.
  */
 public class NPNullOnSomePathException extends FixTemplate {
-
-	/*
-	 * + if (input/outputStream != null) {
-	 *     input/outputStream.close();
-	 * + }
-	 */
 	
 	@Override
 	public void generatePatches() {

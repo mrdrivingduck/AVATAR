@@ -10,14 +10,12 @@ import edu.lu.uni.serval.utils.Checker;
 /**
  * e.g. for str.substring(), repair it to str = str.substring().
  * 
+ * -  var.method(args);
+ * +  var = var.method(args);
+ * 
  * @author Mr Dk.
  */
 public class RVReturnValueIgnoredInffered extends FixTemplate {
-
-	/*
-	 * -  var.method(args);
-	 * +  var = var.method(args);
-	 */
 
 	private List<ITree> buggyExps = new ArrayList<>();
 	private List<String> invokers = new ArrayList<>();	
@@ -41,6 +39,10 @@ public class RVReturnValueIgnoredInffered extends FixTemplate {
 
 	private void findBuggyExpressions(ITree tree) {
 		for (ITree child : tree.getChildren()) {
+
+			if (child.getChildren().size() < 1) {
+				continue;
+			}
 
 			if (Checker.isMethodInvocation(child.getType())) {
 				if (child.getChild(0) != null && Checker.isSimpleName(child.getChild(0).getType())) {

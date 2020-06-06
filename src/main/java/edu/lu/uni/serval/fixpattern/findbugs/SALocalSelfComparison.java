@@ -9,14 +9,12 @@ import edu.lu.uni.serval.utils.Checker;
 
 /**
  * 
+ * -    var.equals(var);
+ * +    var.equals(this.var); 
+ * 
  * @author Mr Dk.
  */
 public class SALocalSelfComparison extends FixTemplate {
-
-	/*
-	 * -    var.equals(var);
-	 * +    var.equals(this.var); 
-	 */
 
 	@Override
 	public void generatePatches() {

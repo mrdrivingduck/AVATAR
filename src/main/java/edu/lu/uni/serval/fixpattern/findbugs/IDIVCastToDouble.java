@@ -10,16 +10,14 @@ import edu.lu.uni.serval.utils.Checker;
 /**
  * Useful for Math_11.
  * 
+ * intVarExp / 10 --> intVarExp / 10d(or f).
+ * 1 / var --> 1.0 / var.
+ * dividend / divisor --> dividend / (float or double) divisor.
+ * dividend / divisor --> (double or float) dividend / divisor
+ * 
  * @author Mr Dk.
  */
 public class IDIVCastToDouble extends FixTemplate {
-
-	/*
-	 * intVarExp / 10 --> intVarExp / 10d(or f).
-	 * 1 / var --> 1.0 / var.
-	 * dividend / divisor --> dividend / (float or double) divisor.
-	 * dividend / divisor --> (double or float) dividend / divisor
-	 */
 	
 	private List<ITree> buggyExps = new ArrayList<>();
 	private List<String> operators = new ArrayList<>();
@@ -54,6 +52,11 @@ public class IDIVCastToDouble extends FixTemplate {
 		for (ITree child : children) {
 			if (Checker.isInfixExpression(child.getType())) {
 				List<ITree> subChildren = child.getChildren();
+
+				if (subChildren.size() < 3) {
+					continue;
+				}
+
 				String op = subChildren.get(1).getLabel();
 
 				if ("/".equals(op)) {

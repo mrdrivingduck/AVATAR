@@ -10,15 +10,13 @@ import edu.lu.uni.serval.utils.Checker;
 /**
  * Tested through Math_22.
  * 
+ * For a floating point number.
+ * var1 != var2 --> Math.abs(var1 - var2) < 0.00001.
+ * var1 == var2 --> var1.compareTo(var2) == 0.
+ * 
  * @author Mr Dk.
  */
 public class FEFloatingPointEquality extends FixTemplate {
-
-	/*
-	 * For a floating point number.
-	 * var1 != var2 --> Math.abs(var1 - var2) < 0.00001.
-	 * var1 == var2 --> var1.compareTo(var2) == 0.
-	 */
 	
 	private List<ITree> buggyExps = new ArrayList<>();
 	private List<String> operators = new ArrayList<>();
@@ -60,6 +58,11 @@ public class FEFloatingPointEquality extends FixTemplate {
 
 			if (Checker.isInfixExpression(type)) {
 				List<ITree> subChildren = child.getChildren();
+
+				if (subChildren.size() < 3) {
+					continue;
+				}
+
 				String op = subChildren.get(1).getLabel();
 				if ("==".equals(op) || "!=".equals(op)) {
 

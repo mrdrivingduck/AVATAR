@@ -10,14 +10,12 @@ import edu.lu.uni.serval.utils.Checker;
 /**
  * Tested through Math_22.
  * 
+ * d == Double.NaN  --> Double.isNaN(d).
+ * d != Double.NaN --> !Double.isNaN(d).
+ * 
  * @author Mr Dk.
  */
 public class FETestIfEqualToNan extends FixTemplate {
-
-	/*
-	 * d == Double.NaN  --> Double.isNaN(d).
-	 * d != Double.NaN --> !Double.isNaN(d).
-	 */
 	
 	private List<ITree> buggyExps = new ArrayList<>();
 	private List<String> operators = new ArrayList<>();
@@ -56,6 +54,11 @@ public class FETestIfEqualToNan extends FixTemplate {
 			if (Checker.isComplexExpression(type)) {
 				if (Checker.isInfixExpression(type)) {
 					List<ITree> subChildren = child.getChildren();
+
+					if (subChildren.size() < 3) {
+						continue;
+					}
+
 					String op = subChildren.get(1).getLabel();
 					if ("==".equals(op) || "!=".equals(op)) {
 						ITree exp = null;
