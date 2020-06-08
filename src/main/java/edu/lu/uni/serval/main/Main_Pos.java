@@ -101,7 +101,6 @@ public class Main_Pos {
 			break;
 		case 2:
 			log.info("=======Partial succeeded to fix bug " + buggyProjectName);
-			fixBug(buggyProjectsPath, defects4jPath, buggyProjectName);
 			break;
 		}
 	}
