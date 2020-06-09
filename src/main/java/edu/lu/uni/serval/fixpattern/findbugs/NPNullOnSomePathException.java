@@ -31,7 +31,7 @@ public class NPNullOnSomePathException extends FixTemplate {
 		for (String varName : allSuspVariables) {
 			
 			String varType = varTypesMap.get(varName);
-			if (varName == null || (!isIOStream(varType) && !isReaderWriter(varType))) {
+			if (varType == null || (!isIOStream(varType) && !isReaderWriter(varType))) {
 				continue;
 			}
 			
