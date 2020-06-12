@@ -1,0 +1,34 @@
+diff --git a/.project b/.project
+index 12816b9b0..c06b9bcef 100644
+--- a/.project
++++ b/.project
+@@ -20,10 +20,16 @@
+ 			<arguments>
+ 			</arguments>
+ 		</buildCommand>
++		<buildCommand>
++			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
++			<arguments>
++			</arguments>
++		</buildCommand>
+ 	</buildSpec>
+ 	<natures>
+ 		<nature>org.eclipse.jdt.core.javanature</nature>
+ 		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
+ 		<nature>org.python.pydev.pythonNature</nature>
++		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
+ 	</natures>
+ </projectDescription>
+diff --git a/src/org/mockito/internal/matchers/Same.java b/src/org/mockito/internal/matchers/Same.java
+index 6c172fee2..ef3e8bfc7 100644
+--- a/src/org/mockito/internal/matchers/Same.java
++++ b/src/org/mockito/internal/matchers/Same.java
+@@ -26,7 +26,7 @@ public class Same extends ArgumentMatcher<Object> implements Serializable {
+     public void describeTo(Description description) {
+         description.appendText("same(");
+         appendQuoting(description);
+-        description.appendText(wanted.toString());
++        if (wanted != null) { description.appendText(wanted.toString()); } 
+         appendQuoting(description);
+         description.appendText(")");
+     }

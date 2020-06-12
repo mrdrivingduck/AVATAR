@@ -1,8 +1,8 @@
 diff --git a/src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveEntry.java b/src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveEntry.java
-index 941bbbd3..d5de1e4d 100644
+index 941bbbd3..ef91e28d 100644
 --- a/src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveEntry.java
 +++ b/src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveEntry.java
-@@ -856,9 +856,7 @@ public class TarArchiveEntry implements TarConstants, ArchiveEntry {
+@@ -856,9 +856,9 @@ public class TarArchiveEntry implements TarConstants, ArchiveEntry {
              return true;
          }
  
@@ -10,6 +10,8 @@ index 941bbbd3..d5de1e4d 100644
 -            return true;
 -        }
 +        
++
++
  
          return false;
      }

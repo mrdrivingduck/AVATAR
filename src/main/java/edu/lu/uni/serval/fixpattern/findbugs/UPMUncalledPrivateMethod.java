@@ -26,7 +26,7 @@ public class UPMUncalledPrivateMethod extends FixTemplate {
 		int startPos = parentTree.getPos();
 		int endPos = startPos + parentTree.getLength();
 
-		String originStr = this.getSuspiciousCodeStr();
+		String originStr = this.suspJavaFileCode.substring(startPos, endPos);
 		int originLines = originStr.length() - originStr.replace("\n", "").length();
 
 		StringBuilder fixedCodeStr1 = new StringBuilder("");

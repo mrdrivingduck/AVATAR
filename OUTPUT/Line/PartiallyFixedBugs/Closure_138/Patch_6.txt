@@ -1,13 +1,22 @@
 diff --git a/src/com/google/javascript/jscomp/ClosureReverseAbstractInterpreter.java b/src/com/google/javascript/jscomp/ClosureReverseAbstractInterpreter.java
-index 720b60b7..aa98ca72 100644
+index 720b60b7..39bb927e 100644
 --- a/src/com/google/javascript/jscomp/ClosureReverseAbstractInterpreter.java
 +++ b/src/com/google/javascript/jscomp/ClosureReverseAbstractInterpreter.java
-@@ -205,7 +205,7 @@ class ClosureReverseAbstractInterpreter
+@@ -205,7 +205,6 @@ class ClosureReverseAbstractInterpreter
        Node param = condition.getLastChild();
        if (callee.getType() == GETPROP && param.isQualifiedName()) {
          JSType paramType =  getTypeIfRefinable(param, blindScope);
 -        if (paramType != null) {
-+        if (blindScope != null) {
          Node left = callee.getFirstChild();
          Node right = callee.getLastChild();
          if (left.getType() == NAME && "goog".equals(left.getString()) &&
+@@ -217,7 +216,8 @@ class ClosureReverseAbstractInterpreter
+                 outcome);
+             }
+           }
+-        }
++
++
+       }
+     }
+     return nextPreciserScopeKnowingConditionOutcome(

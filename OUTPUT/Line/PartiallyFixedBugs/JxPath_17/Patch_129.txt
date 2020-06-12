@@ -1,5 +1,5 @@
 diff --git a/src/java/org/apache/commons/jxpath/ri/model/dom/DOMAttributeIterator.java b/src/java/org/apache/commons/jxpath/ri/model/dom/DOMAttributeIterator.java
-index a2ee4db..c129c3a 100644
+index a2ee4db..b8c6c90 100644
 --- a/src/java/org/apache/commons/jxpath/ri/model/dom/DOMAttributeIterator.java
 +++ b/src/java/org/apache/commons/jxpath/ri/model/dom/DOMAttributeIterator.java
 @@ -89,7 +89,7 @@ public class DOMAttributeIterator implements NodeIterator {
@@ -7,7 +7,7 @@ index a2ee4db..c129c3a 100644
              }
              String nodeNS = null;
 -            if (nodePrefix != null) {
-+            if (testPrefix != null) {
++            if (nodePrefix == null) {
                  nodeNS = parent.getNamespaceURI(nodePrefix);
              }
              return equalStrings(testNS, nodeNS);

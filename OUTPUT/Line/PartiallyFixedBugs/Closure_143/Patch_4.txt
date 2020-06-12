@@ -1,5 +1,5 @@
 diff --git a/src/com/google/javascript/jscomp/AbstractCommandLineRunner.java b/src/com/google/javascript/jscomp/AbstractCommandLineRunner.java
-index 13cb6268..4f5be3d1 100644
+index 13cb6268..c72fb8a1 100644
 --- a/src/com/google/javascript/jscomp/AbstractCommandLineRunner.java
 +++ b/src/com/google/javascript/jscomp/AbstractCommandLineRunner.java
 @@ -865,10 +865,7 @@ abstract class AbstractCommandLineRunner<A extends Compiler,
@@ -14,3 +14,12 @@ index 13cb6268..4f5be3d1 100644
              // If the value starts and ends with a single quote,
              // we assume that it's a string.
              String maybeStringVal =
+@@ -886,6 +883,9 @@ abstract class AbstractCommandLineRunner<A extends Compiler,
+               // do nothing, it will be caught at the end
+             }
+           }
++
++
++
+         }
+       }

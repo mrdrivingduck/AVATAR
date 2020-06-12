@@ -1,0 +1,33 @@
+diff --git a/.project b/.project
+index 12816b9b0..c06b9bcef 100644
+--- a/.project
++++ b/.project
+@@ -20,10 +20,16 @@
+ 			<arguments>
+ 			</arguments>
+ 		</buildCommand>
++		<buildCommand>
++			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
++			<arguments>
++			</arguments>
++		</buildCommand>
+ 	</buildSpec>
+ 	<natures>
+ 		<nature>org.eclipse.jdt.core.javanature</nature>
+ 		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
+ 		<nature>org.python.pydev.pythonNature</nature>
++		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
+ 	</natures>
+ </projectDescription>
+diff --git a/src/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java b/src/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java
+index 671fbc539..4c2c74430 100644
+--- a/src/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java
++++ b/src/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java
+@@ -45,6 +45,6 @@ public class ArgumentMatchingTool {
+     }
+ 
+     private boolean toStringEquals(Matcher m, Object arg) {
+-        return StringDescription.toString(m).equals(arg.toString());
++        if (arg == null) { return false; } return StringDescription.toString(m).equals(arg.toString());
+     }
+ }

@@ -11,7 +11,7 @@ public class Configuration {
 	public static final long SHELL_RUN_TIMEOUT = 10800L;
 	
 	public static String knownBugPositions = "BugPosition/D4jPatchPosition.txt";
-	public static String suspPositionsFilePath = "SuspiciousCodePositions/";
+	public static String suspPositionsFilePath = "/home/mrdrivingduck/Desktop/FL-VS-APR/FaultLocalization/GZoltar-1.7.3/SuspiciousCodePositions/";
 	public static String failedTestCasesFilePath = "FailedTestCases/";
 	public static String faultLocalizationMetric = "Ochiai";
 	public static String outputPath = "OUTPUT/";
