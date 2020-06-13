@@ -27,7 +27,7 @@ public class UCUselessObject extends FixTemplate {
 			endPosition = identifyRelatedStatements(suspStmtTree, varName);
 		}
 
-		String originStr = this.getSuspiciousCodeStr();
+		String originStr = this.suspJavaFileCode.substring(suspCodeStartPos, endPosition);
 		int originLines = originStr.length() - originStr.replace("\n", "").length();
 
 		StringBuilder fixedCodeStr1 = new StringBuilder("");
