@@ -1,8 +1,8 @@
 diff --git a/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java b/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java
-index 37c4417e2..f37dd61c0 100644
+index 37c4417e2..7f2c9cf86 100644
 --- a/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java
 +++ b/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java
-@@ -713,15 +713,7 @@ public class ArrayRealVector extends AbstractRealVector implements Serializable
+@@ -713,15 +713,15 @@ public class ArrayRealVector extends AbstractRealVector implements Serializable
          return sum;
      }
  
@@ -16,14 +16,22 @@ index 37c4417e2..f37dd61c0 100644
 -        return max;
 -    }
 +    
++
++
++
++
++
++
++
++
  
      /** {@inheritDoc} */
      public double getDistance(RealVector v)
 diff --git a/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java b/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
-index e02596003..ea004b93f 100644
+index e02596003..315626f98 100644
 --- a/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
 +++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
-@@ -495,15 +495,7 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
+@@ -495,15 +495,15 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
          return max;
      }
  
@@ -37,6 +45,14 @@ index e02596003..ea004b93f 100644
 -        return max;
 -    }
 +    
++
++
++
++
++
++
++
++
      /**
       * Optimized method to compute LInfDistance.
       * @param v The vector to compute from

@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # The path of containing Defects4J bugs.
-d4jData=/home/mrdrivingduck/defects4j/projects/b/
+d4jData=/home/mrdrivingduck/Desktop/d4jData/
 
 # The path of Defects4J git repository.
-d4jPath=/home/mrdrivingduck/defects4j/
+d4jPath=/home/mrdrivingduck/Desktop/defects4j/
 
 # The fault localization metric used to calculate suspiciousness value of each code line.
 metric=Ochiai

@@ -1,8 +1,8 @@
 diff --git a/src/main/java/org/apache/commons/lang3/SerializationUtils.java b/src/main/java/org/apache/commons/lang3/SerializationUtils.java
-index 1ee636cb..80101152 100644
+index 1ee636cb..f53567b0 100644
 --- a/src/main/java/org/apache/commons/lang3/SerializationUtils.java
 +++ b/src/main/java/org/apache/commons/lang3/SerializationUtils.java
-@@ -251,23 +251,7 @@ public class SerializationUtils {
+@@ -251,23 +251,23 @@ public class SerializationUtils {
  
          }
  
@@ -24,5 +24,21 @@ index 1ee636cb..80101152 100644
 -            }
 -        }
 +        
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
  
      }
