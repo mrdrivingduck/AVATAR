@@ -1,8 +1,8 @@
 diff --git a/src/main/java/org/jsoup/nodes/Element.java b/src/main/java/org/jsoup/nodes/Element.java
-index cd2e86a..a84154d 100644
+index cd2e86a..dbabc2d 100644
 --- a/src/main/java/org/jsoup/nodes/Element.java
 +++ b/src/main/java/org/jsoup/nodes/Element.java
-@@ -1164,16 +1164,7 @@ public class Element extends Node {
+@@ -1164,16 +1164,16 @@ public class Element extends Node {
          return outerHtml();
      }
  
@@ -11,12 +11,19 @@ index cd2e86a..a84154d 100644
 -        if (this == o) return true;
 -        if (o == null || getClass() != o.getClass()) return false;
 -        if (!super.equals(o)) return false;
--
++    
++
++
++
++
++
++
++
+ 
 -        Element element = (Element) o;
--
+ 
 -        return this == o;
 -    }
-+    
  
      @Override
      public int hashCode() {
