@@ -68,17 +68,17 @@ public class ShellUtils {
         } catch (InterruptedException e){
             future.cancel(true);
             e.printStackTrace();
-            shutdownProcess(service, process);
+            // shutdownProcess(service, process);
             return "";
         } catch (TimeoutException e){
             future.cancel(true);
             e.printStackTrace();
-            shutdownProcess(service, process);
+            // shutdownProcess(service, process);
             return "";
         } catch (ExecutionException e){
             future.cancel(true);
             e.printStackTrace();
-            shutdownProcess(service, process);
+            // shutdownProcess(service, process);
             return "";
         } finally {
             shutdownProcess(service, process);
@@ -94,8 +94,9 @@ public class ShellUtils {
 	        process.getOutputStream().close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-        process.destroy();
+		} finally {
+            process.destroy();
+        }
 	}
 }
 
