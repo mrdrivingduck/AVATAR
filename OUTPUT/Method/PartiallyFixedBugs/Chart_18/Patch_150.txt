@@ -1,0 +1,56 @@
+diff --git a/source/org/jfree/data/DefaultKeyedValues.java b/source/org/jfree/data/DefaultKeyedValues.java
+index 707eb0a..f993598 100644
+--- a/source/org/jfree/data/DefaultKeyedValues.java
++++ b/source/org/jfree/data/DefaultKeyedValues.java
+@@ -303,22 +303,22 @@ public class DefaultKeyedValues implements KeyedValues,
+         }
+     }
+ 
+-    /**
+-     * Removes a value from the collection.
+-     *
+-     * @param index  the index of the item to remove (in the range 
+-     *     <code>0</code> to <code>getItemCount() - 1</code>).
+-     *     
+-     * @throws IndexOutOfBoundsException if <code>index</code> is not within
+-     *     the specified range.
+-     */
+-    public void removeValue(int index) {
+-        this.keys.remove(index);
+-        this.values.remove(index);
+-        if (index < this.keys.size()) {
+-        rebuildIndex();
+-        }
+-    }
++    
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
+ 
+     /**
+      * Removes a value from the collection.
+diff --git a/source/org/jfree/data/DefaultKeyedValues2D.java b/source/org/jfree/data/DefaultKeyedValues2D.java
+index 798d5d0..6959bc3 100644
+--- a/source/org/jfree/data/DefaultKeyedValues2D.java
++++ b/source/org/jfree/data/DefaultKeyedValues2D.java
+@@ -455,7 +455,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D,
+         Iterator iterator = this.rows.iterator();
+         while (iterator.hasNext()) {
+             DefaultKeyedValues rowData = (DefaultKeyedValues) iterator.next();
+-                rowData.removeValue(columnKey);
++                rowData.removeValue(serialVersionUID);
+         }
+         this.columnKeys.remove(columnKey);
+     }

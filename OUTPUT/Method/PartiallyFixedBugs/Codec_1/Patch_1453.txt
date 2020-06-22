@@ -1,0 +1,16 @@
+diff --git a/src/java/org/apache/commons/codec/language/Metaphone.java b/src/java/org/apache/commons/codec/language/Metaphone.java
+index 88fea672..e832ebd9 100644
+--- a/src/java/org/apache/commons/codec/language/Metaphone.java
++++ b/src/java/org/apache/commons/codec/language/Metaphone.java
+@@ -84,9 +84,9 @@ public class Metaphone implements StringEncoder {
+             return "" ;
+         }
+         // single character is itself
+-        if (txt.length() == 1) {
+-            return txt.toUpperCase() ;
+-        }
++        
++
++
+       
+         char[] inwd = txt.toUpperCase(java.util.Locale.ENGLISH).toCharArray() ;

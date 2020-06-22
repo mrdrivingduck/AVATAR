@@ -1,0 +1,18 @@
+diff --git a/source/org/jfree/data/KeyedObjects2D.java b/source/org/jfree/data/KeyedObjects2D.java
+index d0e832f..5a8abe4 100644
+--- a/source/org/jfree/data/KeyedObjects2D.java
++++ b/source/org/jfree/data/KeyedObjects2D.java
+@@ -373,10 +373,10 @@ public class KeyedObjects2D implements Cloneable, Serializable {
+                     + ") not recognised.");
+         }
+         Iterator iterator = this.rows.iterator();
+-        while (iterator.hasNext()) {
+-            KeyedObjects rowData = (KeyedObjects) iterator.next();
+-                rowData.removeValue(columnKey);
+-        }
++        
++
++
++
+         this.columnKeys.remove(columnKey);
+     }
