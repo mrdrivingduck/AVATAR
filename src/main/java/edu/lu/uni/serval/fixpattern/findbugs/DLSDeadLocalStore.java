@@ -79,6 +79,7 @@ public class DLSDeadLocalStore extends FixTemplate {
 			if (Checker.isStatement(type)) break;
 			if (Checker.isComplexExpression(type)) {
 				suspVars.addAll(identifyAuspiciousVariables(child));
+				suspVars.add(child);
 				continue;
 			}
 			if (Checker.isSimpleName(type)) {
