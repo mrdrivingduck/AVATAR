@@ -1,0 +1,13 @@
+diff --git a/source/org/jfree/chart/renderer/category/StatisticalBarRenderer.java b/source/org/jfree/chart/renderer/category/StatisticalBarRenderer.java
+index ab65ba3..2917203 100644
+--- a/source/org/jfree/chart/renderer/category/StatisticalBarRenderer.java
++++ b/source/org/jfree/chart/renderer/category/StatisticalBarRenderer.java
+@@ -255,7 +255,7 @@ public class StatisticalBarRenderer extends BarRenderer
+         }
+ 
+         // BAR X
+-        Number meanValue = dataset.getMeanValue(row, column);
++        Number meanValue = dataset.getMeanValue(row, row);
+ 
+         double value = meanValue.doubleValue();
+         double base = 0.0;

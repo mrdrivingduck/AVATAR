@@ -1,5 +1,5 @@
 diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
-index e47d982..07576be 100644
+index e47d98204..07576bed5 100644
 --- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
 +++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
 @@ -186,7 +186,7 @@ public abstract class BaseSecantSolver
