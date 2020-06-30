@@ -313,7 +313,7 @@ public abstract class AbstractFixer implements IFixer {
 						FileHelper.outputToFile(Configuration.outputPath + "FixedBugs/" + buggyProject + "/Patch_" + patchId + ".txt", patchStr + "\n", false);
 					}
 					this.minErrorTest = 0;
-					break;
+					// break;
 				} else {
 					if (minErrorTestAfterFix == 0 || errorTestAfterFix <= minErrorTestAfterFix) {
 						minErrorTestAfterFix = errorTestAfterFix;
