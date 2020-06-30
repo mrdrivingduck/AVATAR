@@ -231,6 +231,10 @@ public abstract class AbstractFixer implements IFixer {
 			if (this.triedPatchCandidates.contains(patch)) continue;
 			
 			patchId++;
+			// if (patchId > 1000) {
+			// 	return;
+			// }
+			log.info("==== Process: patch " + patchId);
 			
 			addPatchCodeToFile(scn, patch);// Insert the patch.
 			String buggyCode = patch.getBuggyCodeStr();
@@ -312,7 +316,7 @@ public abstract class AbstractFixer implements IFixer {
 					} else {
 						FileHelper.outputToFile(Configuration.outputPath + "FixedBugs/" + buggyProject + "/Patch_" + patchId + ".txt", patchStr + "\n", false);
 					}
-					this.minErrorTest = 0;
+					// this.minErrorTest = 0;
 					// break;
 				} else {
 					if (minErrorTestAfterFix == 0 || errorTestAfterFix <= minErrorTestAfterFix) {

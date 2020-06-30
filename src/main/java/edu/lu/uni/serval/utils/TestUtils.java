@@ -22,7 +22,7 @@ public class TestUtils {
                 errorNum =  Integer.valueOf(lineString.split(":")[1].trim());
                 if (errorNum == 0) break;
             } else if (lineString.startsWith("Running ")) {
-            	break;
+            	continue;
             } else {
             	failedTests.add(lineString.trim());
             }
