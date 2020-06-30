@@ -28,7 +28,7 @@ public class ShellUtils {
         }
         else {
             fileName = Configuration.TEMP_FILES_PATH + buggyProject + ".sh";
-            cmd = "bash " + fileName;
+            cmd = "/bin/bash " + fileName;
         }
         File batFile = new File(fileName);
         if (!batFile.exists()){
@@ -53,7 +53,9 @@ public class ShellUtils {
         }
         batFile.deleteOnExit();
         
-        Process process= Runtime.getRuntime().exec(cmd);
+        // Process process= Runtime.getRuntime().exec(cmd);
+        ProcessBuilder pb = new ProcessBuilder(cmd.split(" ")).redirectErrorStream(true);
+        Process process = pb.start();
         String results = ShellUtils.getShellOut(process);
         batFile.delete();
         return results;
@@ -112,27 +114,14 @@ class ReadShellProcess implements Callable<String> {
         BufferedInputStream in = null;
         BufferedReader br = null;
         try {
-            String s;
             in = new BufferedInputStream(process.getInputStream());
             br = new BufferedReader(new InputStreamReader(in));
-            while ((s = br.readLine()) != null && s.length()!=0) {
-                if (sb.length() < 1000000){
-                    if (Thread.interrupted()){
-                        return sb.toString();
-                    }
-                    sb.append(System.getProperty("line.separator"));
-                    sb.append(s);
-                }
-            }
-            in = new BufferedInputStream(process.getErrorStream());
-            br = new BufferedReader(new InputStreamReader(in));
-            while ((s = br.readLine()) != null && s.length()!=0) {
-                if (Thread.interrupted()){
-                    return sb.toString();
-                }
-                if (sb.length() < 1000000){
-                    sb.append(System.getProperty("line.separator"));
-                    sb.append(s);
+            while (true) {
+                if (sb.length() < 1000000) {
+                    String line = br.readLine();
+                    if (line == null)
+                        break;
+                    sb.append(System.getProperty("line.separator")).append(line);
                 }
             }
         } catch (IOException e){
