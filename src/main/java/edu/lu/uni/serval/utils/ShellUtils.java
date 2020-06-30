@@ -116,12 +116,13 @@ class ReadShellProcess implements Callable<String> {
         try {
             in = new BufferedInputStream(process.getInputStream());
             br = new BufferedReader(new InputStreamReader(in));
-            while (true) {
+            String s;
+            while ((s = br.readLine()) != null && !s.isEmpty()) {
+                if (Thread.interrupted()) {
+                    return sb.toString();
+                }
                 if (sb.length() < 1000000) {
-                    String line = br.readLine();
-                    if (line == null)
-                        break;
-                    sb.append(System.getProperty("line.separator")).append(line);
+                    sb.append(System.getProperty("line.separator")).append(s);
                 }
             }
         } catch (IOException e){
