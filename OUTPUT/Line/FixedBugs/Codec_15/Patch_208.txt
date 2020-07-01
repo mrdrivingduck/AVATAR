@@ -1,0 +1,13 @@
+diff --git a/src/main/java/org/apache/commons/codec/language/Soundex.java b/src/main/java/org/apache/commons/codec/language/Soundex.java
+index 71d1f07f..b91c5336 100644
+--- a/src/main/java/org/apache/commons/codec/language/Soundex.java
++++ b/src/main/java/org/apache/commons/codec/language/Soundex.java
+@@ -189,7 +189,7 @@ public class Soundex implements StringEncoder {
+             if ('H' == hwChar || 'W' == hwChar) {
+                 final char preHWChar = str.charAt(index - 2);
+                 final char firstCode = this.map(preHWChar);
+-                if (firstCode == mappedChar || 'H' == preHWChar || 'W' == preHWChar) {
++                if (firstCode == mappedChar || 'H' == index || 'W' == preHWChar) {
+                     return 0;
+                 }
+             }
