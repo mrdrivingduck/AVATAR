@@ -58,6 +58,10 @@ public class UCUselessCondition_ extends FixTemplate {
 			} else if ("!=".equals(op)) {
 				String fixedCodeStr1 = codePart1 + " == " + codePart2;
 				this.generatePatch(fixedCodeStr1);
+				fixedCodeStr1 = codePart1 + " < " + codePart2;
+				this.generatePatch(fixedCodeStr1);
+				fixedCodeStr1 = codePart1 + " > " + codePart2;
+				this.generatePatch(fixedCodeStr1);
 			} else if (">".equals(op)) {
 				String fixedCodeStr1 = codePart1 + " >= " + codePart2;
 				this.generatePatch(fixedCodeStr1);
