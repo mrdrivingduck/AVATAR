@@ -243,21 +243,28 @@ public abstract class AbstractFixer implements IFixer {
 			scn.targetClassFile.delete();
 
 			log.debug("Compiling");
-			try {// Compile patched file.
-				ShellUtils.shellRun(Arrays.asList("javac -Xlint:unchecked -source 1.8 -target 1.8 -cp "
-						+ PathUtils.buildCompileClassPath(Arrays.asList(PathUtils.getJunitPath()), dp.classPath, dp.testClassPath)
-						+ " -d " + dp.classPath + " " + scn.targetJavaFile.getAbsolutePath()), buggyProject);
-			} catch (IOException e) {
-				log.debug(buggyProject + " ---Fixer: fix fail because of javac exception! ");
+			// try {// Compile patched file.
+			// 	ShellUtils.shellRun(Arrays.asList("javac -Xlint:unchecked -source 1.8 -target 1.8 -cp "
+			// 			+ PathUtils.buildCompileClassPath(Arrays.asList(PathUtils.getJunitPath()), dp.classPath, dp.testClassPath)
+			// 			+ " -d " + dp.classPath + " " + scn.targetJavaFile.getAbsolutePath()), buggyProject);
+			// } catch (IOException e) {
+			// 	log.debug(buggyProject + " ---Fixer: fix fail because of javac exception! ");
+			// 	continue;
+			// }
+			// if (!scn.targetClassFile.exists()) { // fail to compile
+			// 	int results = (this.buggyProject.startsWith("Closure") || this.buggyProject.startsWith("Time") || this.buggyProject.startsWith("Mockito")) ? TestUtils.compileProjectWithDefects4j(fullBuggyProjectPath, defects4jPath) : 1;
+			// 	if (results == 1) {
+			// 		log.debug(buggyProject + " ---Fixer: fix fail because of failed compiling! ");
+			// 		continue;
+			// 	}
+			// }
+
+			int compileResult = TestUtils.compileProjectWithDefects4j(fullBuggyProjectPath, defects4jPath);
+			if (compileResult == 1) {
+				log.debug(buggyProject + " ---Fixer: fix fail because of failed compiling! ");
 				continue;
 			}
-			if (!scn.targetClassFile.exists()) { // fail to compile
-				int results = (this.buggyProject.startsWith("Closure") || this.buggyProject.startsWith("Time") || this.buggyProject.startsWith("Mockito")) ? TestUtils.compileProjectWithDefects4j(fullBuggyProjectPath, defects4jPath) : 1;
-				if (results == 1) {
-					log.debug(buggyProject + " ---Fixer: fix fail because of failed compiling! ");
-					continue;
-				}
-			}
+
 			log.debug("Finish of compiling.");
 			
 			log.debug("Test previously failed test cases.");
