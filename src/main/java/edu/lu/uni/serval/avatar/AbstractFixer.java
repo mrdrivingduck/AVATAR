@@ -61,6 +61,8 @@ public abstract class AbstractFixer implements IFixer {
 	public String dataType = "";
 	protected int patchId = 0;
 //	private TimeLine timeLine;
+
+	protected boolean isPartiallyFix = false;
 	
 	public AbstractFixer(String path, String projectName, int bugId, String defects4jPath) {
 		this.path = path;
@@ -231,9 +233,9 @@ public abstract class AbstractFixer implements IFixer {
 			if (this.triedPatchCandidates.contains(patch)) continue;
 			
 			patchId++;
-			// if (patchId > 1000) {
-			// 	return;
-			// }
+			if (patchId > 1000) {
+				return;
+			}
 			log.info("==== Process: patch " + patchId);
 			
 			addPatchCodeToFile(scn, patch);// Insert the patch.
@@ -326,7 +328,7 @@ public abstract class AbstractFixer implements IFixer {
 					// this.minErrorTest = 0;
 					// break;
 				} else {
-					if (minErrorTestAfterFix == 0 || errorTestAfterFix <= minErrorTestAfterFix) {
+					if (minErrorTestAfterFix == 0 || errorTestAfterFix < minErrorTestAfterFix) {
 						minErrorTestAfterFix = errorTestAfterFix;
 						if (fixedStatus != 1) fixedStatus = 2;
 						log.info("Partially Succeeded to fix the bug " + buggyProject + "====================");
@@ -338,6 +340,17 @@ public abstract class AbstractFixer implements IFixer {
 									+ "===Buggy Code===\n" + buggyCode + "\n\n===Patch Code===\n" + patchCode, false);
 						} else {
 							FileHelper.outputToFile(Configuration.outputPath + "PartiallyFixedBugs/" + buggyProject + "/Patch_" + patchId + ".txt", patchStr + "\n", false);
+						}
+
+						this.isPartiallyFix = true;
+
+						try {
+							scn.javaBackup.delete();
+							scn.classBackup.delete();
+							Files.copy(scn.targetJavaFile.toPath(), scn.javaBackup.toPath());
+							Files.copy(scn.targetClassFile.toPath(), scn.classBackup.toPath());
+						} catch (IOException e) {
+							e.printStackTrace();
 						}
 						return;
 					}

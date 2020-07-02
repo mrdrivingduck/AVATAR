@@ -99,6 +99,10 @@ public class Avatar extends AbstractFixer {
 		// generate patches with fix templates.
 		FixTemplate ft = null;
 		for (int contextInfo : distinctContextInfo) {
+			if (isPartiallyFix) {
+				this.isPartiallyFix = false;
+				return;
+			}
 			if (Checker.isTypeDeclaration(contextInfo)) {
 				ft = new EQDoesNotOverrideEquals();
 			} else if (Checker.isCastExpression(contextInfo)) {
@@ -107,11 +111,12 @@ public class Avatar extends AbstractFixer {
 					&& !Checker.isWhileStatement(scn.suspCodeAstNode.getType())
 					&& !Checker.isDoStatement(scn.suspCodeAstNode.getType())
 					&& !Checker.isEnhancedForStatement(scn.suspCodeAstNode.getType())) {
+				ft = new NPNullOnSomePath();
+				generatePatches(ft, scn);
+				if (this.minErrorTest == 0) break;
 				ft = new DLSDeadLocalStore();
 				generatePatches(ft, scn);
 				if (this.minErrorTest == 0) break;
-				ft = new NPNullOnSomePath();
-				generatePatches(ft, scn);
 				ft = new NPNullOnSomePathException();
 			} else if (Checker.isIfStatement(contextInfo)
 					|| Checker.isWhileStatement(contextInfo) 
@@ -170,6 +175,10 @@ public class Avatar extends AbstractFixer {
 		}
 		
 		for (int contextInfo : distinctContextInfo) {
+			if (isPartiallyFix) {
+				this.isPartiallyFix = false;
+				return;
+			}
 			if (Checker.isIfStatement(contextInfo)
 					|| Checker.isWhileStatement(contextInfo) 
 					|| Checker.isDoStatement(contextInfo)
