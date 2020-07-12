@@ -1,4 +1,4 @@
-Chart_1,true,NPAlwaysNull
+Chart_1,true,NP_ALWAYS_NULL
 Chart_4,true,NPNullOnSomePath
 Chart_7,false,DLSDeadLocalStore
 Chart_8,true,DLSDeadLocalStore

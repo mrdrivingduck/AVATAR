@@ -1,0 +1,7 @@
+Chart_8,ChainingConstructorIgnoresParameter,true
+Lang_51,FallThrough,false
+Lang_62,FallThrough,false
+Math_57,NarrowingCompoundAssignment,false
+Math_66,MissingOverride,false
+Math_77,MissingOverride,true
+Mockito_19,MissingOverride,false
