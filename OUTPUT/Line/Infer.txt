@@ -1,5 +1,0 @@
-Chart_1,NULL_DEREFERENCE,true
-Chart_4,NULL_DEREFERENCE,true
-Jsoup_8,NULL_DEREFERENCE,false
-JacksonDatabind_76,RESOURCE_LEAK,false
-Math_87,NULL_DEREFERENCE,false
