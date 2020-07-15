@@ -233,7 +233,7 @@ public abstract class AbstractFixer implements IFixer {
 			if (this.triedPatchCandidates.contains(patch)) continue;
 			
 			patchId++;
-			if (patchId > 1000) {
+			if (patchId > 3000) {
 				return;
 			}
 			log.info("==== Process: patch " + patchId);
@@ -342,16 +342,16 @@ public abstract class AbstractFixer implements IFixer {
 							FileHelper.outputToFile(Configuration.outputPath + "PartiallyFixedBugs/" + buggyProject + "/Patch_" + patchId + ".txt", patchStr + "\n", false);
 						}
 
-						this.isPartiallyFix = true;
+						// this.isPartiallyFix = true;
 
-						try {
-							scn.javaBackup.delete();
-							scn.classBackup.delete();
-							Files.copy(scn.targetJavaFile.toPath(), scn.javaBackup.toPath());
-							Files.copy(scn.targetClassFile.toPath(), scn.classBackup.toPath());
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						// try {
+						// 	scn.javaBackup.delete();
+						// 	scn.classBackup.delete();
+						// 	Files.copy(scn.targetJavaFile.toPath(), scn.javaBackup.toPath());
+						// 	Files.copy(scn.targetClassFile.toPath(), scn.classBackup.toPath());
+						// } catch (IOException e) {
+						// 	e.printStackTrace();
+						// }
 						return;
 					}
 				}
@@ -405,6 +405,9 @@ public abstract class AbstractFixer implements IFixer {
 		if (exactBuggyCodeEndPos > exactBuggyCodeStartPos) {
 			if (exactBuggyCodeStartPos != -1 && exactBuggyCodeStartPos < scn.startPos) {
 				// remove uncalled method.
+				if (fixedCodeStr1 != null && !fixedCodeStr1.equals("")) {
+					needBuggyCode = true;
+				}
 			} else {
 				needBuggyCode = true;
 				if (exactBuggyCodeStartPos == 0) {

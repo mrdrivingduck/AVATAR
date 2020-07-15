@@ -31,7 +31,7 @@ public class UCFUselessControlFlow extends FixTemplate {
 					ITree previousSiblingTree = siblingTrees.get(index-1);
 					int startPos_ = previousSiblingTree.getPos() + previousSiblingTree.getLength();
 					int endPos_ = this.getSuspiciousCodeTree().getPos();
-					String codeFrag = this.getSubSuspiciouCodeStr(startPos_, endPos_);
+					String codeFrag = this.getSubSuspiciouCodeStr2(startPos_, endPos_);
 					int elseIndex = codeFrag.lastIndexOf("else");
 					if (elseIndex > 0) {
 						// if (...) {statement(s)} else buggy_if (...) {...} ...
@@ -52,7 +52,7 @@ public class UCFUselessControlFlow extends FixTemplate {
 							ITree child = suspChildren.get(i-1);
 							ITree child_ = suspChildren.get(i);
 							startPos = child.getPos() + child.getLength();
-							codeFrag = this.getSubSuspiciouCodeStr(startPos, child_.getPos());
+							codeFrag = this.getSubSuspiciouCodeStr2(startPos, child_.getPos());
 							elseIndex = codeFrag.indexOf("else");
 							if (elseIndex >= 0) {
 								endPos = startPos + elseIndex + 4;
@@ -92,26 +92,26 @@ public class UCFUselessControlFlow extends FixTemplate {
 				ITree child = suspChildren.get(i-1);
 				ITree child_ = suspChildren.get(i);
 				int startPos_ = child.getPos() + child.getLength();
-				String codeFrag = this.getSubSuspiciouCodeStr(startPos_, child_.getPos());
+				String codeFrag = this.getSubSuspiciouCodeStr2(startPos_, child_.getPos());
 				int elseIndex = codeFrag.indexOf("else");
 				if (elseIndex >= 0) {
 					isIfElse = true;
 					if (i == size_ - 1) { // buggy_if () {...} else if (...) {} 
 						int startPos2 = child_.getPos();
 						int endPos = startPos2 + child_.getLength();
-						String fixedCodeStr1 = this.getSubSuspiciouCodeStr(startPos2, endPos);
+						String fixedCodeStr1 = this.getSubSuspiciouCodeStr2(startPos2, endPos);
 						this.generatePatch(fixedCodeStr1);// Just its else-if branch. 
 						endPos = startPos_;
-						String fixedCodeStr2 = this.getSubSuspiciouCodeStr(startPos, endPos);
+						String fixedCodeStr2 = this.getSubSuspiciouCodeStr2(startPos, endPos);
 						this.generatePatch(fixedCodeStr2 + fixedCodeStr1);// Just removing the If control flow but keeping its block and its else-if branch.
 					} else { // buggy_if () {...} else { ... }
 						int endPos = startPos_;
-						String fixedCodeStr1 = this.getSubSuspiciouCodeStr(startPos, endPos);
+						String fixedCodeStr1 = this.getSubSuspiciouCodeStr2(startPos, endPos);
 						this.generatePatch(fixedCodeStr1); // Removing the IfStatement and its else block.
 						startPos = child_.getPos();
 						ITree lastChild = suspChildren.get(size_ - 1);
 						endPos = lastChild.getPos() + lastChild.getLength();
-						fixedCodeStr1 = this.getSubSuspiciouCodeStr(startPos, endPos);
+						fixedCodeStr1 = this.getSubSuspiciouCodeStr2(startPos, endPos);
 						this.generatePatch(fixedCodeStr1); // Keep its else block.
 					}
 					break;
@@ -121,7 +121,7 @@ public class UCFUselessControlFlow extends FixTemplate {
 			if (!isIfElse) {// buggy_if () {...}
 				ITree lastStmt = children.get(size - 1);
 				int endPos = lastStmt.getPos() + lastStmt.getLength();
-				String fixedCodeStr1 = this.getSubSuspiciouCodeStr(startPos, endPos);
+				String fixedCodeStr1 = this.getSubSuspiciouCodeStr2(startPos, endPos);
 				this.generatePatch(fixedCodeStr1); // Just removing the IfStatement but keeping its block.
 			}
 		}

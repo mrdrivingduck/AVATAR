@@ -55,6 +55,10 @@ public abstract class FixTemplate implements IFixTemplate {
 		patch.setFixedCodeStr2(fixedCodeStr2);
 		this.patchesList.add(patch);
 	}
+
+	public String getSubSuspiciouCodeStr2(int startPos, int endPos) {
+		return this.suspJavaFileCode.substring(startPos, endPos);
+	}
 	
 	public void setSourceCodePath(String sourceCodePath) {
 		this.sourceCodePath = sourceCodePath;
