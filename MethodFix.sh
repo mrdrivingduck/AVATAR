@@ -50,7 +50,7 @@ do
 done
 
 proj=Compress
-for bug in $(seq 5 47)
+for bug in $(seq 1 47)
 do
     java -Xmx4g -cp "target/dependency/*" edu.lu.uni.serval.main.Main_Pos $d4jData $d4jPath ${proj}_${bug} $metric M
     echo ${proj}_${bug}
@@ -92,7 +92,7 @@ do
 done
 
 proj=Jsoup
-for bug in $(seq 51 93)
+for bug in $(seq 1 93)
 do
     java -Xmx4g -cp "target/dependency/*" edu.lu.uni.serval.main.Main_Pos $d4jData $d4jPath ${proj}_${bug} $metric M
     echo ${proj}_${bug}
