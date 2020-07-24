@@ -1,0 +1,13 @@
+diff --git a/src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java b/src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java
+index d60c4de3..292c8ffe 100644
+--- a/src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java
++++ b/src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java
+@@ -609,7 +609,7 @@ public class TarUtils {
+             unsignedSum += 0xff & b;
+             signedSum += b;
+         }
+-        return storedSum == unsignedSum || storedSum == signedSum;
++        return storedSum == unsignedSum || unsignedSum == signedSum;
+     }
+ 
+ }

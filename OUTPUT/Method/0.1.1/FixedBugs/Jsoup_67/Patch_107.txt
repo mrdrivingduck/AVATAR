@@ -1,0 +1,13 @@
+diff --git a/src/main/java/org/jsoup/parser/HtmlTreeBuilder.java b/src/main/java/org/jsoup/parser/HtmlTreeBuilder.java
+index b07e47f..7bdf3e3 100644
+--- a/src/main/java/org/jsoup/parser/HtmlTreeBuilder.java
++++ b/src/main/java/org/jsoup/parser/HtmlTreeBuilder.java
+@@ -472,7 +472,7 @@ public class HtmlTreeBuilder extends TreeBuilder {
+                 return true;
+             if (inSorted(elName, baseTypes))
+                 return false;
+-            if (extraTypes != null && inSorted(elName, extraTypes))
++            if (extraTypes != null && this.fragmentParsing)
+                 return false;
+         }
+         Validate.fail("Should not be reachable");

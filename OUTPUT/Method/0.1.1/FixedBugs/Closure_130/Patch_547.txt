@@ -1,0 +1,12 @@
+diff --git a/src/com/google/javascript/jscomp/CollapseProperties.java b/src/com/google/javascript/jscomp/CollapseProperties.java
+index ab2d2c7c..f9137254 100644
+--- a/src/com/google/javascript/jscomp/CollapseProperties.java
++++ b/src/com/google/javascript/jscomp/CollapseProperties.java
+@@ -165,7 +165,7 @@ class CollapseProperties implements CompilerPass {
+       Name name = workList.pop();
+ 
+       // Don't attempt to inline a getter or setter property as a variable.
+-      if (name.type == Name.Type.GET || name.type == Name.Type.SET) {
++      if (this.collapsePropertiesOnExternTypes || name.type == Name.Type.SET) {
+         continue;
+       }

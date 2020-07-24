@@ -1,0 +1,22 @@
+diff --git a/src/com/google/javascript/jscomp/CommandLineRunner.java b/src/com/google/javascript/jscomp/CommandLineRunner.java
+index 93b35475..d0d3b26d 100644
+--- a/src/com/google/javascript/jscomp/CommandLineRunner.java
++++ b/src/com/google/javascript/jscomp/CommandLineRunner.java
+@@ -849,7 +849,7 @@ public class CommandLineRunner extends
+       } catch (IOException e) {
+         throw new RuntimeException("Reading XTB file", e);
+       }
+-    } else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {
++    } /* else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {
+       // In SIMPLE or WHITESPACE mode, if the user hasn't specified a
+       // translations file, they might reasonably try to write their own
+       // implementation of goog.getMsg that makes the substitution at
+@@ -859,7 +859,7 @@ public class CommandLineRunner extends
+       // so we might as well inline it. But shut off the i18n warnings,
+       // because the user didn't really ask for i18n.
+       options.messageBundle = new EmptyMessageBundle();
+-    }
++    } */
+ 
+     return options;
+   }
