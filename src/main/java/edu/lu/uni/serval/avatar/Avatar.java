@@ -113,62 +113,150 @@ public class Avatar extends AbstractFixer {
 					&& !Checker.isEnhancedForStatement(scn.suspCodeAstNode.getType())) {
 				ft = new NPNullOnSomePath();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
+
 				ft = new DLSDeadLocalStore();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
+
 				ft = new NPNullOnSomePathException();
+
 			} else if (Checker.isIfStatement(contextInfo)
 					|| Checker.isWhileStatement(contextInfo) 
 					|| Checker.isDoStatement(contextInfo)) {
 				ft = new UCUselessCondition_(false);
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
+
 				ft = new UCUselessCondition();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
+
 				ft = new UCUselessCondition_(true);
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
+
 				ft = new NPAlwaysNull();
+
 			} else if (!Checker.withBlockStatement(scn.suspCodeAstNode.getType()) && Checker.isConditionalExpression(contextInfo)) {
 				ft = new UCUselessCondition_(false);
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
+
 				ft = new UCUselessCondition();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
+
 				ft = new UCUselessCondition_(true);
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
+
 				ft = new NPAlwaysNull();
+
 			} else if (Checker.isMethodInvocation(contextInfo)) {
 				ft = new EP1();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
+
 				ft = new EP2();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
+				
 				ft = new SALocalSelfComparison();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
+
 				ft = new RVReturnValueIgnoredInffered();
+
 			} else if (Checker.isClassInstanceCreation(contextInfo)) {
 				ft = new EP3();
 			} else if (Checker.isInfixExpression(contextInfo)) {
 				ft = new EP4();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
+
 				ft = new FETestIfEqualToNan();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
+
 				ft = new FEFloatingPointEquality();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
+
 				ft = new IDIVCastToDouble();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
+
 				ft = new DLSDeadLocalStoreShadowsField();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
+
 				ft = new ECBadArrayCompare();
 			}
 			
 			if (ft != null) {
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
 			}
 			ft = null;
@@ -189,23 +277,46 @@ public class Avatar extends AbstractFixer {
 			} else if (Checker.isVariableDeclarationStatement(contextInfo)) {
 				ft = new UCUselessObject();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
+
 				ft = new EP5();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
+
 				ft = new EP8();
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
+
 				ft = new EP9();
 			}
 			
 			if (ft != null) {
 				generatePatches(ft, scn);
+				if (isPartiallyFix) {
+					this.isPartiallyFix = false;
+					return;
+				}
 				if (this.minErrorTest == 0) break;
 			}
 			
 			ft = new UPMUncalledPrivateMethod();
 			generatePatches(ft, scn);
+			if (isPartiallyFix) {
+				this.isPartiallyFix = false;
+				return;
+			}
 			if (this.minErrorTest == 0) break;
 		}
 	}

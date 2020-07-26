@@ -1,8 +1,5 @@
-Chart_7,true,DLS_DEAD_LOCAL_STORE
-Chart_14,true,NP_NULL_ON_SOME_PATH
 Chart_16,false
 Chart_18,false
-Chart_19,true,NP_NULL_ON_SOME_PATH
 Cli_39,false
 Closure_6,false
 Codec_1,false
@@ -16,7 +13,6 @@ JxPath_1,false
 JxPath_16,true,DLS_DEAD_LOCAL_STORE
 JxPath_17,false
 Lang_50,false
-Math_4,true,NP_NULL_ON_SOME_PATH
 Math_43,false
 Math_77,false
 Math_98,true,DLS_DEAD_LOCAL_STORE

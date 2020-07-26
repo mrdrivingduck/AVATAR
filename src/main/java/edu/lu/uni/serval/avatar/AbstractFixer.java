@@ -325,8 +325,8 @@ public abstract class AbstractFixer implements IFixer {
 					} else {
 						FileHelper.outputToFile(Configuration.outputPath + "FixedBugs/" + buggyProject + "/Patch_" + patchId + ".txt", patchStr + "\n", false);
 					}
-					// this.minErrorTest = 0;
-					// break;
+					this.minErrorTest = 0;
+					break;
 				} else {
 					if (minErrorTestAfterFix == 0 || errorTestAfterFix < minErrorTestAfterFix) {
 						minErrorTestAfterFix = errorTestAfterFix;
@@ -342,7 +342,7 @@ public abstract class AbstractFixer implements IFixer {
 							FileHelper.outputToFile(Configuration.outputPath + "PartiallyFixedBugs/" + buggyProject + "/Patch_" + patchId + ".txt", patchStr + "\n", false);
 						}
 
-						// this.isPartiallyFix = true;
+						this.isPartiallyFix = true;
 
 						// try {
 						// 	scn.javaBackup.delete();
