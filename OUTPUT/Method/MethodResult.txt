@@ -72,6 +72,7 @@ Math_85,true,UC_USELESS_CONDITION_
 Math_88,false
 Math_89,true,BC_UNCONFIRMED_CAST
 Math_95,false
+Math_98,true,DLS_DEAD_LOCAL_STORE
 Mockito_29,true,NP_NULL_ON_SOME_PATH
 Mockito_38,true,NP_NULL_ON_SOME_PATH
 Time_7,true,DLS_DEAD_LOCAL_STORE
