@@ -10,8 +10,6 @@ import edu.lu.uni.serval.config.Configuration;
 import edu.lu.uni.serval.fixpattern.FixTemplate;
 import edu.lu.uni.serval.fixpattern.findbugs.BCUnconfirmedCast;
 import edu.lu.uni.serval.fixpattern.findbugs.DLSDeadLocalStore;
-import edu.lu.uni.serval.fixpattern.findbugs.DLSDeadLocalStoreShadowsField;
-import edu.lu.uni.serval.fixpattern.findbugs.ECBadArrayCompare;
 import edu.lu.uni.serval.fixpattern.findbugs.EQDoesNotOverrideEquals;
 import edu.lu.uni.serval.fixpattern.findbugs.FEFloatingPointEquality;
 import edu.lu.uni.serval.fixpattern.findbugs.FETestIfEqualToNan;
@@ -19,7 +17,6 @@ import edu.lu.uni.serval.fixpattern.findbugs.IDIVCastToDouble;
 import edu.lu.uni.serval.fixpattern.findbugs.NPAlwaysNull;
 import edu.lu.uni.serval.fixpattern.findbugs.NPNullOnSomePath;
 import edu.lu.uni.serval.fixpattern.findbugs.NPNullOnSomePathException;
-import edu.lu.uni.serval.fixpattern.findbugs.RVReturnValueIgnoredInffered;
 import edu.lu.uni.serval.fixpattern.findbugs.SALocalSelfComparison;
 import edu.lu.uni.serval.fixpattern.findbugs.UCFUselessControlFlow;
 import edu.lu.uni.serval.fixpattern.findbugs.UCUselessCondition;
@@ -202,13 +199,13 @@ public class Avatar extends AbstractFixer {
 				}
 				
 				ft = new SALocalSelfComparison();
-				generatePatches(ft, scn);
-				if (isPartiallyFix) {
-					this.isPartiallyFix = false;
-					return;
-				}
+				// generatePatches(ft, scn);
+				// if (isPartiallyFix) {
+				// 	this.isPartiallyFix = false;
+				// 	return;
+				// }
 
-				ft = new RVReturnValueIgnoredInffered();
+				// ft = new RVReturnValueIgnoredInffered();
 
 			} else if (Checker.isClassInstanceCreation(contextInfo)) {
 				ft = new EP3();
@@ -220,35 +217,35 @@ public class Avatar extends AbstractFixer {
 					return;
 				}
 
-				ft = new FETestIfEqualToNan();
-				generatePatches(ft, scn);
-				if (isPartiallyFix) {
-					this.isPartiallyFix = false;
-					return;
-				}
+				// ft = new FETestIfEqualToNan();
+				// generatePatches(ft, scn);
+				// if (isPartiallyFix) {
+				// 	this.isPartiallyFix = false;
+				// 	return;
+				// }
 
-				ft = new FEFloatingPointEquality();
-				generatePatches(ft, scn);
-				if (isPartiallyFix) {
-					this.isPartiallyFix = false;
-					return;
-				}
+				// ft = new FEFloatingPointEquality();
+				// generatePatches(ft, scn);
+				// if (isPartiallyFix) {
+				// 	this.isPartiallyFix = false;
+				// 	return;
+				// }
 
 				ft = new IDIVCastToDouble();
-				generatePatches(ft, scn);
-				if (isPartiallyFix) {
-					this.isPartiallyFix = false;
-					return;
-				}
+				// generatePatches(ft, scn);
+				// if (isPartiallyFix) {
+				// 	this.isPartiallyFix = false;
+				// 	return;
+				// }
 
-				ft = new DLSDeadLocalStoreShadowsField();
-				generatePatches(ft, scn);
-				if (isPartiallyFix) {
-					this.isPartiallyFix = false;
-					return;
-				}
+				// ft = new DLSDeadLocalStoreShadowsField();
+				// generatePatches(ft, scn);
+				// if (isPartiallyFix) {
+				// 	this.isPartiallyFix = false;
+				// 	return;
+				// }
 
-				ft = new ECBadArrayCompare();
+				// ft = new ECBadArrayCompare();
 			}
 			
 			if (ft != null) {

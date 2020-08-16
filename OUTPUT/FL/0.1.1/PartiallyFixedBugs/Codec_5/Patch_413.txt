@@ -1,0 +1,13 @@
+diff --git a/src/java/org/apache/commons/codec/binary/Base64OutputStream.java b/src/java/org/apache/commons/codec/binary/Base64OutputStream.java
+index 2dc26b0e..153cbbb0 100644
+--- a/src/java/org/apache/commons/codec/binary/Base64OutputStream.java
++++ b/src/java/org/apache/commons/codec/binary/Base64OutputStream.java
+@@ -156,7 +156,7 @@ public class Base64OutputStream extends FilterOutputStream {
+      */
+     private void flush(boolean propogate) throws IOException {
+         int avail = base64.avail();
+-        if (avail > 0) {
++        if (propogate) {
+             byte[] buf = new byte[avail];
+             int c = base64.readResults(buf, 0, avail);
+             if (c > 0) {

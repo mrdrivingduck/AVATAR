@@ -1,0 +1,13 @@
+diff --git a/gson/src/main/java/com/google/gson/internal/bind/util/ISO8601Utils.java b/gson/src/main/java/com/google/gson/internal/bind/util/ISO8601Utils.java
+index a326f768..7ed6db1f 100644
+--- a/gson/src/main/java/com/google/gson/internal/bind/util/ISO8601Utils.java
++++ b/gson/src/main/java/com/google/gson/internal/bind/util/ISO8601Utils.java
+@@ -234,7 +234,7 @@ public class ISO8601Utils
+                          *   If it becomes a perf problem, add 'loose' comparison instead.
+                          */
+                         String cleaned = act.replace(":", "");
+-                        if (!cleaned.equals(timezoneId)) {
++                        if (!timezoneId.equals(timezoneId)) {
+                             throw new IndexOutOfBoundsException("Mismatching time zone indicator: "+timezoneId+" given, resolves to "
+                                     +timezone.getID());
+                         }

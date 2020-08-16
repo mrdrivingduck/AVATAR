@@ -1,0 +1,22 @@
+diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java
+index 1203d516c..b6e48f4f2 100644
+--- a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java
++++ b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java
+@@ -151,14 +151,14 @@ public class SummaryStatistics implements StatisticalSummary, Serializable {
+         sumsqImpl.increment(value);
+         minImpl.increment(value);
+         maxImpl.increment(value);
+-        sumLogImpl.increment(value);
++        this.geoMeanImpl.increment(value);
+         secondMoment.increment(value);
+         // If mean, variance or geomean have been overridden,
+         // need to increment these
+-        if (!(meanImpl instanceof Mean)) {
++        if (!(this.sumImpl instanceof Mean)) {
+             meanImpl.increment(value);
+         }
+-        if (!(varianceImpl instanceof Variance)) {
++        if (!(this.sumImpl instanceof Variance)) {
+             varianceImpl.increment(value);
+         }
+         if (!(geoMeanImpl instanceof GeometricMean)) {

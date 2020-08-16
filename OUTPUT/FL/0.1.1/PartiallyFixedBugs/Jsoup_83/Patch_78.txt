@@ -1,0 +1,49 @@
+diff --git a/src/main/java/org/jsoup/parser/HtmlTreeBuilder.java b/src/main/java/org/jsoup/parser/HtmlTreeBuilder.java
+index 23d3708..357bdda 100644
+--- a/src/main/java/org/jsoup/parser/HtmlTreeBuilder.java
++++ b/src/main/java/org/jsoup/parser/HtmlTreeBuilder.java
+@@ -621,7 +621,43 @@ public class HtmlTreeBuilder extends TreeBuilder {
+         // todo: namespaces
+     }
+ 
+-    void reconstructFormattingElements() {
++    
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++void reconstructFormattingElements() {
+         Element last = lastFormattingElement();
+         if (last == null || onStack(last))
+             return;

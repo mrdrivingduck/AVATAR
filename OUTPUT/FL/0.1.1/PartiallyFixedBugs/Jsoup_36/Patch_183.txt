@@ -1,0 +1,13 @@
+diff --git a/src/main/java/org/jsoup/helper/DataUtil.java b/src/main/java/org/jsoup/helper/DataUtil.java
+index f07173c..b59818b 100644
+--- a/src/main/java/org/jsoup/helper/DataUtil.java
++++ b/src/main/java/org/jsoup/helper/DataUtil.java
+@@ -52,7 +52,7 @@ public class DataUtil {
+      */
+     public static Document load(InputStream in, String charsetName, String baseUri) throws IOException {
+         ByteBuffer byteData = readToByteBuffer(in);
+-        return parseByteData(byteData, charsetName, baseUri, Parser.htmlParser());
++        return parseByteData(byteData, defaultCharset, baseUri, Parser.htmlParser());
+     }
+ 
+     /**

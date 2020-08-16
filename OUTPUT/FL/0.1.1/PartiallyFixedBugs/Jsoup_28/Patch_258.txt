@@ -1,0 +1,13 @@
+diff --git a/src/main/java/org/jsoup/nodes/Entities.java b/src/main/java/org/jsoup/nodes/Entities.java
+index be73e32..c3f70fd 100644
+--- a/src/main/java/org/jsoup/nodes/Entities.java
++++ b/src/main/java/org/jsoup/nodes/Entities.java
+@@ -115,7 +115,7 @@ public class Entities {
+                 }
+             } else {
+                 String name = m.group(1);
+-                if (full.containsKey(name))
++                if (base.containsKey(name))
+                     charval = full.get(name);
+             }
+             if (charval != -1 || charval > 0xFFFF) {

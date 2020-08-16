@@ -1,0 +1,27 @@
+diff --git a/src/main/java/org/jsoup/parser/CharacterReader.java b/src/main/java/org/jsoup/parser/CharacterReader.java
+index 9ed4163..6db29c2 100644
+--- a/src/main/java/org/jsoup/parser/CharacterReader.java
++++ b/src/main/java/org/jsoup/parser/CharacterReader.java
+@@ -152,7 +152,21 @@ public final class CharacterReader {
+         return -1;
+     }
+ 
+-    /**
++    
++
++
++
++
++
++
++
++
++
++
++
++
++
++/**
+      * Reads characters up to the specific char.
+      * @param c the delimiter
+      * @return the chars read

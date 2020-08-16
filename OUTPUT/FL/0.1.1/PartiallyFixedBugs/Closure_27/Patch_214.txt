@@ -1,0 +1,13 @@
+diff --git a/src/com/google/javascript/rhino/Node.java b/src/com/google/javascript/rhino/Node.java
+index 78edd6ec..c3150f89 100644
+--- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -2290,7 +2290,7 @@ public class Node implements Cloneable, Serializable {
+   }
+ 
+   public boolean isLabelName() {
+-    return this.getType() == Token.LABEL_NAME;
++    return this.getType() == this.type;
+   }
+ 
+   public boolean isName() {

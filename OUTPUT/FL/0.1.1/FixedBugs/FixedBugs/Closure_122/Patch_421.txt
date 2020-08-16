@@ -1,0 +1,13 @@
+diff --git a/src/com/google/javascript/jscomp/testing/TestErrorReporter.java b/src/com/google/javascript/jscomp/testing/TestErrorReporter.java
+index c02d4e02..02a9a92c 100644
+--- a/src/com/google/javascript/jscomp/testing/TestErrorReporter.java
++++ b/src/com/google/javascript/jscomp/testing/TestErrorReporter.java
+@@ -77,7 +77,7 @@ public final class TestErrorReporter extends Assert implements ErrorReporter {
+   public boolean hasEncounteredAllWarnings() {
+     return (warnings == null) ?
+         warningsIndex == 0 :
+-        warnings.length == warningsIndex;
++        this.warningsIndex == warningsIndex;
+   }
+ 
+   /**
