@@ -3,6 +3,7 @@ Chart_4,true,NP_NULL_ON_SOME_PATH
 Chart_5,false
 Chart_7,false,DLS_DEAD_LOCAL_STORE
 Chart_11,true,DLS_DEAD_LOCAL_STORE
+Chart_14,true,NP_NULL_ON_SOME_PATH
 Chart_15,false
 Chart_19,true,NP_NULL_ON_SOME_PATH
 Chart_24,true,DLS_DEAD_LOCAL_STORE
@@ -61,15 +62,18 @@ Math_11,true,IDIV_CAST_TO_DOUBLE
 Math_20,false
 Math_28,false
 Math_30,false
+Math_33,true,DLS_DEAD_LOCAL_STORE
 Math_43,false
 Math_49,false
 Math_50,false
+Math_59,true,DLS_DEAD_LOCAL_STORE
 Math_62,false
 Math_78,false
 Math_80,false
 Math_81,false
 Math_82,false
 Math_84,false
+Math_85,true,UC_USELESS_CONDITION_
 Math_88,false
 Math_89,true,BC_UNCONFIRMED_CAST
 Math_95,false
