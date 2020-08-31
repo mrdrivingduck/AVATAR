@@ -8,7 +8,7 @@ Gson_4,false
 Jsoup_18,true,DLS_DEAD_LOCAL_STORE
 Jsoup_28,false
 Jsoup_36,false
-Jsoup_63,UCF_USELESS_CONTROL_FLOW,true
+Jsoup_63,true,UCF_USELESS_CONTROL_FLOW
 Jsoup_70,false
 Jsoup_71,false
 Math_77,false
