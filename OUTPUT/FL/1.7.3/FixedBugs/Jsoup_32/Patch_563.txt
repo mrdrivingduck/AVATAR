@@ -1,0 +1,17 @@
+diff --git a/src/main/java/org/jsoup/nodes/Element.java b/src/main/java/org/jsoup/nodes/Element.java
+index 7906822..fe9efe5 100644
+--- a/src/main/java/org/jsoup/nodes/Element.java
++++ b/src/main/java/org/jsoup/nodes/Element.java
+@@ -959,10 +959,10 @@ public class Element extends Node {
+      * @return set of classnames, empty if no class attribute
+      */
+     public Set<String> classNames() {
+-        if (classNames == null) {
+-            String[] names = className().split("\\s+");
++        String[] names = className().split("\\s+");
+             classNames = new LinkedHashSet<String>(Arrays.asList(names));
+-        }
++
++
+         return classNames;
+     }

@@ -1,0 +1,13 @@
+diff --git a/src/main/java/org/apache/commons/compress/archivers/sevenz/SevenZOutputFile.java b/src/main/java/org/apache/commons/compress/archivers/sevenz/SevenZOutputFile.java
+index 05912b9f..19438fc0 100644
+--- a/src/main/java/org/apache/commons/compress/archivers/sevenz/SevenZOutputFile.java
++++ b/src/main/java/org/apache/commons/compress/archivers/sevenz/SevenZOutputFile.java
+@@ -172,7 +172,7 @@ public class SevenZOutputFile {
+      * @throws IOException on error
+      */
+     public void write(final byte[] b, final int off, final int len) throws IOException {
+-        if (len > 0) {
++        if (len >= 0) {
+             getCurrentOutputStream().write(b, off, len);
+         }
+     }

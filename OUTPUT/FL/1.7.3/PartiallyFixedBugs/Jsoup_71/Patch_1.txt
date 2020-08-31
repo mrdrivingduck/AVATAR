@@ -1,0 +1,21 @@
+diff --git a/src/main/java/org/jsoup/select/QueryParser.java b/src/main/java/org/jsoup/select/QueryParser.java
+index e00f46e..c36bd85 100644
+--- a/src/main/java/org/jsoup/select/QueryParser.java
++++ b/src/main/java/org/jsoup/select/QueryParser.java
+@@ -146,7 +146,7 @@ public class QueryParser {
+     }
+ 
+     private void findElements() {
+-        if (tq.matchChomp("#"))
++        if (tq != null) { if (tq.matchChomp("#"))
+             byId();
+         else if (tq.matchChomp("."))
+             byClass();
+@@ -201,7 +201,7 @@ public class QueryParser {
+         else if (tq.matchChomp(":root"))
+         	evals.add(new Evaluator.IsRoot());
+ 		else // unhandled
+-            throw new Selector.SelectorParseException("Could not parse query '%s': unexpected token at '%s'", query, tq.remainder());
++            throw new Selector.SelectorParseException("Could not parse query '%s': unexpected token at '%s'", query, tq.remainder()); } 
+ 
+     }

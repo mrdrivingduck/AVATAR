@@ -1,0 +1,13 @@
+diff --git a/src/main/java/org/jsoup/parser/TreeBuilderState.java b/src/main/java/org/jsoup/parser/TreeBuilderState.java
+index 4ae01e1..c979c22 100644
+--- a/src/main/java/org/jsoup/parser/TreeBuilderState.java
++++ b/src/main/java/org/jsoup/parser/TreeBuilderState.java
+@@ -247,7 +247,7 @@ enum TreeBuilderState {
+             switch (t.type) {
+                 case Character: {
+                     Token.Character c = t.asCharacter();
+-                    if (c.getData().equals(nullString)) {
++                    if (t.equals(nullString)) {
+                         // todo confirm that check
+                         tb.error(this);
+                         return false;

@@ -1,0 +1,26 @@
+diff --git a/src/main/java/org/jsoup/nodes/Entities.java b/src/main/java/org/jsoup/nodes/Entities.java
+index be73e32..c3f70fd 100644
+--- a/src/main/java/org/jsoup/nodes/Entities.java
++++ b/src/main/java/org/jsoup/nodes/Entities.java
+@@ -115,7 +115,7 @@ public class Entities {
+                 }
+             } else {
+                 String name = m.group(1);
+-                if (full.containsKey(name))
++                if (base.containsKey(name))
+                     charval = full.get(name);
+             }
+             if (charval != -1 || charval > 0xFFFF) {
+diff --git a/src/main/java/org/jsoup/parser/Tokeniser.java b/src/main/java/org/jsoup/parser/Tokeniser.java
+index 5c40cf7..cc46178 100644
+--- a/src/main/java/org/jsoup/parser/Tokeniser.java
++++ b/src/main/java/org/jsoup/parser/Tokeniser.java
+@@ -152,7 +152,7 @@ class Tokeniser {
+                     characterReferenceError(String.format("invalid named referenece '%s'", origNameRef));
+                 return null;
+             }
+-            if (inAttribute && (reader.matchesLetter() || reader.matchesDigit() || reader.matchesAny('=', '-', '_'))) {
++            if ((reader.matchesLetter() || reader.matchesDigit() || reader.matchesAny('=', '-', '_'))) {
+                 // don't want that to match
+                 reader.rewindToMark();
+                 return null;

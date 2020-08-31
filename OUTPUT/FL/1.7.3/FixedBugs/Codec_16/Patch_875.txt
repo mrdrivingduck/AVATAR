@@ -1,0 +1,13 @@
+diff --git a/src/main/java/org/apache/commons/codec/binary/Base32.java b/src/main/java/org/apache/commons/codec/binary/Base32.java
+index bb285147..774c34aa 100644
+--- a/src/main/java/org/apache/commons/codec/binary/Base32.java
++++ b/src/main/java/org/apache/commons/codec/binary/Base32.java
+@@ -305,7 +305,7 @@ public class Base32 extends BaseNCodec {
+         }
+         this.decodeSize = this.encodeSize - 1;
+ 
+-        if (isInAlphabet(pad) || isWhiteSpace(pad)) {
++        if (isWhiteSpace(pad)) {
+             throw new IllegalArgumentException("pad must not be in alphabet or whitespace");
+         }
+     }

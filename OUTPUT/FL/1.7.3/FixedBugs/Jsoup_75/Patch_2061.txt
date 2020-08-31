@@ -1,0 +1,21 @@
+diff --git a/src/main/java/org/jsoup/parser/TokeniserState.java b/src/main/java/org/jsoup/parser/TokeniserState.java
+index 7d40425..7544565 100644
+--- a/src/main/java/org/jsoup/parser/TokeniserState.java
++++ b/src/main/java/org/jsoup/parser/TokeniserState.java
+@@ -763,11 +763,11 @@ enum TokeniserState {
+     },
+     AttributeValue_singleQuoted {
+         void read(Tokeniser t, CharacterReader r) {
+-            String value = r.consumeToAny(attributeSingleValueCharsSorted);
+-            if (value.length() > 0)
+-                t.tagPending.appendAttributeValue(value);
+-            else
+-                t.tagPending.setEmptyAttributeValue();
++            
++
++
++
++
+ 
+             char c = r.consume();
+             switch (c) {

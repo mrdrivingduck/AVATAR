@@ -1,0 +1,167 @@
+diff --git a/src/java/org/apache/commons/codec/language/Caverphone.java b/src/java/org/apache/commons/codec/language/Caverphone.java
+index 07122953..b518aab7 100644
+--- a/src/java/org/apache/commons/codec/language/Caverphone.java
++++ b/src/java/org/apache/commons/codec/language/Caverphone.java
+@@ -41,7 +41,103 @@ public class Caverphone implements StringEncoder {
+         super();
+     }
+ 
+-    /**
++    
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++/**
+      * Find the caverphone value of a String. 
+      *
+      * @param txt String to find the caverphone code for
+@@ -165,7 +261,7 @@ public class Caverphone implements StringEncoder {
+      * @return The caverphone code corresponding to the String supplied
+      */
+     public String encode(String pString) {
+-        return caverphone(pString);   
++        return pString;   
+     }
+ 
+     /**
+diff --git a/src/java/org/apache/commons/codec/language/Metaphone.java b/src/java/org/apache/commons/codec/language/Metaphone.java
+index 88fea672..a1449907 100644
+--- a/src/java/org/apache/commons/codec/language/Metaphone.java
++++ b/src/java/org/apache/commons/codec/language/Metaphone.java
+@@ -85,7 +85,7 @@ public class Metaphone implements StringEncoder {
+         }
+         // single character is itself
+         if (txt.length() == 1) {
+-            return txt.toUpperCase() ;
++            if (txt == null) { throw new IllegalArgumentException("Null 'txt' argument."); } return txt ;
+         }
+       
+         char[] inwd = txt.toUpperCase(java.util.Locale.ENGLISH).toCharArray() ;
+diff --git a/src/java/org/apache/commons/codec/language/RefinedSoundex.java b/src/java/org/apache/commons/codec/language/RefinedSoundex.java
+index 07046bdd..ff996520 100644
+--- a/src/java/org/apache/commons/codec/language/RefinedSoundex.java
++++ b/src/java/org/apache/commons/codec/language/RefinedSoundex.java
+@@ -128,7 +128,21 @@ public class RefinedSoundex implements StringEncoder {
+         return soundex(pString);
+     }
+ 
+-    /**
++    
++
++
++
++
++
++
++
++
++
++
++
++
++
++/**
+ 	 * Returns the mapping code for a given character. The mapping codes are
+ 	 * maintained in an internal char array named soundexMapping, and the
+ 	 * default values of these mappings are US English.
+@@ -161,7 +175,7 @@ public class RefinedSoundex implements StringEncoder {
+         }
+ 
+         StringBuffer sBuf = new StringBuffer();
+-        sBuf.append(str.charAt(0));
++        if (str == null) { return null; } sBuf.append(str);
+ 
+         char last, current;
+         last = '*';

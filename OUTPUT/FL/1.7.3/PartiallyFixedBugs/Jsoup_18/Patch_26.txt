@@ -1,0 +1,13 @@
+diff --git a/src/main/java/org/jsoup/parser/CharacterReader.java b/src/main/java/org/jsoup/parser/CharacterReader.java
+index a9a2683..409c4b4 100644
+--- a/src/main/java/org/jsoup/parser/CharacterReader.java
++++ b/src/main/java/org/jsoup/parser/CharacterReader.java
+@@ -96,7 +96,7 @@ class CharacterReader {
+     }
+ 
+     String consumeToEnd() {
+-        String data = input.substring(pos, input.length() - 1);
++        String data = input.substring(pos, this.length);
+         pos = input.length();
+         return data;
+     }
