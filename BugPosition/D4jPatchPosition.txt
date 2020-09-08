@@ -1,3 +1,4 @@
+Bears-5@src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java@409,410,411
 Chart_1@source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java@1797
 Chart_2@source/org/jfree/data/general/DatasetUtilities.java@755,766,758,761,1242,1243,1245,1248
 Chart_3@source/org/jfree/data/time/TimeSeries.java@1056,1057
