@@ -65,12 +65,12 @@ public class Line_Fixer extends Avatar {
 			if (isBuggyProject == null || isBuggyProject) {
 				if (pos.startsWith(this.buggyProject + "@")) {
 					isBuggyProject = true;
-					
+
 					String[] elements = pos.split("@");
-	            	String[] lineStrArr = elements[2].split(",");
-	            	String classPath = elements[1];
-	            	String shortSrcPath = dp.srcPath.substring(dp.srcPath.indexOf(this.buggyProject) + this.buggyProject.length() + 1);
-	            	classPath = classPath.substring(shortSrcPath.length(), classPath.length() - 5);
+					String[] lineStrArr = elements[2].split(",");
+					String classPath = elements[1];
+					// String shortSrcPath = PathUtils.getSrcPath(this.buggyProject).get(2);
+	            	classPath = classPath.substring(0, classPath.length() - 5);
 
 	            	for (String lineStr : lineStrArr) {
 	    				if (lineStr.contains("-")) {

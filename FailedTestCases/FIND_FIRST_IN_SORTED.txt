@@ -1,0 +1,3 @@
+test_1(java_programs.FIND_FIRST_IN_SORTED_TEST)
+test_2(java_programs.FIND_FIRST_IN_SORTED_TEST)
+test_4(java_programs.FIND_FIRST_IN_SORTED_TEST)

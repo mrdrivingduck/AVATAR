@@ -1,3 +1,6 @@
+BITCOUNT@src/main/java/java_programs/BITCOUNT.java@15
+BUCKETSORT@src/main/java/java_programs/BUCKETSORT.java@22
+FIND_FIRST_IN_SORTED@src/main/java/java_programs/FIND_FIRST_IN_SORTED.java@19
 Chart_1@source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java@1797
 Chart_2@source/org/jfree/data/general/DatasetUtilities.java@755,766,758,761,1242,1243,1245,1248
 Chart_3@source/org/jfree/data/time/TimeSeries.java@1056,1057

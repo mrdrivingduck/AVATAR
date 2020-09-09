@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.lu.uni.serval.utils.FileHelper;
 import edu.lu.uni.serval.utils.JavaLibrary;
 import edu.lu.uni.serval.utils.PathUtils;
@@ -27,7 +30,9 @@ public class DataPreparer {
     public List<String> libPaths = new ArrayList<>();
     public boolean validPaths = true;
     public String[] testCases;
-    public URL[] classPaths;
+	public URL[] classPaths;
+	
+	private static Logger log = LoggerFactory.getLogger(DataPreparer.class);
     
     public DataPreparer(String path){
         if (!path.endsWith("/")){
@@ -56,10 +61,10 @@ public class DataPreparer {
 	private void loadPaths(String buggyProject) {
 		String projectDir = buggyProjectParentPath;
 		List<String> paths = PathUtils.getSrcPath(buggyProject);
-		classPath = projectDir + buggyProject + paths.get(0);
-		testClassPath = projectDir + buggyProject + paths.get(1);
-		srcPath = projectDir + buggyProject + paths.get(2);
-		testSrcPath = projectDir + buggyProject + paths.get(3);
+		classPath = projectDir + paths.get(0);
+		testClassPath = projectDir + paths.get(1);
+		srcPath = projectDir + paths.get(2);
+		testSrcPath = projectDir + paths.get(3);
 
 		List<File> libPackages = new ArrayList<>();
 		if (new File(projectDir + buggyProject + "/lib/").exists()) {

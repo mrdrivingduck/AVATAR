@@ -66,22 +66,27 @@ public abstract class AbstractFixer implements IFixer {
 	
 	public AbstractFixer(String path, String projectName, int bugId, String defects4jPath) {
 		this.path = path;
-		this.buggyProject = projectName + "_" + bugId;
-		fullBuggyProjectPath = path + buggyProject;
+		this.buggyProject = projectName;
+		fullBuggyProjectPath = path;
 		this.defects4jPath = defects4jPath;
-//		int compileResult = TestUtils.compileProjectWithDefects4j(fullBuggyProjectPath, this.defects4jPath);
-//      if (compileResult == 1) {
-//      	log.debug(buggyProject + " ---Fixer: fix fail because of compile fail! ");
-//      }
-		if (FileHelper.getAllFiles(path + buggyProject + PathUtils.getSrcPath(buggyProject).get(0), ".class").isEmpty()) {
-			TestUtils.compileProjectWithDefects4j(path + buggyProject, defects4jPath);
+
+		// log.info(path);
+		// log.info(buggyProject);
+		// log.info(fullBuggyProjectPath);
+
+		int compileResult = TestUtils.compileProjectWithDefects4j(fullBuggyProjectPath, this.defects4jPath);
+		if (compileResult == 1) {
+			log.debug(buggyProject + " ---Fixer: fix fail because of compile fail! ");
 		}
-		minErrorTest = TestUtils.getFailTestNumInProject(path + buggyProject, defects4jPath, failedTestStrList);
-		if (minErrorTest == Integer.MAX_VALUE) {
-			TestUtils.compileProjectWithDefects4j(path + buggyProject, defects4jPath);
-			minErrorTest = TestUtils.getFailTestNumInProject(path + buggyProject, defects4jPath, failedTestStrList);
-		}
-		log.info(buggyProject + " Failed Tests: " + this.minErrorTest);
+		// if (FileHelper.getAllFiles(path + buggyProject + PathUtils.getSrcPath(buggyProject).get(0), ".class").isEmpty()) {
+		// 	TestUtils.compileProjectWithDefects4j(path + buggyProject, defects4jPath);
+		// }
+		minErrorTest = TestUtils.getFailTestNumInProject(buggyProject, path, failedTestStrList);
+		// if (minErrorTest == Integer.MAX_VALUE) {
+		// 	TestUtils.compileProjectWithDefects4j(path + buggyProject, defects4jPath);
+		// 	minErrorTest = TestUtils.getFailTestNumInProject(path + buggyProject, defects4jPath, failedTestStrList);
+		// }
+		// log.info(buggyProject + " Failed Tests: " + this.minErrorTest);
 		
 		// Read paths of the buggy project.
 		this.dp = new DataPreparer(path);
@@ -99,16 +104,17 @@ public abstract class AbstractFixer implements IFixer {
 		String[] failedTestCases = FileHelper.readFile(Configuration.failedTestCasesFilePath + this.buggyProject + ".txt").split("\n");
 		List<String> failedTestCasesList = new ArrayList<>();
 		List<String> failed = new ArrayList<>();
-		for (int index = 1, length = failedTestCases.length; index < length; index ++) {
+		for (int index = 0; index < failedTestCases.length; index++) {
 			// - org.jfree.data.general.junit.DatasetUtilitiesTests::testBug2849731_2
+			// test_5(java_programs.BITCOUNT_TEST)
 			String failedTestCase = failedTestCases[index].trim();
 			failed.add(failedTestCase);
-			failedTestCase = failedTestCase.substring(failedTestCase.indexOf("-") + 1).trim();
+			// failedTestCase = failedTestCase.substring(failedTestCase.indexOf("-") + 1).trim();
 			failedTestCasesStrList.add(failedTestCase);
-			int colonIndex = failedTestCase.indexOf("::");
-			if (colonIndex > 0) {
-				failedTestCase = failedTestCase.substring(0, colonIndex);
-			}
+			// int colonIndex = failedTestCase.indexOf("::");
+			// if (colonIndex > 0) {
+			// 	failedTestCase = failedTestCase.substring(0, colonIndex);
+			// }
 			if (!failedTestCasesList.contains(failedTestCase)) {
 				this.failedTestCaseClasses += failedTestCase + " ";
 				failedTestCasesList.add(failedTestCase);
@@ -180,7 +186,9 @@ public abstract class AbstractFixer implements IFixer {
 	
 	@Override
 	public SuspCodeNode parseSuspiciousCode(SuspiciousPosition suspiciousCode) {
-		String suspiciousClassName = suspiciousCode.classPath;
+		String pathToSrc = PathUtils.getSrcPath(this.buggyProject).get(2);
+		String suspiciousClassName = suspiciousCode.classPath.substring(
+			suspiciousCode.classPath.indexOf(pathToSrc) + pathToSrc.length());
 		int buggyLine = suspiciousCode.lineNumber;
 		
 		log.debug(suspiciousClassName + " ===" + buggyLine);
@@ -270,38 +278,42 @@ public abstract class AbstractFixer implements IFixer {
 			log.debug("Finish of compiling.");
 			
 			log.debug("Test previously failed test cases.");
-			try {
-				String results = ShellUtils.shellRun(Arrays.asList("java -cp "
-						+ PathUtils.buildTestClassPath(dp.classPath, dp.testClassPath)
-						+ " org.junit.runner.JUnitCore " + this.failedTestCaseClasses), buggyProject);
+			// try {
+			// 	String results = ShellUtils.shellRun(Arrays.asList("java -cp "
+			// 			+ PathUtils.buildTestClassPath(dp.classPath, dp.testClassPath)
+			// 			+ " org.junit.runner.JUnitCore " + this.failedTestCaseClasses), buggyProject);
 
-				if (results.isEmpty()) {
-					System.err.println(scn.suspiciousJavaFile + "@" + scn.buggyLine);
-					System.err.println("Bug: " + buggyCode);
-					System.err.println("Patch: " + patchCode);
-					continue;
-				} else {
-					if (!results.contains("java.lang.NoClassDefFoundError")) {
-						List<String> tempFailedTestCases = readTestResults(results);
-						tempFailedTestCases.retainAll(this.fakeFailedTestCasesList);
-						if (!tempFailedTestCases.isEmpty()) {
-							if (this.failedTestCasesStrList.size() == 1) continue;
+			// 	if (results.isEmpty()) {
+			// 		System.err.println(scn.suspiciousJavaFile + "@" + scn.buggyLine);
+			// 		System.err.println("Bug: " + buggyCode);
+			// 		System.err.println("Patch: " + patchCode);
+			// 		continue;
+			// 	} else {
+			// 		if (!results.contains("java.lang.NoClassDefFoundError")) {
+			// 			List<String> tempFailedTestCases = readTestResults(results);
+			// 			tempFailedTestCases.retainAll(this.fakeFailedTestCasesList);
+			// 			if (!tempFailedTestCases.isEmpty()) {
+			// 				if (this.failedTestCasesStrList.size() == 1) continue;
 
-							// Might be partially fixed.
-							tempFailedTestCases.removeAll(this.failedTestCasesStrList);
-							if (!tempFailedTestCases.isEmpty()) continue; // Generate new bugs.
-						}
-					}
-				}
-			} catch (IOException e) {
+			// 				// Might be partially fixed.
+			// 				tempFailedTestCases.removeAll(this.failedTestCasesStrList);
+			// 				if (!tempFailedTestCases.isEmpty()) continue; // Generate new bugs.
+			// 			}
+			// 		}
+			// 	}
+			// } catch (IOException e) {
+			// 	log.debug(buggyProject + " ---Fixer: fix fail because of faile passing previously failed test cases! ");
+			// 	continue;
+			// }
+
+			List<String> failedTestsAfterFix = new ArrayList<>();
+			int errorTestAfterFix = TestUtils.getFailTestNumInProject(buggyProject, path, failedTestsAfterFix);
+			failedTestsAfterFix.removeAll(this.fakeFailedTestCasesList);
+
+			if (errorTestAfterFix == Integer.MAX_VALUE) {
 				log.debug(buggyProject + " ---Fixer: fix fail because of faile passing previously failed test cases! ");
 				continue;
 			}
-
-			List<String> failedTestsAfterFix = new ArrayList<>();
-			int errorTestAfterFix = TestUtils.getFailTestNumInProject(fullBuggyProjectPath, this.defects4jPath,
-					failedTestsAfterFix);
-			failedTestsAfterFix.removeAll(this.fakeFailedTestCasesList);
 			
 			if (errorTestAfterFix < minErrorTest) {
 				List<String> tmpFailedTestsAfterFix = new ArrayList<>();
@@ -344,14 +356,14 @@ public abstract class AbstractFixer implements IFixer {
 
 						this.isPartiallyFix = true;
 
-						// try {
-						// 	scn.javaBackup.delete();
-						// 	scn.classBackup.delete();
-						// 	Files.copy(scn.targetJavaFile.toPath(), scn.javaBackup.toPath());
-						// 	Files.copy(scn.targetClassFile.toPath(), scn.classBackup.toPath());
-						// } catch (IOException e) {
-						// 	e.printStackTrace();
-						// }
+						try {
+							scn.javaBackup.delete();
+							scn.classBackup.delete();
+							Files.copy(scn.targetJavaFile.toPath(), scn.javaBackup.toPath());
+							Files.copy(scn.targetClassFile.toPath(), scn.classBackup.toPath());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 						return;
 					}
 				}

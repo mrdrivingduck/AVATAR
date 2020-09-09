@@ -57,26 +57,26 @@ public class Main_Pos {
 
 	public static void fixBug(String buggyProjectsPath, String defects4jPath, String buggyProjectName) {
 		String dataType = "AVATAR";
-		String[] elements = buggyProjectName.split("_");
-		String projectName = elements[0];
-		int bugId;
-		try {
-			bugId = Integer.valueOf(elements[1]);
-		} catch (NumberFormatException e) {
-			System.err.println("Please input correct buggy project ID, such as \"Chart_1\".");
-			return;
-		}
+		// String[] elements = buggyProjectName.split("_");
+		// String projectName = elements[0];
+		int bugId = 0;
+		// try {
+		// 	bugId = Integer.valueOf(elements[1]);
+		// } catch (NumberFormatException e) {
+		// 	System.err.println("Please input correct buggy project ID, such as \"Chart_1\".");
+		// 	return;
+		// }
 		
 		AbstractFixer fixer = null;
 		switch (granularity) {
 		case Line:
-			fixer = new Line_Fixer(buggyProjectsPath, projectName, bugId, defects4jPath);
+			fixer = new Line_Fixer(buggyProjectsPath, buggyProjectName, bugId, defects4jPath);
 			break;
 		case Method:
-			fixer = new Method_Fixer(buggyProjectsPath, projectName, bugId, defects4jPath);
+			fixer = new Method_Fixer(buggyProjectsPath, buggyProjectName, bugId, defects4jPath);
 			break;
 		case File:
-			fixer = new File_Fixer(buggyProjectsPath, projectName, bugId, defects4jPath);
+			fixer = new File_Fixer(buggyProjectsPath, buggyProjectName, bugId, defects4jPath);
 			break;
 		default:
 			break;
