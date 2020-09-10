@@ -1,3 +1,0 @@
-Failing tests: 2
-  - com.google.javascript.jscomp.CommandLineRunnerTest::testWarningGuardOrdering2
-  - com.google.javascript.jscomp.CommandLineRunnerTest::testWarningGuardOrdering4

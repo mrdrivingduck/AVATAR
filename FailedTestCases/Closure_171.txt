@@ -1,4 +1,0 @@
-Failing tests: 3
-  - com.google.javascript.jscomp.TypeCheckTest::testIssue1023
-  - com.google.javascript.jscomp.TypedScopeCreatorTest::testMethodBeforeFunction2
-  - com.google.javascript.jscomp.TypedScopeCreatorTest::testPropertiesOnInterface2

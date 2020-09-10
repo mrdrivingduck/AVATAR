@@ -1,3 +1,0 @@
-Failing tests: 2
-  - com.google.gson.functional.MapTest::testConcurrentMap
-  - com.google.gson.functional.MapTest::testConcurrentNavigableMap

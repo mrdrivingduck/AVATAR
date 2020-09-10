@@ -1,3 +1,0 @@
-Failing tests: 2
-  - org.apache.commons.math3.distribution.BinomialDistributionTest::testMath718
-  - org.apache.commons.math3.distribution.FDistributionTest::testMath785

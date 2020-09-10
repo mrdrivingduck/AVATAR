@@ -1,3 +1,0 @@
-Failing tests: 2
-  - com.google.javascript.rhino.jstype.RecordTypeTest::testRecursiveRecord
-  - com.google.javascript.rhino.jstype.RecordTypeTest::testLongToString

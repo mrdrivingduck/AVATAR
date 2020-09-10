@@ -1,3 +1,0 @@
-Failing tests: 2
-  - com.google.javascript.jscomp.PeepholeReplaceKnownMethodsTest::testStringJoinAdd
-  - com.google.javascript.jscomp.PeepholeReplaceKnownMethodsTest::testNoStringJoin
