@@ -1,0 +1,4 @@
+test_0(java_programs.POWERSET_TEST)
+test_1(java_programs.POWERSET_TEST)
+test_2(java_programs.POWERSET_TEST)
+test_4(java_programs.POWERSET_TEST)

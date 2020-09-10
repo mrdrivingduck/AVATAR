@@ -1,0 +1,1 @@
+test_4(java_programs.NEXT_PALINDROME_TEST)

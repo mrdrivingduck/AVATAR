@@ -1,0 +1,3 @@
+test_1(java_programs.KHEAPSORT_TEST)
+test_2(java_programs.KHEAPSORT_TEST)
+test_3(java_programs.KHEAPSORT_TEST)

@@ -1,0 +1,3 @@
+test_0(java_programs.RPN_EVAL_TEST)
+test_2(java_programs.RPN_EVAL_TEST)
+test_5(java_programs.RPN_EVAL_TEST)

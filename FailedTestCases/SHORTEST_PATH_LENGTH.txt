@@ -1,0 +1,2 @@
+test1(java_programs.SHORTEST_PATH_LENGTH_TEST)
+test2(java_programs.SHORTEST_PATH_LENGTH_TEST)

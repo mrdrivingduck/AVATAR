@@ -1,0 +1,5 @@
+test_0(java_programs.LEVENSHTEIN_TEST)
+test_1(java_programs.LEVENSHTEIN_TEST)
+test_2(java_programs.LEVENSHTEIN_TEST)
+test_4(java_programs.LEVENSHTEIN_TEST)
+test_6(java_programs.LEVENSHTEIN_TEST)

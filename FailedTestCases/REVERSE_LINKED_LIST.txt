@@ -1,0 +1,2 @@
+test1(java_programs.REVERSE_LINKED_LIST_TEST)
+test2(java_programs.REVERSE_LINKED_LIST_TEST)

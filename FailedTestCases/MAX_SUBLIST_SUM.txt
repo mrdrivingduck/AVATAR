@@ -1,0 +1,4 @@
+test_0(java_programs.MAX_SUBLIST_SUM_TEST)
+test_1(java_programs.MAX_SUBLIST_SUM_TEST)
+test_3(java_programs.MAX_SUBLIST_SUM_TEST)
+test_5(java_programs.MAX_SUBLIST_SUM_TEST)

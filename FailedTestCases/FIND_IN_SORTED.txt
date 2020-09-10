@@ -1,0 +1,2 @@
+test_1(java_programs.FIND_IN_SORTED_TEST)
+test_6(java_programs.FIND_IN_SORTED_TEST)
