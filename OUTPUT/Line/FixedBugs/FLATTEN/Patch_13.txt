@@ -1,0 +1,13 @@
+diff --git a/src/main/java/java_programs/FLATTEN.java b/src/main/java/java_programs/FLATTEN.java
+index b19d07a..1f4de3c 100644
+--- a/src/main/java/java_programs/FLATTEN.java
++++ b/src/main/java/java_programs/FLATTEN.java
+@@ -18,7 +18,7 @@ public class FLATTEN {
+                 if (x instanceof ArrayList) {
+                     result.addAll((ArrayList) flatten(x));
+                 } else {
+-                    result.add(flatten(x));
++                    result.add(x);
+ 		}
+             }
+             return result;

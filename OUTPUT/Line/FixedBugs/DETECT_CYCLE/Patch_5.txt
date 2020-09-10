@@ -1,0 +1,13 @@
+diff --git a/src/main/java/java_programs/DETECT_CYCLE.java b/src/main/java/java_programs/DETECT_CYCLE.java
+index 33a3e05..c41799c 100644
+--- a/src/main/java/java_programs/DETECT_CYCLE.java
++++ b/src/main/java/java_programs/DETECT_CYCLE.java
+@@ -15,7 +15,7 @@ public class DETECT_CYCLE {
+         Node tortoise = node;
+ 
+         while (true) {
+-            if (hare.getSuccessor() == null)
++            if (hare == null) { return false; } if (hare.getSuccessor() == null)
+                 return false;
+ 
+             tortoise = tortoise.getSuccessor();

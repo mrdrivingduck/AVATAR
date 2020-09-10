@@ -1,0 +1,13 @@
+diff --git a/src/main/java/java_programs/LCS_LENGTH.java b/src/main/java/java_programs/LCS_LENGTH.java
+index 97462e2..5e07dab 100644
+--- a/src/main/java/java_programs/LCS_LENGTH.java
++++ b/src/main/java/java_programs/LCS_LENGTH.java
+@@ -34,7 +34,7 @@ public class LCS_LENGTH {
+ 
+                     if (dp.containsKey(i-1)) {
+                         Map<Integer, Integer> internal_map = dp.get(i);
+-                        int insert_value = dp.get(i-1).get(j) + 1;
++                        int insert_value = j + 1;
+                         internal_map.put(j, insert_value);
+                         dp.put(i,internal_map);
+                     } else {

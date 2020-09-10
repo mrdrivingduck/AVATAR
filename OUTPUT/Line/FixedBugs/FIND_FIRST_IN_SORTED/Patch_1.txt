@@ -1,16 +1,3 @@
-diff --git a/run.py b/run.py
-index 21c1c7b..2f30701 100755
---- a/run.py
-+++ b/run.py
-@@ -240,7 +240,7 @@ def evotest(testname,patchpath,bugid,tool):
- 
- if __name__ == '__main__':
-     #command: Plausible_check | Evosuite_check | InputSample_check
--    rootpath='your customized path of the project'
-+    rootpath='/home/mrdrivingduck/Desktop/quixbugs-experiment'
-     command=sys.argv[1]
-     dir='./patches'
-     travFolder(dir,command)
 diff --git a/src/main/java/java_programs/FIND_FIRST_IN_SORTED.java b/src/main/java/java_programs/FIND_FIRST_IN_SORTED.java
 index 002eba1..36bc6ec 100644
 --- a/src/main/java/java_programs/FIND_FIRST_IN_SORTED.java

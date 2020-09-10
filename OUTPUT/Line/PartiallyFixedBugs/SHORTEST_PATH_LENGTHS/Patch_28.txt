@@ -1,0 +1,13 @@
+diff --git a/src/main/java/java_programs/SHORTEST_PATH_LENGTHS.java b/src/main/java/java_programs/SHORTEST_PATH_LENGTHS.java
+index ecbd939..ba3eaad 100644
+--- a/src/main/java/java_programs/SHORTEST_PATH_LENGTHS.java
++++ b/src/main/java/java_programs/SHORTEST_PATH_LENGTHS.java
+@@ -32,7 +32,7 @@ public class SHORTEST_PATH_LENGTHS {
+         for (int k = 0; k < numNodes; k++) {
+             for (int i = 0; i < numNodes; i++) {
+                 for (int j = 0; j < numNodes; j++) {
+-                    int update_length = Math.min(length_by_path.get(Arrays.asList(i,j)),
++                    int update_length = Math.min(length_by_path.get(Arrays.asList(j,j)),
+                             length_by_path.get(Arrays.asList(i,k)) + length_by_path.get(Arrays.asList(j,k)));
+                     length_by_path.put(Arrays.asList(i,j), update_length);
+                 }

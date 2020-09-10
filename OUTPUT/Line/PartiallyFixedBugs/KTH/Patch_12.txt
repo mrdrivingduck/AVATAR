@@ -1,0 +1,13 @@
+diff --git a/src/main/java/java_programs/KTH.java b/src/main/java/java_programs/KTH.java
+index 9bef978..0e88718 100644
+--- a/src/main/java/java_programs/KTH.java
++++ b/src/main/java/java_programs/KTH.java
+@@ -22,7 +22,7 @@ public class KTH {
+         if (k < num_less) {
+             return kth(below, k);
+         } else if (k >= num_lessoreq) {
+-            return kth(above, k);
++            return kth(above, num_less);
+         } else {
+             return pivot;
+         }

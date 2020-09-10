@@ -1,0 +1,13 @@
+diff --git a/src/main/java/java_programs/KNAPSACK.java b/src/main/java/java_programs/KNAPSACK.java
+index cb1705d..4d973bf 100644
+--- a/src/main/java/java_programs/KNAPSACK.java
++++ b/src/main/java/java_programs/KNAPSACK.java
+@@ -27,7 +27,7 @@ public class KNAPSACK {
+                 if (i == 0 || j == 0) {
+                     memo[i][j] = 0;
+                 }
+-                else if (weight < j) {
++                else if (weight <= j) {
+                     memo[i][j] = Math.max(memo[i - 1][j], value + memo[i - 1][j - weight]);
+                 }
+                 else {

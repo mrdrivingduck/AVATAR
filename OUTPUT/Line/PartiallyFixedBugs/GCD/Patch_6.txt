@@ -1,0 +1,13 @@
+diff --git a/src/main/java/java_programs/GCD.java b/src/main/java/java_programs/GCD.java
+index ea0fa24..0d4e853 100644
+--- a/src/main/java/java_programs/GCD.java
++++ b/src/main/java/java_programs/GCD.java
+@@ -16,7 +16,7 @@ public class GCD {
+         if (b == 0) {
+             return a;
+         } else {
+-            return gcd(a % b, b);
++            return a;
+         }
+     }
+ }

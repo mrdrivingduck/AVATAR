@@ -1,0 +1,17 @@
+diff --git a/src/main/java/java_programs/SIEVE.java b/src/main/java/java_programs/SIEVE.java
+index 0b1e376..b4dd610 100644
+--- a/src/main/java/java_programs/SIEVE.java
++++ b/src/main/java/java_programs/SIEVE.java
+@@ -38,9 +38,9 @@ public class SIEVE {
+     public static ArrayList<Integer> sieve(Integer max) {
+         ArrayList<Integer> primes = new ArrayList<Integer>();
+         for (int n=2; n<max+1; n++) {
+-            if (any(list_comp(n, primes))) {
+-                primes.add(n);
+-            }
++            primes.add(n);
++
++
+         }
+         return primes;
+     }
