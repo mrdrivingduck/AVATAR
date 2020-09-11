@@ -1,0 +1,2 @@
+CtTypeInformationTest.testGetSuperclass:37 expected:<61> but was:<62>
+ImportScannerTest.testTargetTypeNull:107 » NullPointer

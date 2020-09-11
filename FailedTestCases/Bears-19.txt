@@ -1,0 +1,1 @@
+IgnorePropertyOnDeserTest.testIgnoreGetterNotSetter1595:89 expected:<jack> but was:<null>

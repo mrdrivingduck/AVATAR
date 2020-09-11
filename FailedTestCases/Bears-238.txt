@@ -1,0 +1,2 @@
+testConstructorMap(com.json.ignore.JsonIgnoreFieldsTest): expected:<{"intValue":[-2147483648,"boolValue":fals]e}> but was:<{"intValue":[0,"boolValue":tru]e}>
+testMultipleAnnotationMethod(com.json.ignore.JsonIgnoreFieldsTest): expected:<{"intValue":[-2147483648,"boolValue":fals]e}> but was:<{"intValue":[0,"boolValue":tru]e}>

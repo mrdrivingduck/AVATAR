@@ -1,0 +1,2 @@
+EnumDeserializationTest.testNumbersToEnums:293->BaseTest.verifyException:367 Expected an exception with one of substrings ([value not one of declared Enum]): got one with message "Can not deserialize value of type com.fasterxml.jackson.databind.deser.EnumDeserializationTest$TestEnum from number 1: not allowed to deserialize Enum value out of number: disable DeserializationConfig.DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS to allow
+EnumDefaultReadTest.testWithFailOnNumbersAndReadUnknownAsDefault:201->_verifyOkDeserialization:214 » InvalidFormat

@@ -1,0 +1,1 @@
+testDecode(org.traccar.protocol.TmgFrameDecoderTest): buffer is null

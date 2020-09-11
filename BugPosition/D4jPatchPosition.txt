@@ -1,1 +1,12 @@
+Bears-3@src/main/java/com/fasterxml/jackson/databind/deser/impl/BeanPropertyMap.java@437
 Bears-5@src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java@409,410,411
+Bears-7@src/main/java/com/fasterxml/jackson/databind/deser/std/EnumDeserializer.java@170,176
+Bears-19@src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java@495
+Bears-31@src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java@622,677
+Bears-43@src/main/java/spoon/support/reflect/reference/CtExecutableReferenceImpl.java@239-243
+Bears-46@src/main/java/spoon/support/reflect/declaration/CtElementImpl.java@389
+Bears-49@src/main/java/spoon/support/reflect/declaration/CtAnnotationImpl.java@113
+Bears-56@src/main/java/spoon/reflect/visitor/ImportScannerImpl.java@566
+Bears-133@src/org/traccar/protocol/Jt600FrameDecoder.java@40
+Bears-135@src/org/traccar/protocol/TmgFrameDecoder.java@50,56
+Bears-238@src/main/java/com/json/ignore/JsonIgnoreFields.java@133

@@ -1,0 +1,3 @@
+CtTypeInformationTest.testGetSuperclass:37 expected:<61> but was:<62>
+FilterTest.testOverridingMethodFromSubClassOfAbstractClass:290 expected:<3> but was:<2>
+FilterTest.testOverridingMethodFromSubClassOfInterface:339 expected:<1> but was:<0>

@@ -1,0 +1,1 @@
+testDecode(org.traccar.protocol.Jt600FrameDecoderTest): buffer is null

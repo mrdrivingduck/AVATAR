@@ -1,0 +1,5 @@
+CtTypeInformationTest.testGetSuperclass:37 expected:<61> but was:<62>
+ImportTest.testNestedAccessPathWithTypedParameter:406 expected:<...ltimap<K, V>.Wrapped[Collection].WrappedIterator {}> but was:<...ltimap<K, V>.Wrapped[List].WrappedIterator {}>
+ImportTest.testNestedAccessPathWithTypedParameterWithImports:430 expected:<...ltimap<K, V>.Wrapped[Collection].WrappedIterator {}> but was:<...ltimap<K, V>.Wrapped[List].WrappedIterator {}>
+ImportTest.testAccessPath:619 » Spoon java.lang.NullPointerException
+MainTest.testTest:325 » Spoon java.lang.NullPointerException
