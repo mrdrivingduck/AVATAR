@@ -1,3 +1,0 @@
-Failing tests: 2
-  - com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testC3P0Types
-  - com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testJDKTypes1855

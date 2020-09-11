@@ -1,3 +1,0 @@
-Failing tests: 2
-  - com.google.javascript.jscomp.CollapsePropertiesTest::testAliasedTopLevelEnum
-  - com.google.javascript.jscomp.CollapsePropertiesTest::testIssue389

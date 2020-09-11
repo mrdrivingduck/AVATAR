@@ -1,4 +1,0 @@
-Failing tests: 3
-  - com.google.javascript.jscomp.TypeCheckTest::testIssue783
-  - com.google.javascript.jscomp.TypeCheckTest::testMissingProperty20
-  - com.google.javascript.rhino.jstype.JSTypeTest::testRestrictedTypeGivenToBoolean

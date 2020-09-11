@@ -1,3 +1,0 @@
-Failing tests: 2
-  - com.google.gson.internal.UnsafeAllocatorInstantiationTest::testInterfaceInstantiation
-  - com.google.gson.internal.UnsafeAllocatorInstantiationTest::testAbstractClassInstantiation
