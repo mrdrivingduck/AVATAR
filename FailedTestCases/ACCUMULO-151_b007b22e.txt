@@ -1,0 +1,1 @@
+test1(org.apache.accumulo.core.iterators.CombinerTest): expected:<[4]> but was:<[9]>

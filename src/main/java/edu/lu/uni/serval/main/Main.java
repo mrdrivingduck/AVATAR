@@ -32,15 +32,15 @@ public class Main {
 		String suspiciousFileStr = Configuration.suspPositionsFilePath;
 		
 		String dataType = "AVATAR";
-		String[] elements = buggyProjectName.split("_");
+		String[] elements = buggyProjectName.split("-");
 		String projectName = elements[0];
-		int bugId;
-		try {
-			bugId = Integer.valueOf(elements[1]);
-		} catch (NumberFormatException e) {
-			System.err.println("Please input correct buggy project ID, such as \"Chart_1\".");
-			return;
-		}
+		String bugId = elements[1];
+		// try {
+		// 	bugId = Integer.valueOf(elements[1]);
+		// } catch (NumberFormatException e) {
+		// 	System.err.println("Please input correct buggy project ID, such as \"Chart_1\".");
+		// 	return;
+		// }
 		
 		AbstractFixer fixer = new Avatar(buggyProjectsPath, projectName, bugId, defects4jPath);
 		fixer.metric = Configuration.faultLocalizationMetric;

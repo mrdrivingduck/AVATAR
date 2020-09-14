@@ -20,11 +20,11 @@ public class File_Fixer extends Avatar {
 	
 	private static Logger log = LoggerFactory.getLogger(File_Fixer.class);
 	
-	public File_Fixer(String path, String projectName, int bugId, String defects4jPath) {
+	public File_Fixer(String path, String projectName, String bugId, String defects4jPath) {
 		super(path, projectName, bugId, defects4jPath);
 	}
 	
-	public File_Fixer(String path, String metric, String projectName, int bugId, String defects4jPath) {
+	public File_Fixer(String path, String metric, String projectName, String bugId, String defects4jPath) {
 		super(path, metric, projectName, bugId, defects4jPath);
 	}
 

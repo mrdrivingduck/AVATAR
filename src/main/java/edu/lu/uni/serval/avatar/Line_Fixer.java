@@ -20,11 +20,11 @@ public class Line_Fixer extends Avatar {
 	
 	private static Logger log = LoggerFactory.getLogger(Line_Fixer.class);
 	
-	public Line_Fixer(String path, String projectName, int bugId, String defects4jPath) {
+	public Line_Fixer(String path, String projectName, String bugId, String defects4jPath) {
 		super(path, projectName, bugId, defects4jPath);
 	}
 	
-	public Line_Fixer(String path, String metric, String projectName, int bugId, String defects4jPath) {
+	public Line_Fixer(String path, String metric, String projectName, String bugId, String defects4jPath) {
 		super(path, metric, projectName, bugId, defects4jPath);
 	}
 

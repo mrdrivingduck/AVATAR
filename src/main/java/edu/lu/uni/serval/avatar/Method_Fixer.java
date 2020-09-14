@@ -23,11 +23,11 @@ public class Method_Fixer extends Avatar {
 	
 	private static Logger log = LoggerFactory.getLogger(Method_Fixer.class);
 	
-	public Method_Fixer(String path, String projectName, int bugId, String defects4jPath) {
+	public Method_Fixer(String path, String projectName, String bugId, String defects4jPath) {
 		super(path, projectName, bugId, defects4jPath);
 	}
 	
-	public Method_Fixer(String path, String metric, String projectName, int bugId, String defects4jPath) {
+	public Method_Fixer(String path, String metric, String projectName, String bugId, String defects4jPath) {
 		super(path, metric, projectName, bugId, defects4jPath);
 	}
 

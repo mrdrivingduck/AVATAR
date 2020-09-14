@@ -45,11 +45,11 @@ public class Avatar extends AbstractFixer {
 	
 	private static Logger log = LoggerFactory.getLogger(Avatar.class);
 	
-	public Avatar(String path, String projectName, int bugId, String defects4jPath) {
+	public Avatar(String path, String projectName, String bugId, String defects4jPath) {
 		super(path, projectName, bugId, defects4jPath);
 	}
 	
-	public Avatar(String path, String metric, String projectName, int bugId, String defects4jPath) {
+	public Avatar(String path, String metric, String projectName, String bugId, String defects4jPath) {
 		super(path, metric, projectName, bugId, defects4jPath);
 	}
 
