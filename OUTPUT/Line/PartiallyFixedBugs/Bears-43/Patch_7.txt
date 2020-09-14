@@ -1,0 +1,13 @@
+diff --git a/src/main/java/spoon/support/reflect/reference/CtExecutableReferenceImpl.java b/src/main/java/spoon/support/reflect/reference/CtExecutableReferenceImpl.java
+index 68438c423..5aa0f0702 100644
+--- a/src/main/java/spoon/support/reflect/reference/CtExecutableReferenceImpl.java
++++ b/src/main/java/spoon/support/reflect/reference/CtExecutableReferenceImpl.java
+@@ -236,7 +236,7 @@ public class CtExecutableReferenceImpl<T> extends CtReferenceImpl implements CtE
+ 		if (!isSame) {
+ 			return false;
+ 		}
+-		if (getDeclaringType().isAnonymous()) {
++		if (this.type.isAnonymous()) {
+ 			if (!getDeclaringType().getDeclaringType().isSubtypeOf(executable.getDeclaringType())) {
+ 				return false;
+ 			}

@@ -1,0 +1,12 @@
+diff --git a/src/org/traccar/protocol/TmgFrameDecoder.java b/src/org/traccar/protocol/TmgFrameDecoder.java
+index 07b4162db..30d2e4fc5 100644
+--- a/src/org/traccar/protocol/TmgFrameDecoder.java
++++ b/src/org/traccar/protocol/TmgFrameDecoder.java
+@@ -47,7 +47,7 @@ public class TmgFrameDecoder extends FrameDecoder {
+             }
+         });
+ 
+-        if (beginIndex > 0) {
++        if (beginIndex >= 0) {
+ 
+             buf.readerIndex(beginIndex);

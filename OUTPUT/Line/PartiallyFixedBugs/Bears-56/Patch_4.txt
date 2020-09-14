@@ -1,0 +1,16 @@
+diff --git a/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java b/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java
+index 9f46670f6..8806083f1 100644
+--- a/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java
++++ b/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java
+@@ -563,9 +563,9 @@ public class ImportScannerImpl extends CtScanner implements ImportScanner {
+ 	 * @return true if the ref should be imported.
+ 	 */
+ 	protected boolean isTypeInCollision(CtReference ref, boolean fqnMode) {
+-		if (targetType.getSimpleName().equals(ref.getSimpleName()) && !targetType.equals(ref)) {
++		if (targetType != null) { if (targetType.getSimpleName().equals(ref.getSimpleName()) && !targetType.equals(ref)) {
+ 			return true;
+-		}
++		} } 
+ 
+ 		try {
+ 			CtElement parent;
