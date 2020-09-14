@@ -13,7 +13,7 @@ public class PathUtils {
 		// String projectName = words[0];
 		int bugId = Integer.parseInt(words[1]);
 
-		if (bugId <= 97) {
+		if (bugId <= 97 || bugId > 200) {
 			path.add("/target/classes/");
 			path.add("/target/test-classes/");
 			path.add("/src/main/java/");
@@ -21,8 +21,8 @@ public class PathUtils {
 		} else {
 			path.add("/target/classes/");
 			path.add("/target/test-classes/");
-			path.add("/src/main/java/");
-			path.add("/src/test/java/");
+			path.add("/src/");
+			path.add("/test/");
 		}
 
 		// if (projectName.equals("Chart")) {

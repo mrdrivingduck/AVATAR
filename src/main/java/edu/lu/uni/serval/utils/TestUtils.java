@@ -42,8 +42,30 @@ public class TestUtils {
                     int failure = Integer.parseInt(tokens[4].substring(0, tokens[4].length() - 1));
                     int error = Integer.parseInt(tokens[6].substring(0, tokens[6].length() - 1));
                     res = failure + error;
-                } else {
-                    failedTests.add(lines[i - 1].split(" ")[1]);
+                } /*else {
+                    int failure = Integer.parseInt(tokens[4].substring(0, tokens[4].length() - 1));
+                    int error = Integer.parseInt(tokens[6].substring(0, tokens[6].length() - 1));
+                    if (failure + error > 0) {
+                        failedTests.add(lines[i - 1].split(" ")[1]);
+                    }
+                }*/
+            } else if (lines[i].startsWith("Failed tests:")) {
+                if (lines[i].trim().length() > "Failed tests:".length()) {
+                    failedTests.add(lines[i].substring("Failed tests:   ".length()));
+                }
+                int j = i + 1;
+                while (lines[j].startsWith("  ") && j < lines.length) {
+                    failedTests.add(lines[j].trim());
+                    j++;
+                }
+            } else if (lines[i].startsWith("Tests in error:")) {
+                if (lines[i].trim().length() > "Tests in error:".length()) {
+                    failedTests.add(lines[i].substring("Tests in error:   ".length()));
+                }
+                int j = i + 1;
+                while (lines[j].startsWith("  ") && j < lines.length) {
+                    failedTests.add(lines[j].trim());
+                    j++;
                 }
             }
         }

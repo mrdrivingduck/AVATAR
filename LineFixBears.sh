@@ -15,7 +15,7 @@ metric=Ochiai
 
 
 proj=Bears
-for bug in $(seq 5 5)
+for bug in $(seq 56 56)
 do
     java -Xmx4g -cp "target/dependency/*" edu.lu.uni.serval.main.Main_Pos $d4jData $d4jPath ${proj}_${bug} $metric L
     echo ${proj}_${bug}
