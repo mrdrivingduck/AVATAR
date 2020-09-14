@@ -1,3 +1,0 @@
-Failing tests: 2
-  - org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::winzipBackSlashWorkaround
-  - org.apache.commons.compress.archivers.zip.ZipFileTest::testWinzipBackSlashWorkaround

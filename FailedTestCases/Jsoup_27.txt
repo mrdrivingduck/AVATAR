@@ -1,3 +1,0 @@
-Failing tests: 2
-  - org.jsoup.helper.DataUtilTest::testCharset
-  - org.jsoup.helper.DataUtilTest::testQuotedCharset

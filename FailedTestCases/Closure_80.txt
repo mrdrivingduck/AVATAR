@@ -1,3 +1,0 @@
-Failing tests: 2
-  - com.google.javascript.jscomp.NodeUtilTest::testIsBooleanResult
-  - com.google.javascript.jscomp.NodeUtilTest::testLocalValue1

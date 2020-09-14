@@ -1,3 +1,0 @@
-Failing tests: 2
-  - org.jfree.chart.util.junit.ShapeListTests::testSerialization
-  - org.jfree.chart.util.junit.ShapeListTests::testEquals

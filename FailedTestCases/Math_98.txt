@@ -1,3 +1,0 @@
-Failing tests: 2
-  - org.apache.commons.math.linear.BigMatrixImplTest::testMath209
-  - org.apache.commons.math.linear.RealMatrixImplTest::testMath209

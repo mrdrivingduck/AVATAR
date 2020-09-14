@@ -1,3 +1,0 @@
-Failing tests: 2
-  - org.jsoup.select.QueryParserTest::testParsesSingleQuoteInContains
-  - org.jsoup.select.QueryParserTest::exceptionOnUncloseAttribute
