@@ -11,13 +11,79 @@ public class PathUtils {
 		ArrayList<String> path = new ArrayList<String>();
 		String[] words = bugProject.split("-");
 		String projectName = words[0];
-		// int bugId = Integer.parseInt(words[1]);
+		String bugID = words[1];
 
 		if (projectName.equals("ACCUMULO")) {
 			path.add("/src/core/target/classes/");
 			path.add("/src/core/target/test-classes/");
 			path.add("/src/core/src/main/java/");
 			path.add("/src/core/src/test/java/");
+		} else if (projectName.equals("FLINK")) {
+			if (bugID.equals("2817_5dfc897b")) {
+				path.add("/flink-staging/flink-streaming/flink-streaming-core/target/classes/");
+				path.add("/flink-staging/flink-streaming/flink-streaming-core/target/test-classes/");
+				path.add("/flink-staging/flink-streaming/flink-streaming-core/src/main/java/");
+				path.add("/flink-staging/flink-streaming/flink-streaming-core/src/test/java/");
+			} else if (bugID.equals("3011_a402002d")) {
+				path.add("/flink-runtime/target/classes/");
+				path.add("/flink-runtime/target/test-classes/");
+				path.add("/flink-runtime/src/main/java/");
+				path.add("/flink-runtime/src/test/java/");
+			} else if (bugID.equals("3189_a5b05566")) {
+				path.add("/src/core/target/classes/");
+				path.add("/src/core/target/test-classes/");
+				path.add("/flink-clients/src/main/java/");
+				path.add("/flink-clients/src/test/java/");
+			} else {
+				path.add("/src/core/target/classes/");
+				path.add("/src/core/target/test-classes/");
+				path.add("/flink-core/src/main/java/");
+				path.add("/flink-core/src/test/java/");
+			}
+		} else if (projectName.equals("LOG4J2")) {
+			if (bugID.equals("114_afcf92eb") || bugID.equals("127_029e79da")) {
+				path.add("/api/target/classes/");
+				path.add("/api/target/test-classes/");
+				path.add("/api/src/main/java/");
+				path.add("/api/src/test/java/");
+			} else if (bugID.equals("813_0bea17d7")) {
+				path.add("/log4j-api/target/classes/");
+				path.add("/log4j-api/target/test-classes/");
+				path.add("/log4j-api/src/main/java/");
+				path.add("/log4j-api/src/test/java/");
+			} else if (bugID.equals("1061_86d8944f") || bugID.equals("1062_4cf831b6")) {
+				path.add("/log4j-slf4j-impl/target/classes/");
+				path.add("/log4j-slf4j-impl/target/test-classes/");
+				path.add("/log4j-slf4j-impl/src/main/java/");
+				path.add("/log4j-slf4j-impl/src/test/java/");
+			} else {
+				path.add("/log4j-core/target/classes/");
+				path.add("/log4j-core/target/test-classes/");
+				path.add("/log4j-core/src/main/java/");
+				path.add("/log4j-core/src/test/java/");
+			}
+		} else if (projectName.equals("MATH")) {
+			path.add("/target/classes/");
+			path.add("/target/test-classes/");
+			path.add("/src/main/java/");
+			path.add("/src/test/java/");
+		} else if (projectName.equals("OAK")) {
+			if (bugID.equals("738_8ed779dc") || bugID.equals("3517_24f7f60a")) {
+				path.add("/oak-jcr/target/classes/");
+				path.add("/oak-jcr/target/test-classes/");
+				path.add("/oak-jcr/src/main/java/");
+				path.add("/oak-jcr/src/test/java/");
+			} else if (bugID.equals("3367_06812d25")) {
+				path.add("/oak-lucene/target/classes/");
+				path.add("/oak-lucene/target/test-classes/");
+				path.add("/oak-lucene/src/main/java/");
+				path.add("/oak-lucene/src/test/java/");
+			} else {
+				path.add("/oak-core/target/classes/");
+				path.add("/oak-core/target/test-classes/");
+				path.add("/oak-core/src/main/java/");
+				path.add("/oak-core/src/test/java/");
+			}
 		} else {
 			path.add("/build/");
 			path.add("/build-tests/");

@@ -9,6 +9,8 @@ projects = os.listdir(git_dir)
 os.system("mkdir " + data_dir)
 
 for project in projects:
+    # if project != "logging-log4j2":
+    #     continue
     git_ref = open(os.path.join(git_dir, project, "packed-refs"))
     for line in git_ref.readlines():
         line = line.strip('\n')

@@ -69,10 +69,10 @@ public abstract class AbstractFixer implements IFixer {
 		this.buggyProject = projectName + "-" + bugId;
 		fullBuggyProjectPath = path + buggyProject;
 		this.defects4jPath = defects4jPath;
-//		int compileResult = TestUtils.compileProjectWithDefects4j(fullBuggyProjectPath, this.defects4jPath);
-//      if (compileResult == 1) {
-//      	log.debug(buggyProject + " ---Fixer: fix fail because of compile fail! ");
-//      }
+		int compileResult = TestUtils.compileProjectWithDefects4j(fullBuggyProjectPath, this.defects4jPath);
+     if (compileResult == 1) {
+     	log.debug(buggyProject + " ---Fixer: fix fail because of compile fail! ");
+     }
 		// if (FileHelper.getAllFiles(path + buggyProject + PathUtils.getSrcPath(buggyProject).get(0), ".class").isEmpty()) {
 		// 	TestUtils.compileProjectWithDefects4j(path + buggyProject, defects4jPath);
 		// }
@@ -330,8 +330,12 @@ public abstract class AbstractFixer implements IFixer {
 					} else {
 						FileHelper.outputToFile(Configuration.outputPath + "FixedBugs/" + buggyProject + "/Patch_" + patchId + ".txt", patchStr + "\n", false);
 					}
-					this.minErrorTest = 0;
-					break;
+
+					/**
+					 * For line fix.
+					 */
+					// this.minErrorTest = 0;
+					// break;
 				} else {
 					if (minErrorTestAfterFix == 0 || errorTestAfterFix < minErrorTestAfterFix) {
 						minErrorTestAfterFix = errorTestAfterFix;

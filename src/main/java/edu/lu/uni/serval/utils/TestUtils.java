@@ -4,20 +4,33 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class TestUtils {
+
+    private static Logger log = LoggerFactory.getLogger(TestUtils.class);
 
 	public static int getFailTestNumInProject(String projectName, String defects4jPath, List<String> failedTests){
 
         String result = null;
 
         try {
-			String buggyProject = projectName.substring(projectName.lastIndexOf("/") + 1);
+            String buggyProject = projectName.substring(projectName.lastIndexOf("/") + 1);
+            
+            List<String> srcPaths = PathUtils.getSrcPath(buggyProject);
+            String srcPath = srcPaths.get(2);
+            String subDir = srcPath.substring(0, srcPath.indexOf("/src/main/"));
+
+            // log.info(projectName);
+            // log.info(subDir);
+
             //which java\njava -version\n
             ShellUtils.shellRun(Arrays.asList(
-                "cd " + projectName + " \n",
-                "mvn test -V -B -Denforcer.skip=true -Dcheckstyle.skip=true -Dcobertura.skip=true -DskipITs=true -Drat.skip=true -Dlicense.skip=true -Dfindbugs.skip=true -Dgpg.skip=true -Dskip.npm=true -Dskip.gulp=true -Dskip.bower=true > log"
-            ), buggyProject);//"defects4j " + cmdType + "\n"));//
-            result = FileHelper.readFile(projectName + "/log");
+                "cd " + projectName + subDir + " \n",
+                "mvn -Dhttps.protocols=TLSv1.2 test -Denforcer.skip=true -Dcheckstyle.skip=true -Dcobertura.skip=true -DskipITs=true -Drat.skip=true -Dlicense.skip=true -Dfindbugs.skip=true -Dgpg.skip=true -Dskip.npm=true -Dskip.gulp=true -Dskip.bower=true -Djacoco.skip=true -Dhttps.protocols=TLSv1.2 > log"
+            ), buggyProject); //"defects4j " + cmdType + "\n"));//
+            result = FileHelper.readFile(projectName + subDir + "/log");
         } catch (IOException e){
         	e.printStackTrace();
             result = "";
@@ -133,13 +146,18 @@ public class TestUtils {
         String result = null;
 
         try {
-			String buggyProject = projectName.substring(projectName.lastIndexOf("/") + 1);
+            String buggyProject = projectName.substring(projectName.lastIndexOf("/") + 1);
+            
+            // List<String> srcPaths = PathUtils.getSrcPath(buggyProject);
+            // String srcPath = srcPaths.get(2);
+            // String subDir = srcPath.substring(0, srcPath.indexOf("/src/main/"));
+
             //which java\njava -version\n
             result = ShellUtils.shellRun(Arrays.asList(
                 "cd " + projectName + " \n",
-                "mvn install -V -B -DskipTests=true -Denforcer.skip=true -Dcheckstyle.skip=true -Dcobertura.skip=true -DskipITs=true -Drat.skip=true -Dlicense.skip=true -Dfindbugs.skip=true -Dgpg.skip=true -Dskip.npm=true -Dskip.gulp=true -Dskip.bower=true"
-            ), buggyProject).trim();//"defects4j " + cmdType + "\n"));//
-            // result = FileHelper.readFile(projectName + "/log");
+                "mvn -Dhttps.protocols=TLSv1.2 install -V -B -DskipTests -Denforcer.skip=true -Dcheckstyle.skip=true -Dcobertura.skip=true -DskipITs=true -Drat.skip=true -Dlicense.skip=true -Dfindbugs.skip=true -Dgpg.skip=true -Dskip.npm=true -Dskip.gulp=true -Dskip.bower=true"
+            ), buggyProject).trim(); //"defects4j " + cmdType + "\n"));//
+            // result = FileHelper.readFile(projectName + subDir + "/log");
         } catch (IOException e){
         	e.printStackTrace();
             result = "";
