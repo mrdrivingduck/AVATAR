@@ -1,0 +1,2 @@
+testIssue631(org.apache.commons.math.analysis.solvers.RegulaFalsiSolverTest): Expected exception: org.apache.commons.math.exception.TooManyEvaluationsException
+checkMissingFastMathClasses(org.apache.commons.math.util.FastMathTest): FastMath should implement all StrictMath methods

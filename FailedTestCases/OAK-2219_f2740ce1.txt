@@ -1,0 +1,2 @@
+oak2219(org.apache.jackrabbit.oak.plugins.index.property.OrderedPropertyIndexDescendingQueryTest): Expected path /content/a not found
+oak2219(org.apache.jackrabbit.oak.plugins.index.property.OrderedPropertyIndexQueryTest): Expected path /content/a not found

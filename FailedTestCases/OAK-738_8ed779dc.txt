@@ -1,0 +1,2 @@
+testOrderByScore(org.apache.jackrabbit.core.query.SQL2OrderByTest): expected:</testroot/node[1]> but was:</testroot/node[2]>
+testAddNodeWithExpandedName(org.apache.jackrabbit.oak.jcr.RepositoryTest)

@@ -1,0 +1,1 @@
+analyzedEnabledForBoostedField(org.apache.jackrabbit.oak.plugins.index.lucene.IndexDefinitionTest): expected:<2> but was:<1>

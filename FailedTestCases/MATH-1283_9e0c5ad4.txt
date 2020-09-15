@@ -1,0 +1,1 @@
+GammaTest.testGammaNegativeDouble:985 expected:<1> but was:<-1>

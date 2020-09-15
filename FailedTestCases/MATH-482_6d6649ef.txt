@@ -1,0 +1,1 @@
+testMinMaxFloat(org.apache.commons.math.util.FastMathTest)

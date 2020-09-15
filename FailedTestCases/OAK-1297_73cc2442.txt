@@ -1,0 +1,2 @@
+simpleMove(org.apache.jackrabbit.oak.spi.state.MoveDetectorTest): Unexpected move. Expected: None Found: >/test/x:/test/x expected:<null> but was:</test/x>
+testSetPolicyWritesAcContent(org.apache.jackrabbit.oak.security.authorization.accesscontrol.AccessControlManagerImplTest): arrays first differed at element [0]; expected:<jcr:addChildNodes> but was:<jcr:read>

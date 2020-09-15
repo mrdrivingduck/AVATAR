@@ -1,0 +1,1 @@
+testPcts(org.apache.commons.math.stat.FrequencyTest)

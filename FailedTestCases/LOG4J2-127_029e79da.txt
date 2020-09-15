@@ -1,0 +1,2 @@
+testError(org.apache.logging.log4j.AbstractLoggerTest): Incorrect marker. Expected TEST, actual is null
+testFatal(org.apache.logging.log4j.AbstractLoggerTest): Incorrect marker. Expected TEST, actual is null

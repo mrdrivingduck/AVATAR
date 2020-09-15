@@ -1,0 +1,1 @@
+testZeroSizeCache(org.apache.jackrabbit.oak.cache.CacheTest): Max memory must be larger than 0

@@ -1,0 +1,2 @@
+PatternLayoutTest.testPatternSelector:326 Unexpected result: 2020-09-15 21:04:53,741 TRACE [main]: ====== PatternLayoutTest.testPatternSelector:324 entry ======
+PropertiesConfigurationRootLoggerOnlyTest.testPropertiesConfiguration:45 » NullPointer

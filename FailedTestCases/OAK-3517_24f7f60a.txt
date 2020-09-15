@@ -1,0 +1,1 @@
+testAddNodeWithRelativePath(org.apache.jackrabbit.oak.jcr.security.authorization.WriteTest): Access denied.

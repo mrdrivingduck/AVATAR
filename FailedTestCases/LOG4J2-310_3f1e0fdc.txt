@@ -1,0 +1,4 @@
+AdvertiserTest.testAdvertisementsFound:96->verifyExpectedEntriesAdvertised:88 Entries for File1 appender do not exist
+AdvertiserTest.testAdvertisementsAddedOnReconfigAfterStop:115->verifyExpectedEntriesAdvertised:88 Entries for File1 appender do not exist
+AdvertiserTest.testAdvertisementsRemovedOnConfigStop:101->verifyExpectedEntriesAdvertised:88 Entries for File1 appender do not exist
+SMTPAppenderTest.testDelivery:156 null

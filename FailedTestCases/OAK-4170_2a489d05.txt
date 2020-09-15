@@ -1,0 +1,1 @@
+oak4170(org.apache.jackrabbit.oak.query.FilterTest): expected:<...t:"december", path=*[])> but was:<...t:"december", path=*[, property=[jcr:content/metadata/comment=[is not null]]])>

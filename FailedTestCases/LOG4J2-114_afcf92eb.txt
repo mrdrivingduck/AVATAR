@@ -1,0 +1,2 @@
+testMsgWithKeyTooLong(org.apache.logging.log4j.message.StructuredDataMessageTest): Expected exception: java.lang.IllegalArgumentException
+testMsg(org.apache.logging.log4j.message.StructuredDataMessageTest): Structured data values are limited to 32 characters. key: memo value: This is a very long test memo to prevent regression of LOG4J2-114
