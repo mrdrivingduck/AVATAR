@@ -5,4 +5,4 @@
 setResult(yMin, 0);
 
 ===Patch Code===
-setResult(f, 0);
+setResult(min, 0);

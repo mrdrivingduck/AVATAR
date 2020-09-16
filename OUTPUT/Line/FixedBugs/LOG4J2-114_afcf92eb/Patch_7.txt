@@ -1,0 +1,14 @@
+//**********************************************************
+//org/apache/logging/log4j/message/StructuredDataMessage.java ------ 191
+//**********************************************************
+===Buggy Code===
+if (value.length() > MAX_LENGTH) {
+            throw new IllegalArgumentException("Structured data values are limited to 32 characters. key: " + key +
+                " value: " + value);
+        }
+
+===Patch Code===
+if (key.length() > MAX_LENGTH) {
+            throw new IllegalArgumentException("Structured data values are limited to 32 characters. key: " + key +
+                " value: " + value);
+        }
