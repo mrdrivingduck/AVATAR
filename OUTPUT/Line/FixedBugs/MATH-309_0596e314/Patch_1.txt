@@ -1,0 +1,14 @@
+//**********************************************************
+//org/apache/commons/math/random/RandomDataImpl.java ------ 465
+//**********************************************************
+===Buggy Code===
+if (mean < 0.0) {
+            throw MathRuntimeException.createIllegalArgumentException(
+                  "mean must be positive ({0})", mean);
+        }
+
+===Patch Code===
+if (mean <= 0.0) {
+            throw MathRuntimeException.createIllegalArgumentException(
+                  "mean must be positive ({0})", mean);
+        }

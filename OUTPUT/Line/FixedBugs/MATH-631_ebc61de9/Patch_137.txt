@@ -1,0 +1,8 @@
+//**********************************************************
+//org/apache/commons/math/analysis/solvers/BaseSecantSolver.java ------ 191
+//**********************************************************
+===Buggy Code===
+x0 = 0.5 * (x0 + x1 - delta);
+
+===Patch Code===
+x0 = 0.5 * (x0 + this.method - delta);

@@ -1,0 +1,8 @@
+//**********************************************************
+//org/apache/commons/math/analysis/solvers/BrentSolver.java ------ 115
+//**********************************************************
+===Buggy Code===
+setResult(yMin, 0);
+
+===Patch Code===
+setResult(f, 0);

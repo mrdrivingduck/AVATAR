@@ -1,0 +1,8 @@
+//**********************************************************
+//org/apache/commons/math/stat/Frequency.java ------ 303
+//**********************************************************
+===Buggy Code===
+return getCumPct((Comparable<?>) v);
+
+===Patch Code===
+if (v != null) { return getCumPct((Comparable<?>) v); } 

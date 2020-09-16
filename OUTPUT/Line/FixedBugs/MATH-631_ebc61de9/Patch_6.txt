@@ -1,0 +1,10 @@
+//**********************************************************
+//org/apache/commons/math/analysis/solvers/BaseSecantSolver.java ------ 187
+//**********************************************************
+===Buggy Code===
+final double delta = FastMath.max(rtol * FastMath.abs(x1),
+                                                          atol);
+
+===Patch Code===
+final double delta = inverted.max(rtol * FastMath.abs(x1),
+                                                          atol);

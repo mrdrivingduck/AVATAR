@@ -1,0 +1,12 @@
+//**********************************************************
+//org/apache/commons/math3/optimization/linear/SimplexTableau.java ------ 338
+//**********************************************************
+===Buggy Code===
+if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
+                columnsToDrop.add(i);
+            }
+
+===Patch Code===
+if (Precision.compareTo(entry, 0d, this.epsilon) > 0) {
+                columnsToDrop.add(i);
+            }

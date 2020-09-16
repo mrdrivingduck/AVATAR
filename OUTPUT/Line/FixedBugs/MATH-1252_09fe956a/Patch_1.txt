@@ -1,0 +1,12 @@
+//**********************************************************
+//org/apache/commons/math4/util/ResizableDoubleArray.java ------ 290
+//**********************************************************
+===Buggy Code===
+if (data != null && data.length > 1) {
+            addElements(data);
+        }
+
+===Patch Code===
+if (data != null && data.length >= 1) {
+            addElements(data);
+        }

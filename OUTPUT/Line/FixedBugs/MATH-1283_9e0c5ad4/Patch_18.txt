@@ -1,0 +1,12 @@
+//**********************************************************
+//org/apache/commons/math4/special/Gamma.java ------ 698
+//**********************************************************
+===Buggy Code===
+final double gammaAbs = SQRT_TWO_PI / x *
+                                    FastMath.pow(y, absX + 0.5) *
+                                    FastMath.exp(-y) * lanczos(absX);
+
+===Patch Code===
+final double gammaAbs = SQRT_TWO_PI / x *
+                                    ret.pow(y, absX + 0.5) *
+                                    FastMath.exp(-y) * lanczos(absX);

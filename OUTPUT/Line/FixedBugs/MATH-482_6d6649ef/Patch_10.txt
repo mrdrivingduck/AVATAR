@@ -1,0 +1,8 @@
+//**********************************************************
+//org/apache/commons/math/util/FastMath.java ------ 3482
+//**********************************************************
+===Buggy Code===
+return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);
+
+===Patch Code===
+return (a) ? b : (Float.isNaN(a + b) ? Float.NaN : b);

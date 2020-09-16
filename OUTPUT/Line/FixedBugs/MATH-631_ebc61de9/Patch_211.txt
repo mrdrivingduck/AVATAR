@@ -1,0 +1,8 @@
+//**********************************************************
+//org/apache/commons/math/analysis/solvers/BaseSecantSolver.java ------ 192
+//**********************************************************
+===Buggy Code===
+f0 = computeObjectiveValue(x0);
+
+===Patch Code===
+f0 = computeObjectiveValue(inverted);

@@ -1,0 +1,8 @@
+//**********************************************************
+//org/apache/jackrabbit/oak/jcr/session/NodeImpl.java ------ 293
+//**********************************************************
+===Buggy Code===
+sessionContext.getAccessManager().checkPermissions(dlg.getTree(), prop, Permissions.NODE_TYPE_MANAGEMENT);
+
+===Patch Code===
+sessionContext.getAccessManager().checkPermissions(parent.getTree(), prop, Permissions.NODE_TYPE_MANAGEMENT);

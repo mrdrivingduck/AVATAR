@@ -1,0 +1,12 @@
+//**********************************************************
+//org/apache/commons/math3/distribution/MultivariateNormalDistribution.java ------ 183
+//**********************************************************
+===Buggy Code===
+return FastMath.pow(2 * FastMath.PI, -dim / 2) *
+            FastMath.pow(covarianceMatrixDeterminant, -0.5) *
+            getExponentTerm(vals);
+
+===Patch Code===
+return FastMath.pow(2 * FastMath.PI, ((double) -dim) / 2d) *
+            FastMath.pow(covarianceMatrixDeterminant, -0.5) *
+            getExponentTerm(vals);
